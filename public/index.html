@@ -2626,7 +2626,7 @@
         <button class="btn-scan" style="flex:1; background: var(--accent); color: white;"
           onclick="closeModal('advisoryDetailModal')">Understood</button>
         <button class="btn-scan" style="flex:1; border: 1px solid var(--border); color: var(--text-primary);"
-          onclick="alert('Shared to Community!')">Share with Farmers</button>
+          onclick="showToast('Shared to Community!', 'success')">Share with Farmers</button>
       </div>
     </div>
   </div>
@@ -2634,6 +2634,16 @@
   <!-- ─── SCRIPTS ─── -->
   <script src="lang.js"></script>
   <script>
+    // Force API traffic to backend server when served by Live Server or file://
+    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3000') ? 'http://localhost:3000' : '';
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = function(resource, init) {
+      if (typeof resource === 'string' && resource.startsWith('/api/')) {
+        resource = API_BASE + resource;
+      }
+      return originalFetch(resource, init);
+    };
+
     // ── AUTH ──
     let currentUser = JSON.parse(localStorage.getItem('farmify_user')) || null;
     let authToken = localStorage.getItem('farmify_token') || null;
@@ -2688,10 +2698,10 @@
       });
       const data = await res.json();
       if (data.success) {
-        alert('Account created! Please login.');
+        showToast('Account created successfully! Please login.', 'success');
         toggleAuth(true);
       } else {
-        alert(data.error);
+        showToast(data.error, 'error');
       }
     }
 
@@ -2714,7 +2724,7 @@
         updateAuthUI();
         location.reload();
       } else {
-        alert(data.error);
+        showToast(data.error, 'error');
       }
     }
 
@@ -2965,7 +2975,7 @@
           body: JSON.stringify(data)
         });
         if (res.ok) {
-          alert('Advisory Published Live!');
+          showToast('Advisory Published Live!', 'success');
           closeModal('expertModal');
           fetchAdvisories(true);
         }
@@ -3174,7 +3184,7 @@
         document.getElementById('communityMsg').value = '';
         fetchCommunityData();
       } catch (e) {
-        alert('Error posting to community.');
+        showToast('Error posting to community.', 'error');
       }
     }
 
@@ -3426,7 +3436,7 @@
         return openModal('authModal');
       }
       if (currentUser.role !== 'buyer') {
-        return alert('Only buyers can place orders.');
+        return showToast('Only buyers can place orders.', 'warning');
       }
 
       const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -3542,12 +3552,12 @@
         closeModal('addProductModal');
         fetchFarmerDash();
         fetchMarketplace();
-      } else { alert('Error adding product'); }
+      } else { showToast('Error adding product', 'error'); }
     }
 
     async function buyProduct(id) {
       if (!authToken) return openModal('authModal');
-      if (currentUser.role !== 'buyer') return alert('Only buyers can purchase');
+      if (currentUser.role !== 'buyer') return showToast('Only buyers can purchase', 'warning');
 
       const qty = prompt('Enter quantity:', '1');
       if (!qty) return;
@@ -3561,9 +3571,9 @@
         body: JSON.stringify({ product_id: id, quantity: parseInt(qty) })
       });
       if (res.ok) {
-        alert('Order placed successfully!');
+        showToast('Order placed successfully!', 'success');
         fetchBuyerDash();
-      } else { alert('Error placing order'); }
+      } else { showToast('Error placing order', 'error'); }
     }
 
     // Initial fetches
@@ -3596,7 +3606,7 @@
 
     async function buyStoreItem(name, price) {
       if (!authToken) return openModal('authModal');
-      alert(`Request sent for ${name}. Our delivery partner will contact you soon for cash on delivery.`);
+      showToast(`Request sent for ${name}. Our delivery partner will contact you soon for cash on delivery.`, 'success');
     }
 
     async function updateOrderStatus(orderId, newStatus) {
@@ -3630,7 +3640,7 @@
           fetchBuyerDash();
         } else {
           const data = await res.json();
-          alert(data.error);
+          showToast(data.error, 'error');
         }
       } catch (e) { console.error(e); }
     }
@@ -3708,7 +3718,7 @@
           body: JSON.stringify(data)
         });
         if (res.ok) {
-          alert('Profile Updated Successfully!');
+          showToast('Profile Updated Successfully!', 'success');
           currentUser.name = data.name;
           localStorage.setItem('farmify_user', JSON.stringify(currentUser));
           updateAuthUI();
@@ -3752,7 +3762,7 @@
     // ── SPEECH API (Audio AI) ──
     function startDictation(targetId) {
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-        alert("Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari.");
+        showToast("Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari.", 'warning');
         return;
       }
 
@@ -4306,7 +4316,7 @@
           btn.disabled = false;
 
           if (data.error) {
-            alert('Error: ' + data.error);
+            showToast('Error: ' + data.error, 'error');
           } else {
             document.getElementById('scanResult').style.display = 'block';
             document.getElementById('resDisease').innerText = data.disease;
