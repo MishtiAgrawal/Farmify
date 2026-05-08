@@ -70,8 +70,24 @@ function initDb() {
       price REAL,
       quantity INTEGER,
       image TEXT,
+      description TEXT DEFAULT 'Fresh, high-quality produce directly from farms.',
+      location TEXT DEFAULT 'Farm',
+      rating REAL DEFAULT 4.5,
+      reviews INTEGER DEFAULT 0,
+      discount INTEGER DEFAULT 0,
+      original_price REAL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY(farmer_id) REFERENCES users(id)
     )`);
+
+    // Add columns if they don't exist (for existing databases)
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS description TEXT DEFAULT 'Fresh, high-quality produce directly from farms.'`);
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS location TEXT DEFAULT 'Farm'`);
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS rating REAL DEFAULT 4.5`);
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS reviews INTEGER DEFAULT 0`);
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS discount INTEGER DEFAULT 0`);
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS original_price REAL`);
+    db.run(`ALTER TABLE products ADD COLUMN IF NOT EXISTS created_at DATETIME DEFAULT CURRENT_TIMESTAMP`);
 
     // Orders table with payment details
     db.run(`CREATE TABLE IF NOT EXISTS orders (
@@ -510,14 +526,18 @@ app.post('/api/auth/login', (req, res) => {
 // --- PRODUCT ROUTES (Farmer) ---
 app.post('/api/products', authenticate, upload.single('productImage'), (req, res) => {
   if (req.user.role !== 'farmer') return res.status(403).json({ error: 'Access denied' });
-  const { name, category, price, quantity } = req.body;
+  const { name, category, price, quantity, description, discount, original_price } = req.body;
   const image = req.file ? req.file.path : '';
   
-  db.run('INSERT INTO products (farmer_id, name, category, price, quantity, image) VALUES (?, ?, ?, ?, ?, ?)',
-    [req.user.id, name, category, price, quantity, image], function(err) {
+  db.run(
+    `INSERT INTO products (farmer_id, name, category, price, quantity, image, description, discount, original_price, location) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [req.user.id, name, category, price, quantity, image, description || 'Fresh, high-quality produce', discount || 0, original_price || null, req.user.address || 'Farm'],
+    function(err) {
       if (err) return res.status(500).json({ error: 'Database error' });
       res.json({ id: this.lastID, success: true });
-    });
+    }
+  );
 });
 
 app.get('/api/farmer/products', authenticate, (req, res) => {
@@ -529,7 +549,14 @@ app.get('/api/farmer/products', authenticate, (req, res) => {
 
 // --- MARKETPLACE ROUTES ---
 app.get('/api/marketplace', (req, res) => {
-  db.all('SELECT p.*, u.name as farmer_name FROM products p JOIN users u ON p.farmer_id = u.id', (err, rows) => {
+  db.all(`SELECT p.*, u.name as farmer_name, u.address as location 
+          FROM products p 
+          JOIN users u ON p.farmer_id = u.id 
+          ORDER BY p.created_at DESC`, (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error' });
+    }
     res.json(rows);
   });
 });
