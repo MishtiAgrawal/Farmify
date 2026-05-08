@@ -1,6 +1,5 @@
-#node_modules/
+node_modules/
 .env
 database.sqlite
 uploads/
 .DS_Store
-lang.js

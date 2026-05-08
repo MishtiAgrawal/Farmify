@@ -2634,6 +2634,15 @@
   <!-- ─── SCRIPTS ─── -->
   <script src="lang.js"></script>
   <script>
+    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3000') ? 'http://localhost:3000' : '';
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = (resource, init) => {
+      if (typeof resource === 'string' && resource.startsWith('/api')) {
+        resource = API_BASE + resource;
+      }
+      return originalFetch(resource, init);
+    };
+
     // ── AUTH ──
     let currentUser = JSON.parse(localStorage.getItem('farmify_user')) || null;
     let authToken = localStorage.getItem('farmify_token') || null;
