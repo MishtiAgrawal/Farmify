@@ -4327,7 +4327,7 @@
           console.error(err);
           btn.innerText = originalText;
           btn.disabled = false;
-          alert('Failed to connect to server.');
+          showToast('Failed to connect to server.', 'error');
         }
       }
     }
@@ -4349,7 +4349,7 @@
         document.getElementById('cropResult').style.display = 'block';
         speakText(data.recommendation);
       } catch (e) {
-        alert('Error connecting to server.');
+        showToast('Error connecting to server.', 'error');
       }
     }
 
@@ -4364,7 +4364,7 @@
           document.getElementById('cropResult').style.display = 'block';
           speakText(data.recommendation);
         } catch (e) {
-          alert('Error connecting to server.');
+          showToast('Error connecting to server.', 'error');
         }
       }
     }
@@ -4385,7 +4385,7 @@
         document.getElementById('fertResult').style.display = 'block';
         speakText(data.guide);
       } catch (e) {
-        alert('Error connecting to server.');
+        showToast('Error connecting to server.', 'error');
       }
     }
 
