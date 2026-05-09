@@ -584,6 +584,12 @@
       color: #ef6c00;
     }
 
+    .badge-live {
+      background: #ffebee;
+      color: #e53935;
+      border: 1px solid #ffcdd2;
+    }
+
     .advisory-tabs {
       display: flex;
       gap: 10px;
@@ -609,6 +615,42 @@
       background: var(--accent);
       color: white;
       border-color: var(--accent);
+    }
+
+    .live-ticker-wrap {
+      background: var(--accent-light);
+      padding: 8px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .ticker-label {
+      background: #e53935;
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      animation: pulse 2s infinite;
+    }
+
+    .ticker-content {
+      white-space: nowrap;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      animation: tickerMove 20s linear infinite;
+    }
+
+    @keyframes tickerMove {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     .card-icon {
@@ -1315,6 +1357,64 @@
       border-radius: 10px;
       border: 2px solid var(--bg-secondary);
     }
+
+    /* Payment UI Improvements */
+    .payment-method-card {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: var(--bg-card);
+    }
+
+    .payment-method-card:hover {
+      border-color: var(--accent);
+    }
+
+    .payment-method-card input[type="radio"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      margin-right: 15px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .payment-method-card input[type="radio"]:checked {
+      border-color: var(--accent);
+    }
+
+    .payment-method-card input[type="radio"]:checked::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .payment-method-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .payment-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 
@@ -1487,6 +1587,25 @@
           <button class="btn-scan" data-i18n="btn_view_demo">View All →</button>
         </div>
 
+        <!-- User Dashboard (Live Stats) -->
+        <div id="userDashboardSection" class="section" style="display:none;">
+          <div class="section-title">Account Dashboard</div>
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+            <div class="card" style="background:var(--bg-hero); color:white; padding:20px; border:none;">
+              <div style="font-size:0.8rem; font-weight:800; opacity:0.9;">TOTAL ORDERS</div>
+              <div id="statOrders" style="font-size:2rem; font-weight:900; margin-top:8px;">0</div>
+            </div>
+            <div id="statProductsCard" class="card" style="padding:20px; border-color:var(--accent);">
+              <div style="font-size:0.8rem; font-weight:800; color:var(--text-muted);">ACTIVE PRODUCTS</div>
+              <div id="statProducts" style="font-size:2rem; font-weight:900; margin-top:8px; color:var(--accent);">0</div>
+            </div>
+            <div class="card" style="padding:20px; border-color:var(--accent);">
+              <div style="font-size:0.8rem; font-weight:800; color:var(--text-muted);">TOTAL REVENUE/SPENT</div>
+              <div id="statRevenue" style="font-size:2rem; font-weight:900; margin-top:8px; color:var(--accent);">₹0</div>
+            </div>
+          </div>
+        </div>
+
         <!-- AI Features -->
         <div class="section">
           <div class="section-title" data-i18n="sec_ai">AI Features</div>
@@ -1557,8 +1676,13 @@
               </div>
             </div>
           </div>
+          <div class="live-ticker-wrap" id="tickerWrap" style="display:none;">
+            <div class="ticker-label">LATEST ALERTS</div>
+            <div id="tickerContent" class="ticker-content">Loading latest updates...</div>
+          </div>
           <div class="advisory-tabs" id="advisoryTabs">
             <div class="adv-tab active" onclick="setAdvisoryCategory('All')">All</div>
+            <div class="adv-tab" onclick="setAdvisoryCategory('Live')">Live Updates</div>
             <div class="adv-tab" onclick="setAdvisoryCategory('Weather')">Weather</div>
             <div class="adv-tab" onclick="setAdvisoryCategory('Crop')">Crop</div>
             <div class="adv-tab" onclick="setAdvisoryCategory('Market')">Market</div>
@@ -1979,11 +2103,31 @@
           style="min-height:140px; padding: 32px 48px; background:linear-gradient(135deg, #fb8c00 0%, #ffb300 100%);">
           <div class="hero-content">
             <h1 style="font-size:2rem;">Agri Marketplace</h1>
-            <p class="hero-sub">Direct from farm to your home</p>
+            <p class="hero-sub">Connected to our backend server and live product database</p>
           </div>
         </div>
         <div class="section" style="padding-bottom:100px;">
-          <div class="section-title">Fresh Products</div>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end; margin-bottom:16px;">
+            <div>
+              <div class="section-title" style="margin-bottom:8px;">Fresh Products</div>
+              <p style="margin:0; color:var(--text-muted); max-width:620px;">Browse products sourced from verified farmers, with live data pulled from the backend database.</p>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+              <button class="btn-scan" style="background:white; color:var(--accent); border:1px solid var(--accent);" onclick="fetchMarketplace()">Refresh</button>
+              <span id="marketStatus" style="font-size:0.9rem; color:var(--text-muted);"></span>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
+            <input id="marketSearch" type="search" placeholder="Search product, category, seller..." style="flex:1; min-width:220px; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-primary);" oninput="filterMarketplace()">
+            <select id="marketCategory" style="width:220px; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-primary);" onchange="filterMarketplace()">
+              <option value="">All categories</option>
+              <option value="Seeds">Seeds</option>
+              <option value="Fertilizers">Fertilizers</option>
+              <option value="Equipment">Equipment</option>
+              <option value="Produce">Produce</option>
+              <option value="Tools">Tools</option>
+            </select>
+          </div>
           <div id="marketGrid" class="card-grid">
             <div style="text-align:center; padding:20px; color:var(--text-muted);">Loading products...</div>
           </div>
@@ -2420,67 +2564,63 @@
 
       <!-- Payment Method Selection -->
       <div style="text-align: left; margin: 20px 0;">
-        <label style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 10px;">SELECT PAYMENT METHOD</label>
-        <div style="display: grid; gap: 10px;">
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
-            <input type="radio" name="paymentMethod" value="card" checked style="margin-right: 12px;">
-            <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2" style="margin-right: 10px;">
+        <label style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 12px; letter-spacing: 0.05em;">SELECT PAYMENT METHOD</label>
+        <div style="display: grid; gap: 12px;">
+          <label class="payment-method-card selected">
+            <input type="radio" name="paymentMethod" value="card" checked onchange="updatePaymentSelection(this)">
+            <div class="payment-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2">
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
                 <line x1="1" y1="10" x2="23" y2="10" />
               </svg>
-              <div>
-                <div style="font-weight: 600;">Credit/Debit Card</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Visa, Mastercard, RuPay</div>
-              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem;">Credit/Debit Card</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Visa, Mastercard, RuPay</div>
             </div>
           </label>
 
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
-            <input type="radio" name="paymentMethod" value="upi" style="margin-right: 12px;">
-            <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1976d2" stroke-width="2" style="margin-right: 10px;">
+          <label class="payment-method-card">
+            <input type="radio" name="paymentMethod" value="upi" onchange="updatePaymentSelection(this)">
+            <div class="payment-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1976d2" stroke-width="2">
                 <path d="M21 2H3a1 1 0 0 0-1 1v18a1 1 0 0 1-1-1H1a1 1 0 0 1 1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h18z"/>
                 <circle cx="9" cy="10" r="2"/>
                 <path d="M15 8v4"/>
               </svg>
-              <div>
-                <div style="font-weight: 600;">UPI Payment</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Google Pay, PhonePe, Paytm</div>
-              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem;">UPI Payment</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Google Pay, PhonePe, Paytm</div>
             </div>
           </label>
 
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
-            <input type="radio" name="paymentMethod" value="netbanking" style="margin-right: 12px;">
-            <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#388e3c" stroke-width="2" style="margin-right: 10px;">
+          <label class="payment-method-card">
+            <input type="radio" name="paymentMethod" value="netbanking" onchange="updatePaymentSelection(this)">
+            <div class="payment-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#388e3c" stroke-width="2">
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
                 <line x1="2" y1="9" x2="22" y2="9"/>
                 <line x1="6" y1="3" x2="6" y2="9"/>
-                <line x1="10" y1="3" x2="10" y2="9"/>
-                <line x1="14" y1="3" x2="14" y2="9"/>
-                <line x1="18" y1="3" x2="18" y2="9"/>
               </svg>
-              <div>
-                <div style="font-weight: 600;">Net Banking</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">All major banks supported</div>
-              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem;">Net Banking</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">All major banks supported</div>
             </div>
           </label>
 
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
-            <input type="radio" name="paymentMethod" value="wallet" style="margin-right: 12px;">
-            <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f57c00" stroke-width="2" style="margin-right: 10px;">
+          <label class="payment-method-card">
+            <input type="radio" name="paymentMethod" value="wallet" onchange="updatePaymentSelection(this)">
+            <div class="payment-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f57c00" stroke-width="2">
                 <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M6 8h.01M10 8h.01M14 8h.01"/>
-                <path d="M18 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/>
+                <circle cx="18" cy="12" r="2"/>
               </svg>
-              <div>
-                <div style="font-weight: 600;">Digital Wallet</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Amazon Pay, Mobikwik, Ola Money</div>
-              </div>
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 800; font-size: 1rem;">Digital Wallet</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Amazon Pay, Mobikwik</div>
             </div>
           </label>
         </div>
@@ -2635,14 +2775,37 @@
   <script src="lang.js"></script>
   <script>
     // Force API traffic to backend server when served by Live Server or file://
-    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3000') ? 'http://localhost:3000' : '';
+    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3001') ? 'http://localhost:3001' : '';
     const originalFetch = window.fetch.bind(window);
-    window.fetch = function(resource, init) {
+    window.fetch = async function(resource, init = {}) {
       if (typeof resource === 'string' && resource.startsWith('/api/')) {
         resource = API_BASE + resource;
       }
-      return originalFetch(resource, init);
+      
+      init.headers = init.headers || {};
+      if (authToken) {
+        init.headers['Authorization'] = authToken;
+      }
+
+      try {
+        const response = await originalFetch(resource, init);
+        if (response.status === 401) {
+          logout();
+          showToast('Session expired. Please login again.', 'error');
+        }
+        return response;
+      } catch (err) {
+        console.error('Fetch error:', err);
+        throw err;
+      }
     };
+
+    function getImgUrl(path) {
+      if (!path) return 'https://via.placeholder.com/300?text=Farmify';
+      if (path.startsWith('http')) return path;
+      const normalizedPath = path.replace(/\\/g, '/');
+      return API_BASE + '/' + (normalizedPath.startsWith('/') ? normalizedPath.substring(1) : normalizedPath);
+    }
 
     // ── AUTH ──
     let currentUser = JSON.parse(localStorage.getItem('farmify_user')) || null;
@@ -2655,11 +2818,13 @@
       const farmerNav = document.getElementById('farmerNav');
       const buyerNav = document.getElementById('buyerNav');
       const postAdvBtn = document.getElementById('postAdvBtn');
+      const dashboard = document.getElementById('userDashboardSection');
 
       if (authToken && currentUser) {
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
         authStatus.innerText = `Hi, ${currentUser.name} (${currentUser.role})`;
+        if (dashboard) dashboard.style.display = 'block';
 
         if (currentUser.role === 'farmer') {
           if (farmerNav) farmerNav.style.display = 'flex';
@@ -2674,6 +2839,7 @@
         loginBtn.style.display = 'block';
         logoutBtn.style.display = 'none';
         authStatus.innerText = '';
+        if (dashboard) dashboard.style.display = 'none';
         if (farmerNav) farmerNav.style.display = 'none';
         if (buyerNav) buyerNav.style.display = 'none';
         if (postAdvBtn) postAdvBtn.style.display = 'none';
@@ -2705,36 +2871,90 @@
       }
     }
 
+    function updatePaymentSelection(radio) {
+      document.querySelectorAll('.payment-method-card').forEach(card => card.classList.remove('selected'));
+      radio.closest('.payment-method-card').classList.add('selected');
+      
+      const cardDetails = document.getElementById('cardDetails');
+      const upiDetails = document.getElementById('upiDetails');
+      
+      if (radio.value === 'card') {
+        cardDetails.style.display = 'block';
+        upiDetails.style.display = 'none';
+      } else if (radio.value === 'upi') {
+        cardDetails.style.display = 'none';
+        upiDetails.style.display = 'block';
+      } else {
+        cardDetails.style.display = 'none';
+        upiDetails.style.display = 'none';
+      }
+    }
+
+    async function loadDashboardStats() {
+      const dashboard = document.getElementById('userDashboardSection');
+      if (!authToken || !dashboard) return;
+      try {
+        const res = await fetch('/api/user/stats');
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('statOrders').innerText = data.data.orders;
+          document.getElementById('statProducts').innerText = data.data.products;
+          document.getElementById('statRevenue').innerText = '₹' + data.data.revenue.toLocaleString();
+          
+          if (data.data.role !== 'farmer') {
+            document.getElementById('statProductsCard').style.display = 'none';
+          } else {
+            document.getElementById('statProductsCard').style.display = 'block';
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load stats');
+      }
+    }
+
     async function handleLogin() {
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPass').value;
 
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      const data = await res.json();
-      if (data.token) {
-        localStorage.setItem('farmify_token', data.token);
-        localStorage.setItem('farmify_user', JSON.stringify(data.user));
-        authToken = data.token;
-        currentUser = data.user;
-        closeModal('authModal');
-        updateAuthUI();
-        location.reload();
-      } else {
-        showToast(data.error, 'error');
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.token) {
+          localStorage.setItem('farmify_token', data.token);
+          localStorage.setItem('farmify_user', JSON.stringify(data.user));
+          authToken = data.token;
+          currentUser = data.user;
+          closeModal('authModal');
+          updateAuthUI();
+          showToast('Welcome back, ' + currentUser.name + '!');
+          fetchCart(); // Load user-specific cart
+          loadDashboardStats(); // Load live user stats
+        } else {
+          showToast(data.error || 'Login failed', 'error');
+        }
+      } catch (err) {
+        showToast('Server error during login', 'error');
       }
     }
 
     function logout() {
       localStorage.removeItem('farmify_token');
       localStorage.removeItem('farmify_user');
-      location.reload();
+      authToken = null;
+      currentUser = null;
+      cart = [];
+      updateCartUI();
+      updateAuthUI();
+      showPage('home');
+      showToast('Logged out successfully');
     }
 
     updateAuthUI();
+    if (authToken) loadDashboardStats();
 
     // ── THEME TOGGLE ──
     const html = document.documentElement;
@@ -2899,11 +3119,14 @@
         const res = await fetch(`/api/advisories?lang=${currentLang}&category=${currentAdvCategory}`);
         const data = await res.json();
 
-        // Check for new advisory (Live notification)
-        if (!isInitial && data.length > 0 && data[0].id > lastAdvisoryId) {
-          showLiveNotification(data[0]);
+        if (data.length > 0) {
+          // Check for new advisory (Live notification)
+          if (!isInitial && data[0].id > lastAdvisoryId) {
+            showLiveNotification(data[0]);
+          }
+          lastAdvisoryId = data[0].id;
+          updateTicker(data);
         }
-        if (data.length > 0) lastAdvisoryId = data[0].id;
 
         const list = document.getElementById('advisoryList');
         if (!list) return;
@@ -2929,6 +3152,20 @@
                 `;
         });
       } catch (e) { console.error(e); }
+    }
+
+    function updateTicker(data) {
+      const wrap = document.getElementById('tickerWrap');
+      const content = document.getElementById('tickerContent');
+      if (!wrap || !content) return;
+      
+      const liveItems = data.slice(0, 5).map(adv => `${adv.icon} ${adv.title}`).join(' | ');
+      if (liveItems) {
+        content.innerText = liveItems;
+        wrap.style.display = 'flex';
+      } else {
+        wrap.style.display = 'none';
+      }
     }
 
     function showLiveNotification(adv) {
@@ -3193,11 +3430,28 @@
 
     // ── MARKETPLACE & DASHBOARD LOGIC ──
     async function fetchMarketplace() {
+      const status = document.getElementById('marketStatus');
+      const grid = document.getElementById('marketGrid');
+      const query = document.getElementById('marketSearch') ? document.getElementById('marketSearch').value.trim() : '';
+      const category = document.getElementById('marketCategory') ? document.getElementById('marketCategory').value : '';
+      if (status) status.innerText = 'Connecting to marketplace...';
+      if (grid) grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Loading marketplace data...</div>';
+
       try {
-        const res = await fetch('/api/marketplace');
+        const res = await fetch(`/api/marketplace?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
+        if (!res.ok) {
+          const error = await res.json().catch(() => ({}));
+          throw new Error(error.error || 'Failed to load marketplace');
+        }
+
         allProducts = await res.json();
         renderMarketplace(allProducts);
-      } catch (e) { console.error(e); }
+        if (status) status.innerText = `Connected to server · ${allProducts.length} products available`;
+      } catch (e) {
+        console.error('Marketplace fetch failed:', e);
+        if (status) status.innerText = 'Unable to connect to backend server';
+        if (grid) grid.innerHTML = `<div style="text-align:center; padding:24px; color:var(--text-muted);">Unable to load marketplace. Please start the backend server and refresh.</div>`;
+      }
     }
 
     async function fetchMandiPrices() {
@@ -3226,25 +3480,30 @@
     function renderMarketplace(products) {
       const grid = document.getElementById('marketGrid');
       if (!grid) return;
-      grid.innerHTML = products.length ? '' : '<p style="text-align:center; padding:20px; color:var(--text-muted);">No products found matching your search.</p>';
+      if (!products.length) {
+        grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">No products found. Change filters or refresh to load more.</div>';
+        return;
+      }
+      grid.innerHTML = '';
       products.forEach(p => {
         grid.innerHTML += `
                 <div class="card">
-                    <div style="height:160px; background:#f0f4f0; border-radius:12px; overflow:hidden; position:relative;">
-                        <img src="/${p.image}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=400&auto=format&fit=crop'">
-                        <div style="position:absolute; top:10px; right:10px; background:rgba(255,255,255,0.9); padding:4px 8px; border-radius:8px; font-size:0.7rem; font-weight:800; color:var(--accent);">${p.category}</div>
+                    <div style="height:170px; background:#f7f7f7; border-radius:14px; overflow:hidden; position:relative;">
+                        <img src="${getImgUrl(p.image)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=400&auto=format&fit=crop'">
+                        <div style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.65); color:white; padding:6px 10px; border-radius:999px; font-size:0.75rem; font-weight:700;">${p.category || 'General'}</div>
                     </div>
-                    <div style="padding:12px 2px 0;">
-                        <h3 style="font-size:1.05rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</h3>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                            <span style="color:var(--accent); font-weight:900; font-size:1.1rem;">₹${p.price}</span>
-                            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Stock: ${p.quantity}</span>
+                    <div style="padding:16px 14px 14px;">
+                        <h3 style="font-size:1.05rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</h3>
+                        <p style="margin:8px 0 0; color:var(--text-muted); font-size:0.9rem; line-height:1.4;">Sold by <strong>${p.farmer_name}</strong></p>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px;">
+                            <div>
+                              <div style="font-size:1.15rem; font-weight:800; color:var(--accent);">₹${Number(p.price).toLocaleString()}</div>
+                              <div style="font-size:0.78rem; color:var(--text-muted);">Stock: ${p.quantity}</div>
+                            </div>
+                            <button class="btn-scan" style="padding:10px 14px; background:var(--accent); color:white; border-radius:12px; min-width:110px;" onclick="addToCart('${p._id}', '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${(p.image || '').replace(/'/g, "\\'")}')">
+                                Add to Cart
+                            </button>
                         </div>
-                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Seller: <strong>${p.farmer_name}</strong></p>
-                        <button class="btn-scan" style="width:100%; margin-top:12px; background:var(--accent); color:white; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="addToCart(${p.id}, '${p.name}', ${p.price}, '${p.image || ''}')">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                            Add to Cart
-                        </button>
                     </div>
                 </div>
             `;
@@ -3252,17 +3511,40 @@
     }
 
     function filterMarketplace() {
-      const query = document.getElementById('marketSearch').value.toLowerCase();
-      const filtered = allProducts.filter(p =>
-        p.name.toLowerCase().includes(query) ||
-        p.category.toLowerCase().includes(query) ||
-        p.farmer_name.toLowerCase().includes(query)
-      );
+      const search = document.getElementById('marketSearch') ? document.getElementById('marketSearch').value.trim() : '';
+      const category = document.getElementById('marketCategory') ? document.getElementById('marketCategory').value : '';
+      if (!search && !category) {
+        renderMarketplace(allProducts);
+        return;
+      }
+      const filtered = allProducts.filter(p => {
+        const matchesQuery = !search || [p.name, p.category, p.farmer_name].some(value => String(value || '').toLowerCase().includes(search.toLowerCase()));
+        const matchesCategory = !category || String(p.category || '').toLowerCase() === category.toLowerCase();
+        return matchesQuery && matchesCategory;
+      });
       renderMarketplace(filtered);
     }
 
     // ── CART LOGIC ──
-    let cart = JSON.parse(localStorage.getItem('farmify_cart')) || [];
+    let cart = [];
+
+    async function fetchCart() {
+      if (!authToken) {
+        cart = JSON.parse(localStorage.getItem('farmify_cart')) || [];
+        updateCartUI();
+        return;
+      }
+      try {
+        const res = await fetch('/api/cart', {
+          headers: { 'Authorization': authToken }
+        });
+        const data = await res.json();
+        if (data.success) {
+          cart = data.data.items;
+          updateCartUI();
+        }
+      } catch (e) { console.error('Error fetching cart:', e); }
+    }
 
     function updateCartUI() {
       const badge = document.getElementById('cartBadge');
@@ -3283,55 +3565,128 @@
         let total = 0;
         cart.forEach((item, index) => {
           total += item.price * item.quantity;
+          const productId = item.product || item.id;
           itemsList.innerHTML += `
-                    <div style="display: flex; gap: 12px; align-items: center; background: var(--bg-primary); padding: 10px; border-radius: 12px;">
-                        <div style="width: 50px; height: 50px; background: #eee; border-radius: 8px; overflow: hidden;">
-                            <img src="/${item.image}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/50?text=Agri'">
+                    <div style="display: flex; gap: 12px; align-items: center; background: var(--bg-primary); padding: 10px; border-radius: 12px; border: 1px solid var(--border);">
+                        <div style="width: 55px; height: 55px; background: #eee; border-radius: 10px; overflow: hidden; flex-shrink: 0;">
+                            <img src="${getImgUrl(item.image)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/55?text=Agri'">
                         </div>
                         <div style="flex: 1;">
-                            <div style="font-weight: 800; font-size: 0.9rem;">${item.name}</div>
-                            <div style="font-size: 0.8rem; color: var(--accent); font-weight: 700;">₹${item.price} x ${item.quantity}</div>
+                            <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-primary);">${item.name}</div>
+                            <div style="font-size: 0.85rem; color: var(--accent); font-weight: 700;">₹${item.price} x ${item.quantity}</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <button onclick="changeCartQty(${index}, -1)" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--border); background:white;">-</button>
-                            <span style="font-weight: 800; font-size: 0.9rem;">${item.quantity}</span>
-                            <button onclick="changeCartQty(${index}, 1)" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--border); background:white;">+</button>
-                            <button onclick="removeFromCart(${index})" style="margin-left:8px; color:#c62828; border:none; background:none; cursor:pointer; font-weight:900;">&times;</button>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="display: flex; align-items: center; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border); padding: 2px;">
+                              <button onclick="changeCartQty('${productId}', -1)" style="width:26px; height:26px; border-radius:6px; border:none; background:none; color:var(--text-primary); cursor:pointer;">-</button>
+                              <span style="font-weight: 800; font-size: 0.9rem; min-width: 24px; text-align: center;">${item.quantity}</span>
+                              <button onclick="changeCartQty('${productId}', 1)" style="width:26px; height:26px; border-radius:6px; border:none; background:none; color:var(--text-primary); cursor:pointer;">+</button>
+                            </div>
+                            <button onclick="removeFromCart('${productId}')" style="color:#e53935; border:none; background:none; cursor:pointer; padding:5px;">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
         });
         totalEl.innerText = '₹' + total;
       }
-      localStorage.setItem('farmify_cart', JSON.stringify(cart));
+      
+      // Also save to localStorage as backup for non-logged users
+      if (!authToken) {
+        localStorage.setItem('farmify_cart', JSON.stringify(cart));
+      }
     }
 
-    function addToCart(id, name, price, image) {
-      const existing = cart.find(item => item.id === id);
-      if (existing) {
-        existing.quantity += 1;
+    async function addToCart(id, name, price, image) {
+      if (!authToken) {
+        const existing = cart.find(item => (item.id === id || item.product === id));
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ id, name, price, image, quantity: 1 });
+        }
+        updateCartUI();
+        showToast('Added to local cart');
       } else {
-        cart.push({ id, name, price, image, quantity: 1 });
+        try {
+          const res = await fetch('/api/cart', {
+            method: 'POST',
+            headers: {
+              'Authorization': authToken,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productId: id, name, price, image, quantity: 1 })
+          });
+          const data = await res.json();
+          if (data.success) {
+            cart = data.data.items;
+            updateCartUI();
+            showToast('Syncing with your account...');
+          }
+        } catch (e) { console.error('Add to cart failed:', e); }
       }
-      updateCartUI();
-      // Toast or simple notification
-      const btn = event.currentTarget;
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '✅ Added!';
-      setTimeout(() => btn.innerHTML = originalText, 1000);
+      
+      // Visual feedback on button
+      if (event && event.currentTarget) {
+        const btn = event.currentTarget;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✅ Added!';
+        setTimeout(() => btn.innerHTML = originalText, 1000);
+      }
     }
 
-    function changeCartQty(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
+    async function changeCartQty(productId, delta) {
+      const item = cart.find(i => (i.product === productId || i.id === productId));
+      if (!item) return;
+      
+      const newQty = item.quantity + delta;
+      
+      if (!authToken) {
+        if (newQty <= 0) {
+          cart = cart.filter(i => (i.product !== productId && i.id !== productId));
+        } else {
+          item.quantity = newQty;
+        }
+        updateCartUI();
+      } else {
+        try {
+          const res = await fetch(`/api/cart/${productId}`, {
+            method: 'PUT',
+            headers: {
+              'Authorization': authToken,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quantity: newQty })
+          });
+          const data = await res.json();
+          if (data.success) {
+            cart = data.data.items;
+            updateCartUI();
+          }
+        } catch (e) { console.error('Update qty failed:', e); }
       }
-      updateCartUI();
     }
 
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartUI();
+    async function removeFromCart(productId) {
+      if (!authToken) {
+        cart = cart.filter(i => (i.product !== productId && i.id !== productId));
+        updateCartUI();
+      } else {
+        try {
+          const res = await fetch(`/api/cart/${productId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': authToken }
+          });
+          const data = await res.json();
+          if (data.success) {
+            cart = data.data.items;
+            updateCartUI();
+          }
+        } catch (e) { console.error('Remove from cart failed:', e); }
+      }
     }
 
     function openPaymentModal(total) {
@@ -3410,6 +3765,10 @@
 
         if (paymentData.success) {
           btn.innerText = 'Payment Successful!';
+          
+          // Clear backend cart after successful payment
+          await fetch('/api/cart', { method: 'DELETE', headers: { 'Authorization': authToken } });
+          
           setTimeout(async () => {
             showToast(`Payment successful! Transaction ID: ${paymentData.transaction_id}`);
             cart = [];
@@ -3583,6 +3942,7 @@
     renderStore();
     fetchAdvisories(true);
     fetchMandiPrices();
+    fetchCart(); // Load cart on initialization
 
     async function renderStore() {
       const grid = document.getElementById('storeGrid');
@@ -3597,7 +3957,7 @@
                     <div class="card-icon" style="font-size: 1.5rem;">${item.icon}</div>
                     <h3>${item.name}</h3>
                     <p style="color:var(--accent); font-weight:800;">₹${item.price} / ${item.unit}</p>
-                    <button class="btn-scan" style="width:100%; margin-top:10px; background:var(--accent); color:white;" onclick="addToCart(${item.id}, '${item.name}', ${item.price}, '')">Add to Cart</button>
+                    <button class="btn-scan" style="width:100%; margin-top:10px; background:var(--accent); color:white;" onclick="addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '')">Add to Cart</button>
                 </div>
             `;
         });

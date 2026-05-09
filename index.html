@@ -1835,6 +1835,15 @@
                   <line x1="8" y1="23" x2="16" y2="23" />
                 </svg>
               </button>
+              <button id="audioToggle" onclick="toggleAudio()"
+                style="background:var(--accent-light); border:1px solid var(--accent); border-radius:12px; padding:0 15px; cursor:pointer; display: flex; align-items: center; justify-content: center;"
+                title="Toggle Audio Responses">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </button>
               <button onclick="sendChat()"
                 style="background:var(--accent);color:#fff;border:none;border-radius:12px;padding:12px 20px;font-weight:800;font-size:0.9rem;cursor:pointer;transition:background .2s;"
                 onmouseover="this.style.background='var(--accent-hover)'"
@@ -2065,7 +2074,8 @@
               </div>
               <div>
                 <label style="font-weight:800; font-size:0.85rem; color:var(--text-muted);">GENDER</label>
-                <select id="profGender" style="width:100%; padding:12px; margin-top:5px; border-radius:10px; border:1px solid var(--border); font-family:inherit;">
+                <select id="profGender"
+                  style="width:100%; padding:12px; margin-top:5px; border-radius:10px; border:1px solid var(--border); font-family:inherit;">
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -2420,12 +2430,16 @@
 
       <!-- Payment Method Selection -->
       <div style="text-align: left; margin: 20px 0;">
-        <label style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 10px;">SELECT PAYMENT METHOD</label>
+        <label
+          style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 10px;">SELECT
+          PAYMENT METHOD</label>
         <div style="display: grid; gap: 10px;">
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
             <input type="radio" name="paymentMethod" value="card" checked style="margin-right: 12px;">
             <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2" style="margin-right: 10px;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2"
+                style="margin-right: 10px;">
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
                 <line x1="1" y1="10" x2="23" y2="10" />
               </svg>
@@ -2436,13 +2450,16 @@
             </div>
           </label>
 
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
             <input type="radio" name="paymentMethod" value="upi" style="margin-right: 12px;">
             <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1976d2" stroke-width="2" style="margin-right: 10px;">
-                <path d="M21 2H3a1 1 0 0 0-1 1v18a1 1 0 0 1-1-1H1a1 1 0 0 1 1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h18z"/>
-                <circle cx="9" cy="10" r="2"/>
-                <path d="M15 8v4"/>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1976d2" stroke-width="2"
+                style="margin-right: 10px;">
+                <path
+                  d="M21 2H3a1 1 0 0 0-1 1v18a1 1 0 0 1-1-1H1a1 1 0 0 1 1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h18z" />
+                <circle cx="9" cy="10" r="2" />
+                <path d="M15 8v4" />
               </svg>
               <div>
                 <div style="font-weight: 600;">UPI Payment</div>
@@ -2451,16 +2468,18 @@
             </div>
           </label>
 
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
             <input type="radio" name="paymentMethod" value="netbanking" style="margin-right: 12px;">
             <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#388e3c" stroke-width="2" style="margin-right: 10px;">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                <line x1="2" y1="9" x2="22" y2="9"/>
-                <line x1="6" y1="3" x2="6" y2="9"/>
-                <line x1="10" y1="3" x2="10" y2="9"/>
-                <line x1="14" y1="3" x2="14" y2="9"/>
-                <line x1="18" y1="3" x2="18" y2="9"/>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#388e3c" stroke-width="2"
+                style="margin-right: 10px;">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="2" y1="9" x2="22" y2="9" />
+                <line x1="6" y1="3" x2="6" y2="9" />
+                <line x1="10" y1="3" x2="10" y2="9" />
+                <line x1="14" y1="3" x2="14" y2="9" />
+                <line x1="18" y1="3" x2="18" y2="9" />
               </svg>
               <div>
                 <div style="font-weight: 600;">Net Banking</div>
@@ -2469,13 +2488,15 @@
             </div>
           </label>
 
-          <label style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
             <input type="radio" name="paymentMethod" value="wallet" style="margin-right: 12px;">
             <div style="display: flex; align-items: center; flex: 1;">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f57c00" stroke-width="2" style="margin-right: 10px;">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M6 8h.01M10 8h.01M14 8h.01"/>
-                <path d="M18 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f57c00" stroke-width="2"
+                style="margin-right: 10px;">
+                <rect x="2" y="4" width="20" height="16" rx="2" ry="2" />
+                <path d="M6 8h.01M10 8h.01M14 8h.01" />
+                <path d="M18 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0z" />
               </svg>
               <div>
                 <div style="font-weight: 600;">Digital Wallet</div>
@@ -2516,7 +2537,8 @@
       <button id="payBtn" class="btn-scan"
         style="width:100%; margin-top:25px; background:var(--accent); color:white; height:50px; font-weight:900;"
         onclick="processPayment()">PAY NOW</button>
-      <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 15px;">🔒 SSL Secured · Multiple payment options available</p>
+      <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 15px;">🔒 SSL Secured · Multiple payment
+        options available</p>
     </div>
   </div>
 
@@ -2721,6 +2743,7 @@
         currentUser = data.user;
         closeModal('authModal');
         updateAuthUI();
+        await loadCartFromBackend(); // Load cart after login
         location.reload();
       } else {
         alert(data.error);
@@ -2734,6 +2757,7 @@
     }
 
     updateAuthUI();
+    loadCartFromBackend(); // Load cart on page load if user is logged in
 
     // ── THEME TOGGLE ──
     const html = document.documentElement;
@@ -3263,6 +3287,30 @@
     // ── CART LOGIC ──
     let cart = JSON.parse(localStorage.getItem('farmify_cart')) || [];
 
+    async function loadCartFromBackend() {
+      if (!authToken) return;
+      try {
+        const res = await fetch('/api/cart', {
+          headers: { 'Authorization': authToken }
+        });
+        const data = await res.json();
+        if (data.success && data.data) {
+          // Merge backend cart with local cart
+          cart = data.data.map(item => ({
+            id: item.product_id,
+            name: item.product_name,
+            price: item.price,
+            image: item.image,
+            quantity: item.quantity
+          }));
+          localStorage.setItem('farmify_cart', JSON.stringify(cart));
+          updateCartUI();
+        }
+      } catch (err) {
+        console.error('Error loading cart from backend:', err);
+      }
+    }
+
     function updateCartUI() {
       const badge = document.getElementById('cartBadge');
       const itemsList = document.getElementById('cartItems');
@@ -3306,6 +3354,13 @@
     }
 
     function addToCart(id, name, price, image) {
+      if (!authToken) {
+        showToast('Please login to add items to cart', 'error');
+        openModal('authModal');
+        return;
+      }
+
+      // Add to local cart for UI purposes
       const existing = cart.find(item => item.id === id);
       if (existing) {
         existing.quantity += 1;
@@ -3313,7 +3368,27 @@
         cart.push({ id, name, price, image, quantity: 1 });
       }
       updateCartUI();
-      // Toast or simple notification
+
+      // Also add to backend cart
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Authorization': authToken,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          product_id: id,
+          quantity: 1
+        })
+      }).then(res => res.json()).then(data => {
+        if (!data.success) {
+          showToast(data.error || 'Failed to add to cart', 'error');
+        }
+      }).catch(err => {
+        console.error('Cart API error:', err);
+      });
+
+      // Toast notification
       const btn = event.currentTarget;
       const originalText = btn.innerHTML;
       btn.innerHTML = '✅ Added!';
@@ -3341,7 +3416,7 @@
       // Add event listeners for payment method selection
       const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
       paymentMethods.forEach(method => {
-        method.addEventListener('change', function() {
+        method.addEventListener('change', function () {
           const cardDetails = document.getElementById('cardDetails');
           const upiDetails = document.getElementById('upiDetails');
 
@@ -3774,12 +3849,12 @@
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onstart = function() {
+      recognition.onstart = function () {
         console.log('Speech recognition started');
         showToast('Listening... Speak now', 'info');
       };
 
-      recognition.onresult = function(event) {
+      recognition.onresult = function (event) {
         console.log('Speech recognition result received');
         if (event.results.length > 0) {
           const transcript = event.results[0][0].transcript;
@@ -3789,10 +3864,10 @@
         }
       };
 
-      recognition.onerror = function(event) {
+      recognition.onerror = function (event) {
         console.error('Speech recognition error:', event.error);
         let errorMessage = 'Speech recognition failed. ';
-        switch(event.error) {
+        switch (event.error) {
           case 'no-speech':
             errorMessage += 'No speech was detected.';
             break;
@@ -3811,7 +3886,7 @@
         showToast(errorMessage, 'error');
       };
 
-      recognition.onend = function() {
+      recognition.onend = function () {
         console.log('Speech recognition ended');
       };
 
@@ -3839,15 +3914,15 @@
       utterance.pitch = 1;
       utterance.volume = 0.8;
 
-      utterance.onstart = function() {
+      utterance.onstart = function () {
         console.log('Speech synthesis started');
       };
 
-      utterance.onend = function() {
+      utterance.onend = function () {
         console.log('Speech synthesis ended');
       };
 
-      utterance.onerror = function(event) {
+      utterance.onerror = function (event) {
         console.error('Speech synthesis error:', event.error);
         showToast('Error with text-to-speech', 'error');
       };
@@ -3866,11 +3941,11 @@
       const res = await fetch('/api/soil-labs');
       const labs = await res.json();
       let html = '<div style="display:grid; gap:12px;">';
-      
+
       if (labs.length === 0) {
         html += '<p style="color:var(--text-muted); text-align:center;">No soil testing labs available</p>';
       }
-      
+
       labs.forEach(l => {
         html += `
                 <div class="card" style="border-left:5px solid var(--accent); cursor:pointer;" onclick="viewLabDetails(${l.id}, '${l.name.replace(/'/g, "\\'")}')">
@@ -3896,7 +3971,7 @@
 
     function viewLabDetails(labId, labName) {
       if (!authToken) return openModal('authModal');
-      
+
       fetch('/api/soil-labs').then(r => r.json()).then(labs => {
         const lab = labs.find(l => l.id === labId);
         if (!lab) return;
@@ -4056,7 +4131,7 @@
 
     function viewSubsidyDetails(subsidyId, subsidyName) {
       if (!authToken) return openModal('authModal');
-      
+
       fetch('/api/subsidies').then(r => r.json()).then(subs => {
         const subsidy = subs.find(s => s.id === subsidyId);
         if (!subsidy) return;
@@ -4250,6 +4325,24 @@
       });
       openLedger();
     }
+    let audioEnabled = false; // Default to false for optional audio
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById('audioToggle');
+      if (audioEnabled) {
+        btn.style.background = 'var(--accent)';
+        btn.style.borderColor = 'var(--accent)';
+        btn.querySelector('svg').style.stroke = '#fff';
+        showToast('Audio responses enabled', 'success');
+      } else {
+        btn.style.background = 'var(--accent-light)';
+        btn.style.borderColor = 'var(--accent)';
+        btn.querySelector('svg').style.stroke = 'currentColor';
+        showToast('Audio responses disabled', 'info');
+      }
+    }
+
     async function sendChat() {
       const input = document.getElementById('chatInput');
       const msg = input.value.trim();
@@ -4264,8 +4357,11 @@
           body: JSON.stringify({ message: msg })
         });
         const data = await response.json();
-        addChatMsg(data.reply, 'ai');
-        speakText(data.reply); // Audio AI responds back
+        const reply = data.reply || data.data?.reply || data.message || 'Sorry, I could not get a response from the AI.';
+        addChatMsg(reply, 'ai');
+        if (audioEnabled) {
+          speakText(reply); // Only speak if audio is enabled
+        }
       } catch (err) {
         console.error(err);
         addChatMsg("Sorry, I am offline or cannot connect to the server.", 'ai');
@@ -4320,7 +4416,14 @@
             document.getElementById('scanResult').style.display = 'block';
             document.getElementById('resDisease').innerText = data.disease;
             document.getElementById('resSolution').innerText = data.solution;
-            speakText(`Disease detected: ${data.disease}. ${data.solution}`);
+
+            // Only speak if it's a plant disease result and audio is enabled
+            if (data.disease !== 'Not a Plant' && audioEnabled) {
+              speakText(`Disease detected: ${data.disease}. ${data.solution}`);
+            } else if (data.disease === 'Not a Plant') {
+              // Show message for non-plant images
+              showToast('Please upload an image of a plant, crop, or leaf for disease analysis.', 'warning');
+            }
           }
         } catch (err) {
           console.error(err);
@@ -4346,7 +4449,7 @@
         const data = await res.json();
         document.getElementById('resCrop').innerText = data.recommendation;
         document.getElementById('cropResult').style.display = 'block';
-        speakText(data.recommendation);
+        if (audioEnabled) speakText(data.recommendation);
       } catch (e) {
         alert('Error connecting to server.');
       }
@@ -4361,7 +4464,7 @@
           const data = await res.json();
           document.getElementById('resCrop').innerText = `${data.detected}\n\n${data.recommendation}`;
           document.getElementById('cropResult').style.display = 'block';
-          speakText(data.recommendation);
+          if (audioEnabled) speakText(data.recommendation);
         } catch (e) {
           alert('Error connecting to server.');
         }
@@ -4382,7 +4485,7 @@
         const data = await res.json();
         document.getElementById('resFert').innerText = data.guide;
         document.getElementById('fertResult').style.display = 'block';
-        speakText(data.guide);
+        if (audioEnabled) speakText(data.guide);
       } catch (e) {
         alert('Error connecting to server.');
       }
