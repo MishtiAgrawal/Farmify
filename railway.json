@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npm install",
+  "startCommand": "npm start",
+  "environmentVariables": {
+    "NODE_ENV": "production",
+    "PORT": "3001"
+  }
+}
