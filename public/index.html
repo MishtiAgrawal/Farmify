@@ -3081,7 +3081,7 @@
   <!-- ─── SCRIPTS ─── -->
   <script src="lang.js"></script>
   <script>
-    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3000') ? 'http://localhost:3000' : '';
+    const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3005' : '';
     const originalFetch = window.fetch.bind(window);
     window.fetch = (resource, init) => {
       if (typeof resource === 'string' && resource.startsWith('/api')) {

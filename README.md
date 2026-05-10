@@ -1,96 +1,140 @@
-# Farmify
+# Farmify — Modular Backend Architecture
+**Production-Ready Modular Structure**
 
-Farmify is a full-stack agriculture support platform built with Node.js, Express, SQLite, and a single-page frontend. The app connects the frontend UI to the backend APIs and stores data persistently in `database.sqlite`.
+Farmify is a full-stack agriculture support platform built with Node.js, Express, SQLite, and Gemini AI. This repository contains the modularized backend.
 
-## Live features implemented
+## 📂 Project Structure
+```text
+src/
+├── app.js               # Express application and middleware setup
+├── server.js            # Entry point with graceful shutdown handling
+├── config/              # Configuration (DB, AI, Env)
+├── controllers/         # Business logic modules (Auth, Marketplace, AI, etc.)
+├── routes/              # Route aggregators (Flattened for frontend compatibility)
+├── middleware/          # Security, Auth, Validation, Rate Limiting
+├── utils/               # Database helpers and utilities
+└── uploads/             # Static file storage
+```
 
-- User authentication
-  - Signup, login, JWT-based sessions
-  - Role support for farmer/buyer/expert
-- Profile management
-  - Persistent profile fields including contact, location, financial details
-- Marketplace and orders
-  - Product catalog
-  - Cart checkout and order placement
-  - Payment processing simulation
-- Soil Testing Labs
-  - Browse certified testing labs
-  - Book soil tests with date, sample type, field size, and crop type
-  - Persist bookings to the database
-- Government Subsidies
-  - Browse subsidy schemes
-  - View scheme details, eligibility, application process, required documents
-  - Submit subsidy applications and persist them in the database
-- Live advisory and news sections
-  - Advisory feed with crop, market, and weather updates
-  - Advisory details with external info links
-- Community support and help requests
-  - Submit support queries
-  - Community posts and organizations
-- Farm overview and ledger
-  - Farm data overview persisted per user
-  - Ledger / income-expense tracking
-- Soil and audio features
-  - Speech recognition and text-to-speech support for search and chatbot
+## 🚀 Quick Start
 
-## Backend
+### 1. Install dependencies
+```powershell
+npm install
+```
 
-- Main file: `server.js`
-- Database: `database.sqlite`
-- API routes include:
-  - `POST /api/auth/signup`
-  - `POST /api/auth/login`
-  - `GET /api/profile`
-  - `POST /api/profile`
-  - `GET /api/subsidies`
-  - `POST /api/subsidies/apply`
-  - `GET /api/subsidies/applications`
-  - `GET /api/soil-labs`
-  - `POST /api/soil-labs/book`
-  - `GET /api/soil-labs/bookings`
-  - `POST /api/payment/process`
-  - many more routes for marketplace, orders, advisories, community, weather, farm overview, ledger, and machinery
+### 2. Setup environment
+Create a `.env` file in the root directory:
+```text
+PORT=3004
+JWT_SECRET=your_secure_secret_here
+GEMINI_API_KEY=your_gemini_api_key_here
+OPENWEATHER_API_KEY=your_weather_api_key_here
+```
 
-## Frontend
+### 3. Start server 
+```powershell
+# Development (with nodemon)
+npm run dev
 
-- Main file: `public/index.html`
-- Connected UI feature cards for:
-  - Soil Testing Labs
-  - Government Subsidies
-  - Farm Store
-  - Weather Intelligence
-  - Mandi Prices
-  - Community and support
-  - Machinery rental
-  - Financial ledger
-- Uses toast notifications and modal workflows for smooth interaction
+# Production
+npm start
+```
 
-## How to run
+### 4. Verify
+```powershell
+curl http://localhost:3004/api/health
+```
 
-1. Open terminal in `c:\Users\HP\OneDrive\Desktop\farmify`
-2. Install dependencies if not already installed:
-   ```powershell
-   npm install
-   ```
-3. Start the backend server:
-   ```powershell
-   node server.js
-   ```
-4. Open the app in your browser:
-   ```text
-   http://localhost:3000
-   ```
+---
 
-## Notes
+## 🔐 Authentication System
 
-- The application is currently saved and connected to the server.
-- `git status --short` returned a clean workspace at the time of creation.
-- The backend must be running to use the live features.
-- If you want, open `public/index.html` for further UI polish or translate `lang.js` for additional language support.
+All protected routes require: `Authorization: Bearer <JWT_TOKEN>`
 
-## File status
+| Method | Route | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| POST | `/api/auth/signup` | ❌ | Register `{name, email, password, role?}` |
+| POST | `/api/auth/login` | ❌ | Login `{email, password}` |
+| POST | `/api/auth/logout` | ✅ | Blacklist current token |
+| GET | `/api/auth/me` | ✅ | Get current user data |
+| POST | `/api/auth/change-password` | ✅ | Update password |
 
-- `server.js` is the main Express backend file.
-- `public/index.html` is the live frontend app.
-- `database.sqlite` stores all persistent data.
-- This README was added to document the project state and usage.
+---
+
+## 🛰️ API Reference
+
+### 👤 Profile & Dashboard
+| Method | Route | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| GET | `/api/profile` | ✅ | Get user + farm profile |
+| PUT | `/api/profile` | ✅ | Update profile fields |
+| GET | `/api/dashboard/stats` | ✅ | Get aggregate statistics |
+| GET | `/api/dashboard/overview` | ✅ | Get farm management overview |
+| PUT | `/api/dashboard/overview` | ✅ | Update farm management overview |
+| GET | `/api/weather` | ❌ | Get weather (default: Bhopal) |
+| GET | `/api/mandi` | ❌ | Get live market prices |
+
+### 🌾 Marketplace
+| Method | Route | Auth | Role | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| GET | `/api/marketplace` | ❌ | Any | Browse products |
+| POST | `/api/marketplace` | ✅ | farmer | List a new product |
+| GET | `/api/marketplace/farmer` | ✅ | farmer | View your listings |
+| PUT | `/api/marketplace/:id` | ✅ | farmer | Edit product |
+| DELETE | `/api/marketplace/:id` | ✅ | farmer | Delete product |
+
+### 🛒 Cart
+| Method | Route | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| GET | `/api/cart` | ✅ | View cart items |
+| POST | `/api/cart` | ✅ | Add to cart `{product_id, quantity}` |
+| PUT | `/api/cart/:id` | ✅ | Update quantity |
+| DELETE | `/api/cart/:id` | ✅ | Remove item |
+| DELETE | `/api/cart` | ✅ | Clear cart |
+
+### 📦 Orders & Payments
+| Method | Route | Auth | Description |
+| :--- | :--- | : :--- | :--- |
+| POST | `/api/orders` | ✅ | Place order |
+| GET | `/api/orders/buyer` | ✅ | Purchase history |
+| GET | `/api/orders/farmer` | ✅ | Sales orders (Farmer role) |
+| PUT | `/api/orders/status` | ✅ | Update status (Farmer role) |
+| POST | `/api/orders/cancel` | ✅ | Cancel order |
+| POST | `/api/payments/process` | ✅ | Process payment |
+
+### 🤖 AI & Tools
+| Method | Route | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| POST | `/api/ai/chat` | ✅ | Chat with Krishi AI |
+| GET | `/api/ai/chat/history` | ✅ | Get user chat history |
+| POST | `/api/ai/scan-plant` | ✅ | Analyze plant disease/health |
+| POST | `/api/soil/recommend` | ❌ | Crop recommendations (Parameters) |
+| POST | `/api/soil/fertilizer-guide` | ❌ | Fertilizer schedule & guide |
+
+### 🏘️ Community & Advisories
+| Method | Route | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| GET | `/api/advisories` | ❌ | Browse news and crop alerts |
+| POST | `/api/advisories` | ✅ | Post advisory (Expert role) |
+| GET | `/api/community/posts` | ❌ | Community forum posts |
+| POST | `/api/community/posts` | ✅ | Create forum post |
+| GET | `/api/community/orgs` | ❌ | List farming organizations |
+
+### 📋 Subsidies & Machinery
+| Method | Route | Auth | Description |
+| :--- | :--- | :--- | :--- |
+| GET | `/api/subsidies` | ❌ | Browse government schemes |
+| POST | `/api/subsidies/apply` | ✅ | Apply for a subsidy |
+| GET | `/api/machinery` | ❌ | Browse rental machinery |
+| POST | `/api/machinery/book` | ✅ | Book machinery |
+
+---
+
+## 🛠️ Built With
+- **Node.js & Express** - Server Framework
+- **SQLite3** - Database
+- **JWT** - Authentication
+- **Bcryptjs** - Password Hashing
+- **Google Gemini AI** - Intelligent Advisory
+- **Express Rate Limit** - Security

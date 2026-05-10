@@ -1,34 +1,39 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
 const path = require('path');
-const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const userRoutes = require('./routes/userRoutes');
-const featureRoutes = require('./routes/featureRoutes');
-const errorHandler = require('./middlewares/errorMiddleware');
-const notFound = require('./middlewares/notFound');
+const { globalLimiter } = require('./middleware/rateLimit.middleware');
+const routes = require('./routes');
 
 const app = express();
 
-app.use(helmet());
+// Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// Serve static files from 'public'
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-app.use(express.static(path.join(__dirname, '../public')));
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+// Global rate limiting
+app.use('/api', globalLimiter);
 
-app.use('/api/auth', authRoutes);
-app.use('/api', productRoutes);
-app.use('/api', orderRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api', featureRoutes);
+// API Routes
+app.use('/api', routes);
 
-app.use(notFound);
-app.use(errorHandler);
+// SPA Fallback: Serve index.html for all non-API routes
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) return next();
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error',
+    path: req.path
+  });
+});
 
 module.exports = app;
