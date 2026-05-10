@@ -13,13 +13,11 @@ const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'replace_this_with_a_secure_secret';
 
 // File Uploads
-const upload = multer({ dest: 'uploads/' });
-
-// Database Connection
-const db = new sqlite3.Database('database.sqlite', (err) => {
-  if (err) console.error('Database Connection Error:', err.message);
-  else console.log('Connected to local SQLite database (database.sqlite). No MongoDB needed!');
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
+const upload = multer({ storage });
 
 // Middleware
 app.use(cors());
@@ -438,25 +436,25 @@ function initDb() {
   });
 }
 
-// Multer Setup
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
-});
-const upload = multer({ storage });
+
 
 // Middleware for token verification
 const authenticate = (req, res, next) => {
-  const token = req.headers['authorization'];
+  let token = req.headers['authorization'];
+  if (token && token.startsWith('Bearer ')) {
+    token = token.split(' ')[1];
+  }
+  
   if (!token) return res.status(401).json({ error: 'No token' });
+  
   jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) return res.status(401).json({ error: 'Invalid token' });
     req.user = decoded;
     next();
-  } catch (error) {
-    return res.status(401).json({ success: false, error: 'Not authorized, token failed' });
-  }
+  });
 };
+
+const protect = authenticate;
 
 // --- AUTH ---
 app.post('/api/auth/signup', (req, res) => {
@@ -622,85 +620,7 @@ app.post('/api/payment/process', authenticate, (req, res) => {
   }, 2000); // Simulate 2 second processing
 });
 
-// --- AI & DATA ROUTES ---
-
-app.post('/api/scan', upload.single('plantImage'), (req, res) => {
-  const diseases = ['Blight', 'Rust', 'Leaf Spot', 'Healthy', 'Powdery Mildew'];
-  const solutions = [
-    'Apply Copper fungicide and remove infected leaves.',
-    'Use Sulfur-based spray and improve air circulation.',
-    'Reduce overhead watering and use Neem oil spray.',
-    'Your plant looks great! Keep up the good work.',
-    'Apply Potassium Bicarbonate spray and prune affected areas.'
-  ];
-  const idx = Math.floor(Math.random() * diseases.length);
-  const result = { disease: diseases[idx], solution: solutions[idx] };
-  
-  db.run('INSERT INTO scans (image_path, disease, solution) VALUES (?, ?, ?)', 
-    [req.file ? req.file.path : 'camera', result.disease, result.solution]);
-  
-  res.json(result);
-});
-
-app.post('/api/chat', (req, res) => {
-  const { message } = req.body;
-  // Simple Mock AI
-  let reply = "I understand you are asking about '" + message + "'. As your Krishi AI, I recommend consulting the local mandi for best prices or checking our disease predictor for plant health.";
-  if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) reply = "Namaste! Main aapka Farmify AI assistant hoon. Main aapki kaise madad kar sakta hoon?";
-  
-  db.run('INSERT INTO chat_history (user_message, ai_response) VALUES (?, ?)', [message, reply]);
-  res.json({ reply });
-});
-
-app.post('/api/crop-recommend', (req, res) => {
-  const { soilDetails } = req.body;
-  res.json({ recommendation: "Based on your description, we recommend growing Wheat or Maize for better yield." });
-});
-
-app.post('/api/crop-recommend/scan', upload.single('soilImage'), (req, res) => {
-  res.json({ detected: "Loamy Soil detected", recommendation: "Perfect for Grains and Vegetables. Consider adding organic compost." });
-});
-
-app.post('/api/fertilizer-guide', (req, res) => {
-  const { crop, season } = req.body;
-  res.json({ guide: `For ${crop} in ${season}, use 50kg Urea and 25kg DAP per acre after first irrigation.` });
-});
-
-app.post('/api/help', (req, res) => {
-  const { issue, email } = req.body;
-  if (!issue) return res.status(400).json({ error: 'Please describe your issue' });
-  const userEmail = email || 'anonymous@farmify.in';
-  
-  // Save to help_requests
-  db.run('INSERT INTO help_requests (message) VALUES (?)', [`From: ${userEmail} - Query: ${issue}`]);
-  
-  // Also post to community feed so other farmers can help
-  db.run('INSERT INTO community_posts (user_name, message, location) VALUES (?, ?, ?)', 
-    ['Help Request', `🆘 ${issue} (Contact: ${userEmail})`, 'Community']);
-  
-  // Generate an auto-response solution
-  const solutions = {
-    'yellow': 'Yellowing leaves may indicate nitrogen deficiency. Apply 25kg Urea per acre. Also check for waterlogging.',
-    'pest': 'For pest control, try Neem oil spray (5ml/L water) early morning. If severe, use recommended insecticide.',
-    'water': 'For irrigation issues, consider drip irrigation. Apply for PM Krishi Sinchai Yojana subsidy.',
-    'price': 'Check eNAM portal (enam.gov.in) for best mandi prices. Consider direct selling to FPOs.',
-    'seed': 'Get certified seeds from National Seed Corporation or your nearest KVK center.',
-    'soil': 'Get free soil testing from your nearest Soil Health Card center. Visit soilhealth.dac.gov.in',
-    'loan': 'Apply for Kisan Credit Card at any bank branch. Interest rate is just 4% for loans up to ₹3 lakh.'
-  };
-  let solution = 'Our agricultural experts have been notified. You will receive detailed guidance shortly. Meanwhile, contact Kisan Helpline: 1800-180-1551 (free, 24x7).';
-  const issueLower = issue.toLowerCase();
-  for (const [key, val] of Object.entries(solutions)) {
-    if (issueLower.includes(key)) { solution = val; break; }
-  }
-  
-  console.log(`[HELP] Solution email to ${userEmail}: ${solution}`);
-  res.json({ 
-    message: `Query sent to community & experts! Solution sent to ${userEmail}.`,
-    solution: solution,
-    email_sent: true
-  });
-});
+// Dashboard Stats and Overview routes are defined below
 
 // --- DASHBOARD ---
 app.get('/api/user/stats', protect, (req, res) => {
@@ -793,6 +713,21 @@ app.post('/api/ledger', protect, (req, res) => {
   db.run(`INSERT INTO ledger (user_id, type, amount, description) VALUES (?, ?, ?, ?)`, [req.user.id, req.body.type, req.body.amount, req.body.description], function(err) { res.status(201).json({ success: true, id: this.lastID }); });
 });
 
+// --- AI & DATA ROUTES ---
+app.post('/api/crop-recommend', (req, res) => {
+  const { soilDetails } = req.body;
+  res.json({ recommendation: "Based on your description, we recommend growing Wheat or Maize for better yield." });
+});
+
+app.post('/api/crop-recommend/scan', upload.single('soilImage'), (req, res) => {
+  res.json({ detected: "Loamy Soil detected", recommendation: "Perfect for Grains and Vegetables. Consider adding organic compost." });
+});
+
+app.post('/api/fertilizer-guide', (req, res) => {
+  const { crop, season } = req.body;
+  res.json({ guide: `For ${crop} in ${season}, use 50kg Urea and 25kg DAP per acre after first irrigation.` });
+});
+
 // --- AI INTELLIGENCE ---
 app.post('/api/chat', async (req, res) => {
   if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_gemini_api_key_here') return res.status(200).json({ reply: "Gemini API key not configured." });
@@ -809,6 +744,7 @@ app.post('/api/help', protect, (req, res) => {
 });
 
 // SPA Support
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.get('/lang.js', (req, res) => res.sendFile(path.join(__dirname, 'lang.js')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
