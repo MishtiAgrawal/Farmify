@@ -520,6 +520,217 @@
       gap: 16px;
     }
 
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .market-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+
+    .market-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--accent);
+    }
+
+    .market-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: 0.5s;
+      z-index: 1;
+    }
+
+    .market-card:hover::before {
+      left: 100%;
+    }
+
+    .market-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #f0f4f0 100%);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .market-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .market-card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+
+    .market-card-discount {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      z-index: 2;
+    }
+
+    .market-card-content {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .market-card-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .market-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+    }
+
+    .market-card-stars {
+      display: flex;
+      gap: 2px;
+      color: #ffb300;
+    }
+
+    .market-card-description {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .market-card-farmer {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .market-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .market-card-price {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .market-card-price-current {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .market-card-price-original {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .market-card-stock {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .market-card-wishlist {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 4px;
+    }
+
+    .market-card-wishlist:hover {
+      transform: scale(1.2);
+    }
+
+    .market-card-button {
+      width: 100%;
+      padding: 10px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .market-card-button:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+    }
+
+    .market-card-button:active {
+      transform: scale(0.98);
+    }
+
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -584,12 +795,6 @@
       color: #ef6c00;
     }
 
-    .badge-live {
-      background: #ffebee;
-      color: #e53935;
-      border: 1px solid #ffcdd2;
-    }
-
     .advisory-tabs {
       display: flex;
       gap: 10px;
@@ -615,42 +820,6 @@
       background: var(--accent);
       color: white;
       border-color: var(--accent);
-    }
-
-    .live-ticker-wrap {
-      background: var(--accent-light);
-      padding: 8px 16px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .ticker-label {
-      background: #e53935;
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 900;
-      padding: 3px 8px;
-      border-radius: 6px;
-      white-space: nowrap;
-      animation: pulse 2s infinite;
-    }
-
-    .ticker-content {
-      white-space: nowrap;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      animation: tickerMove 20s linear infinite;
-    }
-
-    @keyframes tickerMove {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
     }
 
     .card-icon {
@@ -1096,6 +1265,37 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
       }
+
+      .market-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 12px;
+      }
+
+      .market-card {
+        border-radius: 12px;
+      }
+
+      .market-card-image {
+        height: 160px;
+      }
+
+      .market-card-content {
+        padding: 12px;
+      }
+
+      .market-card-title {
+        font-size: 0.95rem;
+      }
+
+      .modal-content {
+        width: 95%;
+        max-width: 100%;
+        padding: 16px;
+      }
+
+      #productDetailsContent {
+        grid-template-columns: 1fr !important;
+      }
     }
 
     /* PAGE TRANSITIONS */
@@ -1126,7 +1326,7 @@
 
     /* Upload modal styles */
     .modal {
-      display: none;
+      display: none !important;
       position: fixed;
       z-index: 1000;
       left: 0;
@@ -1134,17 +1334,24 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal[style*="display: flex"] {
+      display: flex !important;
     }
 
     .modal-content {
       background-color: var(--bg-card);
-      margin: 15% auto;
-      padding: 20px;
+      padding: 24px;
       border: 1px solid var(--border);
-      width: 80%;
-      max-width: 500px;
-      border-radius: 12px;
+      border-radius: 16px;
       text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .close-btn {
@@ -1324,6 +1531,28 @@
       }
     }
 
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+    }
+
     /* Cart Sidebar Styles */
     .cart-btn {
       position: relative;
@@ -1356,64 +1585,6 @@
       padding: 2px 6px;
       border-radius: 10px;
       border: 2px solid var(--bg-secondary);
-    }
-
-    /* Payment UI Improvements */
-    .payment-method-card {
-      display: flex;
-      align-items: center;
-      padding: 12px;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: var(--bg-card);
-    }
-
-    .payment-method-card:hover {
-      border-color: var(--accent);
-    }
-
-    .payment-method-card input[type="radio"] {
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
-      border-radius: 50%;
-      margin-right: 15px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .payment-method-card input[type="radio"]:checked {
-      border-color: var(--accent);
-    }
-
-    .payment-method-card input[type="radio"]:checked::after {
-      content: "";
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: var(--accent);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .payment-method-card.selected {
-      border-color: var(--accent);
-      background: var(--accent-light);
-    }
-
-    .payment-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-      flex-shrink: 0;
     }
   </style>
 </head>
@@ -1587,25 +1758,6 @@
           <button class="btn-scan" data-i18n="btn_view_demo">View All →</button>
         </div>
 
-        <!-- User Dashboard (Live Stats) -->
-        <div id="userDashboardSection" class="section" style="display:none;">
-          <div class="section-title">Account Dashboard</div>
-          <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
-            <div class="card" style="background:var(--bg-hero); color:white; padding:20px; border:none;">
-              <div style="font-size:0.8rem; font-weight:800; opacity:0.9;">TOTAL ORDERS</div>
-              <div id="statOrders" style="font-size:2rem; font-weight:900; margin-top:8px;">0</div>
-            </div>
-            <div id="statProductsCard" class="card" style="padding:20px; border-color:var(--accent);">
-              <div style="font-size:0.8rem; font-weight:800; color:var(--text-muted);">ACTIVE PRODUCTS</div>
-              <div id="statProducts" style="font-size:2rem; font-weight:900; margin-top:8px; color:var(--accent);">0</div>
-            </div>
-            <div class="card" style="padding:20px; border-color:var(--accent);">
-              <div style="font-size:0.8rem; font-weight:800; color:var(--text-muted);">TOTAL REVENUE/SPENT</div>
-              <div id="statRevenue" style="font-size:2rem; font-weight:900; margin-top:8px; color:var(--accent);">₹0</div>
-            </div>
-          </div>
-        </div>
-
         <!-- AI Features -->
         <div class="section">
           <div class="section-title" data-i18n="sec_ai">AI Features</div>
@@ -1676,13 +1828,8 @@
               </div>
             </div>
           </div>
-          <div class="live-ticker-wrap" id="tickerWrap" style="display:none;">
-            <div class="ticker-label">LATEST ALERTS</div>
-            <div id="tickerContent" class="ticker-content">Loading latest updates...</div>
-          </div>
           <div class="advisory-tabs" id="advisoryTabs">
             <div class="adv-tab active" onclick="setAdvisoryCategory('All')">All</div>
-            <div class="adv-tab" onclick="setAdvisoryCategory('Live')">Live Updates</div>
             <div class="adv-tab" onclick="setAdvisoryCategory('Weather')">Weather</div>
             <div class="adv-tab" onclick="setAdvisoryCategory('Crop')">Crop</div>
             <div class="adv-tab" onclick="setAdvisoryCategory('Market')">Market</div>
@@ -1959,6 +2106,15 @@
                   <line x1="8" y1="23" x2="16" y2="23" />
                 </svg>
               </button>
+              <button id="audioToggle" onclick="toggleAudio()"
+                style="background:var(--accent-light); border:1px solid var(--accent); border-radius:12px; padding:0 15px; cursor:pointer; display: flex; align-items: center; justify-content: center;"
+                title="Toggle Audio Responses">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </button>
               <button onclick="sendChat()"
                 style="background:var(--accent);color:#fff;border:none;border-radius:12px;padding:12px 20px;font-weight:800;font-size:0.9rem;cursor:pointer;transition:background .2s;"
                 onmouseover="this.style.background='var(--accent-hover)'"
@@ -2099,37 +2255,143 @@
 
       <!-- ══ MARKETPLACE PAGE ══ -->
       <div id="page-marketplace" class="page">
+        <!-- Hero Section -->
         <div class="hero"
           style="min-height:140px; padding: 32px 48px; background:linear-gradient(135deg, #fb8c00 0%, #ffb300 100%);">
           <div class="hero-content">
-            <h1 style="font-size:2rem;">Agri Marketplace</h1>
-            <p class="hero-sub">Connected to our backend server and live product database</p>
+            <h1 style="font-size:2rem;">🌾 Agri Marketplace</h1>
+            <p class="hero-sub">Fresh produce directly from farmers to your doorstep</p>
           </div>
         </div>
-        <div class="section" style="padding-bottom:100px;">
-          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end; margin-bottom:16px;">
-            <div>
-              <div class="section-title" style="margin-bottom:8px;">Fresh Products</div>
-              <p style="margin:0; color:var(--text-muted); max-width:620px;">Browse products sourced from verified farmers, with live data pulled from the backend database.</p>
+
+        <!-- Marketplace Filters & Search -->
+        <div class="section" style="padding-bottom: 100px;">
+          <!-- Search Bar -->
+          <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; margin-bottom: 24px; align-items: end;">
+            <div style="position: relative;">
+              <input type="text" id="marketSearch" placeholder="Search products, farmers, categories..." 
+                style="width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-size:0.95rem; transition:all 0.3s;" 
+                oninput="filterMarketplace()"
+                onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 3px var(--accent-light)';"
+                onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none';">
+              <svg style="position:absolute; right:12px; top:50%; transform:translateY(-50%); width:20px; height:20px; color:var(--text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             </div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-              <button class="btn-scan" style="background:white; color:var(--accent); border:1px solid var(--accent);" onclick="fetchMarketplace()">Refresh</button>
-              <span id="marketStatus" style="font-size:0.9rem; color:var(--text-muted);"></span>
-            </div>
-          </div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
-            <input id="marketSearch" type="search" placeholder="Search product, category, seller..." style="flex:1; min-width:220px; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-primary);" oninput="filterMarketplace()">
-            <select id="marketCategory" style="width:220px; padding:12px 14px; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); color:var(--text-primary);" onchange="filterMarketplace()">
-              <option value="">All categories</option>
-              <option value="Seeds">Seeds</option>
-              <option value="Fertilizers">Fertilizers</option>
-              <option value="Equipment">Equipment</option>
-              <option value="Produce">Produce</option>
-              <option value="Tools">Tools</option>
+            <select id="categoryFilter" style="padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-family:inherit; cursor:pointer; min-width:150px;" onchange="filterMarketplace()">
+              <option value="">All Categories</option>
+              <option value="Vegetables">🥬 Vegetables</option>
+              <option value="Fruits">🍎 Fruits</option>
+              <option value="Grains">🌾 Grains</option>
+              <option value="Dairy">🥛 Dairy</option>
+              <option value="Organic">🌿 Organic</option>
+            </select>
+            <select id="sortBy" style="padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-family:inherit; cursor:pointer; min-width:150px;" onchange="filterMarketplace()">
+              <option value="newest">Newest</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="popular">Most Popular</option>
+              <option value="rating">Top Rated</option>
             </select>
           </div>
-          <div id="marketGrid" class="card-grid">
-            <div style="text-align:center; padding:20px; color:var(--text-muted);">Loading products...</div>
+
+          <!-- Active Filters Display -->
+          <div id="activeFilters" style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+          </div>
+
+          <!-- Section Title with Stats -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="section-title">Fresh Products <span id="productCount" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-left: 12px;">(Loading...)</span></div>
+            <button onclick="toggleWishlistView()" style="padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 600; transition: all 0.3s;">
+              ❤️ Wishlist <span id="wishlistBadge" style="display: none; background: var(--accent); color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; margin-left: 4px;"></span>
+            </button>
+          </div>
+
+          <!-- Product Grid -->
+          <div id="marketGrid" class="market-grid">
+            <div style="text-align:center; padding:40px 20px; color:var(--text-muted); grid-column: 1/-1;">Loading fresh products...</div>
+          </div>
+
+          <!-- Empty State -->
+          <div id="emptyState" style="display: none; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 12px;">📭</div>
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">No Products Found</h3>
+            <p style="font-size: 0.9rem;">Try adjusting your filters or search terms</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details Modal -->
+      <div id="productDetailsModal" class="modal" style="display: none;">
+        <div class="modal-content" style="width: 90%; max-width: 600px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="font-size: 1.5rem; font-weight: 800;">Product Details</h2>
+            <button onclick="closeModal('productDetailsModal')" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+          </div>
+          <div id="productDetailsContent" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <!-- Image -->
+            <div style="background: var(--bg-primary); border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 300px;">
+              <img id="detailImage" src="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <!-- Details -->
+            <div>
+              <div style="display: flex; align-items: start; justify-content: space-between; margin-bottom: 16px;">
+                <div>
+                  <h3 id="detailName" style="font-size: 1.3rem; font-weight: 800; margin-bottom: 4px;"></h3>
+                  <p id="detailCategory" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"></p>
+                </div>
+                <button id="wishlistBtn" onclick="toggleWishlistItem()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">🤍</button>
+              </div>
+              
+              <!-- Rating -->
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                <div id="detailRating" style="display: flex; gap: 2px;"></div>
+                <span id="detailRatingCount" style="color: var(--text-muted); font-size: 0.9rem;"></span>
+              </div>
+
+              <!-- Price & Stock -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; padding: 12px; background: var(--bg-primary); border-radius: 12px;">
+                <div>
+                  <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">PRICE</p>
+                  <p id="detailPrice" style="font-size: 1.3rem; font-weight: 800; color: var(--accent);"></p>
+                </div>
+                <div>
+                  <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">STOCK AVAILABLE</p>
+                  <p id="detailStock" style="font-size: 1.1rem; font-weight: 800;"></p>
+                </div>
+              </div>
+
+              <!-- Farmer Info -->
+              <div style="padding: 12px; background: var(--accent-light); border-radius: 12px; margin-bottom: 16px;">
+                <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">FARMER</p>
+                <p id="detailFarmer" style="font-weight: 800; color: var(--text-primary);"></p>
+                <p id="detailLocation" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;"></p>
+              </div>
+
+              <!-- Description -->
+              <div style="margin-bottom: 16px;">
+                <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;">DESCRIPTION</p>
+                <p id="detailDescription" style="color: var(--text-secondary); line-height: 1.5;"></p>
+              </div>
+
+              <!-- Delivery Info -->
+              <div style="padding: 12px; background: var(--bg-primary); border-radius: 12px; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <div>
+                  <p style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">FREE DELIVERY</p>
+                  <p style="font-size: 0.85rem; color: var(--text-secondary);">Delivered within 24-48 hours</p>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; gap: 12px;">
+                <button id="detailAddToCartBtn" onclick="addDetailToCart()" style="flex: 1; padding: 12px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                  Add to Cart
+                </button>
+                <button onclick="closeModal('productDetailsModal')" style="flex: 1; padding: 12px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border); border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s;">
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2209,7 +2471,8 @@
               </div>
               <div>
                 <label style="font-weight:800; font-size:0.85rem; color:var(--text-muted);">GENDER</label>
-                <select id="profGender" style="width:100%; padding:12px; margin-top:5px; border-radius:10px; border:1px solid var(--border); font-family:inherit;">
+                <select id="profGender"
+                  style="width:100%; padding:12px; margin-top:5px; border-radius:10px; border:1px solid var(--border); font-family:inherit;">
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -2564,63 +2827,78 @@
 
       <!-- Payment Method Selection -->
       <div style="text-align: left; margin: 20px 0;">
-        <label style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 12px; letter-spacing: 0.05em;">SELECT PAYMENT METHOD</label>
-        <div style="display: grid; gap: 12px;">
-          <label class="payment-method-card selected">
-            <input type="radio" name="paymentMethod" value="card" checked onchange="updatePaymentSelection(this)">
-            <div class="payment-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2">
+        <label
+          style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 10px;">SELECT
+          PAYMENT METHOD</label>
+        <div style="display: grid; gap: 10px;">
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+            <input type="radio" name="paymentMethod" value="card" checked style="margin-right: 12px;">
+            <div style="display: flex; align-items: center; flex: 1;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent)" stroke-width="2"
+                style="margin-right: 10px;">
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
                 <line x1="1" y1="10" x2="23" y2="10" />
               </svg>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-weight: 800; font-size: 1rem;">Credit/Debit Card</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">Visa, Mastercard, RuPay</div>
-            </div>
-          </label>
-
-          <label class="payment-method-card">
-            <input type="radio" name="paymentMethod" value="upi" onchange="updatePaymentSelection(this)">
-            <div class="payment-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1976d2" stroke-width="2">
-                <path d="M21 2H3a1 1 0 0 0-1 1v18a1 1 0 0 1-1-1H1a1 1 0 0 1 1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h18z"/>
-                <circle cx="9" cy="10" r="2"/>
-                <path d="M15 8v4"/>
-              </svg>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-weight: 800; font-size: 1rem;">UPI Payment</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">Google Pay, PhonePe, Paytm</div>
+              <div>
+                <div style="font-weight: 600;">Credit/Debit Card</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Visa, Mastercard, RuPay</div>
+              </div>
             </div>
           </label>
 
-          <label class="payment-method-card">
-            <input type="radio" name="paymentMethod" value="netbanking" onchange="updatePaymentSelection(this)">
-            <div class="payment-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#388e3c" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                <line x1="2" y1="9" x2="22" y2="9"/>
-                <line x1="6" y1="3" x2="6" y2="9"/>
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+            <input type="radio" name="paymentMethod" value="upi" style="margin-right: 12px;">
+            <div style="display: flex; align-items: center; flex: 1;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1976d2" stroke-width="2"
+                style="margin-right: 10px;">
+                <path
+                  d="M21 2H3a1 1 0 0 0-1 1v18a1 1 0 0 1-1-1H1a1 1 0 0 1 1-1V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h18z" />
+                <circle cx="9" cy="10" r="2" />
+                <path d="M15 8v4" />
               </svg>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-weight: 800; font-size: 1rem;">Net Banking</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">All major banks supported</div>
+              <div>
+                <div style="font-weight: 600;">UPI Payment</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Google Pay, PhonePe, Paytm</div>
+              </div>
             </div>
           </label>
 
-          <label class="payment-method-card">
-            <input type="radio" name="paymentMethod" value="wallet" onchange="updatePaymentSelection(this)">
-            <div class="payment-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f57c00" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <circle cx="18" cy="12" r="2"/>
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+            <input type="radio" name="paymentMethod" value="netbanking" style="margin-right: 12px;">
+            <div style="display: flex; align-items: center; flex: 1;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#388e3c" stroke-width="2"
+                style="margin-right: 10px;">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="2" y1="9" x2="22" y2="9" />
+                <line x1="6" y1="3" x2="6" y2="9" />
+                <line x1="10" y1="3" x2="10" y2="9" />
+                <line x1="14" y1="3" x2="14" y2="9" />
+                <line x1="18" y1="3" x2="18" y2="9" />
               </svg>
+              <div>
+                <div style="font-weight: 600;">Net Banking</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">All major banks supported</div>
+              </div>
             </div>
-            <div style="flex: 1;">
-              <div style="font-weight: 800; font-size: 1rem;">Digital Wallet</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">Amazon Pay, Mobikwik</div>
+          </label>
+
+          <label
+            style="display: flex; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+            <input type="radio" name="paymentMethod" value="wallet" style="margin-right: 12px;">
+            <div style="display: flex; align-items: center; flex: 1;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f57c00" stroke-width="2"
+                style="margin-right: 10px;">
+                <rect x="2" y="4" width="20" height="16" rx="2" ry="2" />
+                <path d="M6 8h.01M10 8h.01M14 8h.01" />
+                <path d="M18 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0z" />
+              </svg>
+              <div>
+                <div style="font-weight: 600;">Digital Wallet</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Amazon Pay, Mobikwik, Ola Money</div>
+              </div>
             </div>
           </label>
         </div>
@@ -2656,7 +2934,8 @@
       <button id="payBtn" class="btn-scan"
         style="width:100%; margin-top:25px; background:var(--accent); color:white; height:50px; font-weight:900;"
         onclick="processPayment()">PAY NOW</button>
-      <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 15px;">🔒 SSL Secured · Multiple payment options available</p>
+      <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 15px;">🔒 SSL Secured · Multiple payment
+        options available</p>
     </div>
   </div>
 
@@ -2700,20 +2979,48 @@
 
   <!-- 8. Add Product Modal -->
   <div id="addProductModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 600px;">
       <span class="close-btn" onclick="closeModal('addProductModal')">&times;</span>
-      <h2>Add Product to Marketplace</h2>
-      <input type="text" id="pName" placeholder="Product Name (e.g. Fresh Wheat)"
-        style="width:100%; padding:10px; margin-top:15px; border-radius:8px; border:1px solid var(--border); font-family:inherit;">
-      <input type="text" id="pCat" placeholder="Category (e.g. Grains)"
-        style="width:100%; padding:10px; margin-top:10px; border-radius:8px; border:1px solid var(--border); font-family:inherit;">
-      <input type="number" id="pPrice" placeholder="Price (per kg/unit)"
-        style="width:100%; padding:10px; margin-top:10px; border-radius:8px; border:1px solid var(--border); font-family:inherit;">
-      <input type="number" id="pQty" placeholder="Quantity Available"
-        style="width:100%; padding:10px; margin-top:10px; border-radius:8px; border:1px solid var(--border); font-family:inherit;">
-      <input type="file" id="pImage" style="margin-top:10px;">
-      <button class="btn-scan" style="width:100%; margin-top:20px; background:var(--accent); color:white;"
-        onclick="submitProduct()">List Product</button>
+      <h2 style="font-size: 1.3rem; margin-bottom: 20px;">📦 Add Product to Marketplace</h2>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <input type="text" id="pName" placeholder="Product Name (e.g. Fresh Wheat)"
+          style="grid-column: 1/-1; padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+        
+        <select id="pCat" style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+          <option value="">Select Category</option>
+          <option value="Vegetables">🥬 Vegetables</option>
+          <option value="Fruits">🍎 Fruits</option>
+          <option value="Grains">🌾 Grains</option>
+          <option value="Dairy">🥛 Dairy</option>
+          <option value="Organic">🌿 Organic</option>
+        </select>
+        
+        <input type="number" id="pPrice" placeholder="Price (per kg/unit)" min="0" step="0.01"
+          style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+        
+        <input type="number" id="pQty" placeholder="Quantity Available" min="0"
+          style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+        
+        <input type="number" id="pDiscount" placeholder="Discount %" min="0" max="100"
+          style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+        
+        <input type="number" id="pOriginalPrice" placeholder="Original Price (optional)" min="0" step="0.01"
+          style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+      </div>
+      
+      <textarea id="pDesc" placeholder="Product Description (e.g. Fresh from farm, rich in nutrients)"
+        style="width:100%; padding:12px; margin-top:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary); height: 80px; resize: vertical;">Fresh, high-quality produce directly from farms.</textarea>
+      
+      <div style="margin-top: 12px;">
+        <label style="display: block; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px;">Product Image</label>
+        <input type="file" id="pImage" accept="image/*" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: var(--bg-primary);">
+      </div>
+      
+      <button class="btn-scan" style="width:100%; margin-top:20px; padding:14px; background:var(--accent); color:white; border:none; border-radius:10px; font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.3s;"
+        onclick="submitProduct()" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent)'">
+        ✅ List Product
+      </button>
     </div>
   </div>
 
@@ -2766,7 +3073,7 @@
         <button class="btn-scan" style="flex:1; background: var(--accent); color: white;"
           onclick="closeModal('advisoryDetailModal')">Understood</button>
         <button class="btn-scan" style="flex:1; border: 1px solid var(--border); color: var(--text-primary);"
-          onclick="showToast('Shared to Community!', 'success')">Share with Farmers</button>
+          onclick="alert('Shared to Community!')">Share with Farmers</button>
       </div>
     </div>
   </div>
@@ -2774,38 +3081,14 @@
   <!-- ─── SCRIPTS ─── -->
   <script src="lang.js"></script>
   <script>
-    // Force API traffic to backend server when served by Live Server or file://
-    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3001') ? 'http://localhost:3001' : '';
+    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3000') ? 'http://localhost:3000' : '';
     const originalFetch = window.fetch.bind(window);
-    window.fetch = async function(resource, init = {}) {
-      if (typeof resource === 'string' && resource.startsWith('/api/')) {
+    window.fetch = (resource, init) => {
+      if (typeof resource === 'string' && resource.startsWith('/api')) {
         resource = API_BASE + resource;
       }
-      
-      init.headers = init.headers || {};
-      if (authToken) {
-        init.headers['Authorization'] = authToken;
-      }
-
-      try {
-        const response = await originalFetch(resource, init);
-        if (response.status === 401) {
-          logout();
-          showToast('Session expired. Please login again.', 'error');
-        }
-        return response;
-      } catch (err) {
-        console.error('Fetch error:', err);
-        throw err;
-      }
+      return originalFetch(resource, init);
     };
-
-    function getImgUrl(path) {
-      if (!path) return 'https://via.placeholder.com/300?text=Farmify';
-      if (path.startsWith('http')) return path;
-      const normalizedPath = path.replace(/\\/g, '/');
-      return API_BASE + '/' + (normalizedPath.startsWith('/') ? normalizedPath.substring(1) : normalizedPath);
-    }
 
     // ── AUTH ──
     let currentUser = JSON.parse(localStorage.getItem('farmify_user')) || null;
@@ -2818,13 +3101,11 @@
       const farmerNav = document.getElementById('farmerNav');
       const buyerNav = document.getElementById('buyerNav');
       const postAdvBtn = document.getElementById('postAdvBtn');
-      const dashboard = document.getElementById('userDashboardSection');
 
       if (authToken && currentUser) {
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'block';
         authStatus.innerText = `Hi, ${currentUser.name} (${currentUser.role})`;
-        if (dashboard) dashboard.style.display = 'block';
 
         if (currentUser.role === 'farmer') {
           if (farmerNav) farmerNav.style.display = 'flex';
@@ -2839,7 +3120,6 @@
         loginBtn.style.display = 'block';
         logoutBtn.style.display = 'none';
         authStatus.innerText = '';
-        if (dashboard) dashboard.style.display = 'none';
         if (farmerNav) farmerNav.style.display = 'none';
         if (buyerNav) buyerNav.style.display = 'none';
         if (postAdvBtn) postAdvBtn.style.display = 'none';
@@ -2864,51 +3144,10 @@
       });
       const data = await res.json();
       if (data.success) {
-        showToast('Account created successfully! Please login.', 'success');
+        alert('Account created! Please login.');
         toggleAuth(true);
       } else {
-        showToast(data.error, 'error');
-      }
-    }
-
-    function updatePaymentSelection(radio) {
-      document.querySelectorAll('.payment-method-card').forEach(card => card.classList.remove('selected'));
-      radio.closest('.payment-method-card').classList.add('selected');
-      
-      const cardDetails = document.getElementById('cardDetails');
-      const upiDetails = document.getElementById('upiDetails');
-      
-      if (radio.value === 'card') {
-        cardDetails.style.display = 'block';
-        upiDetails.style.display = 'none';
-      } else if (radio.value === 'upi') {
-        cardDetails.style.display = 'none';
-        upiDetails.style.display = 'block';
-      } else {
-        cardDetails.style.display = 'none';
-        upiDetails.style.display = 'none';
-      }
-    }
-
-    async function loadDashboardStats() {
-      const dashboard = document.getElementById('userDashboardSection');
-      if (!authToken || !dashboard) return;
-      try {
-        const res = await fetch('/api/user/stats');
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById('statOrders').innerText = data.data.orders;
-          document.getElementById('statProducts').innerText = data.data.products;
-          document.getElementById('statRevenue').innerText = '₹' + data.data.revenue.toLocaleString();
-          
-          if (data.data.role !== 'farmer') {
-            document.getElementById('statProductsCard').style.display = 'none';
-          } else {
-            document.getElementById('statProductsCard').style.display = 'block';
-          }
-        }
-      } catch (err) {
-        console.error('Failed to load stats');
+        alert(data.error);
       }
     }
 
@@ -2916,45 +3155,34 @@
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPass').value;
 
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        if (data.token) {
-          localStorage.setItem('farmify_token', data.token);
-          localStorage.setItem('farmify_user', JSON.stringify(data.user));
-          authToken = data.token;
-          currentUser = data.user;
-          closeModal('authModal');
-          updateAuthUI();
-          showToast('Welcome back, ' + currentUser.name + '!');
-          fetchCart(); // Load user-specific cart
-          loadDashboardStats(); // Load live user stats
-        } else {
-          showToast(data.error || 'Login failed', 'error');
-        }
-      } catch (err) {
-        showToast('Server error during login', 'error');
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem('farmify_token', data.token);
+        localStorage.setItem('farmify_user', JSON.stringify(data.user));
+        authToken = data.token;
+        currentUser = data.user;
+        closeModal('authModal');
+        updateAuthUI();
+        await loadCartFromBackend(); // Load cart after login
+        location.reload();
+      } else {
+        alert(data.error);
       }
     }
 
     function logout() {
       localStorage.removeItem('farmify_token');
       localStorage.removeItem('farmify_user');
-      authToken = null;
-      currentUser = null;
-      cart = [];
-      updateCartUI();
-      updateAuthUI();
-      showPage('home');
-      showToast('Logged out successfully');
+      location.reload();
     }
 
     updateAuthUI();
-    if (authToken) loadDashboardStats();
+    loadCartFromBackend(); // Load cart on page load if user is logged in
 
     // ── THEME TOGGLE ──
     const html = document.documentElement;
@@ -3119,14 +3347,11 @@
         const res = await fetch(`/api/advisories?lang=${currentLang}&category=${currentAdvCategory}`);
         const data = await res.json();
 
-        if (data.length > 0) {
-          // Check for new advisory (Live notification)
-          if (!isInitial && data[0].id > lastAdvisoryId) {
-            showLiveNotification(data[0]);
-          }
-          lastAdvisoryId = data[0].id;
-          updateTicker(data);
+        // Check for new advisory (Live notification)
+        if (!isInitial && data.length > 0 && data[0].id > lastAdvisoryId) {
+          showLiveNotification(data[0]);
         }
+        if (data.length > 0) lastAdvisoryId = data[0].id;
 
         const list = document.getElementById('advisoryList');
         if (!list) return;
@@ -3152,20 +3377,6 @@
                 `;
         });
       } catch (e) { console.error(e); }
-    }
-
-    function updateTicker(data) {
-      const wrap = document.getElementById('tickerWrap');
-      const content = document.getElementById('tickerContent');
-      if (!wrap || !content) return;
-      
-      const liveItems = data.slice(0, 5).map(adv => `${adv.icon} ${adv.title}`).join(' | ');
-      if (liveItems) {
-        content.innerText = liveItems;
-        wrap.style.display = 'flex';
-      } else {
-        wrap.style.display = 'none';
-      }
     }
 
     function showLiveNotification(adv) {
@@ -3212,7 +3423,7 @@
           body: JSON.stringify(data)
         });
         if (res.ok) {
-          showToast('Advisory Published Live!', 'success');
+          alert('Advisory Published Live!');
           closeModal('expertModal');
           fetchAdvisories(true);
         }
@@ -3421,7 +3632,7 @@
         document.getElementById('communityMsg').value = '';
         fetchCommunityData();
       } catch (e) {
-        showToast('Error posting to community.', 'error');
+        alert('Error posting to community.');
       }
     }
 
@@ -3430,28 +3641,11 @@
 
     // ── MARKETPLACE & DASHBOARD LOGIC ──
     async function fetchMarketplace() {
-      const status = document.getElementById('marketStatus');
-      const grid = document.getElementById('marketGrid');
-      const query = document.getElementById('marketSearch') ? document.getElementById('marketSearch').value.trim() : '';
-      const category = document.getElementById('marketCategory') ? document.getElementById('marketCategory').value : '';
-      if (status) status.innerText = 'Connecting to marketplace...';
-      if (grid) grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Loading marketplace data...</div>';
-
       try {
-        const res = await fetch(`/api/marketplace?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
-        if (!res.ok) {
-          const error = await res.json().catch(() => ({}));
-          throw new Error(error.error || 'Failed to load marketplace');
-        }
-
+        const res = await fetch('/api/marketplace');
         allProducts = await res.json();
         renderMarketplace(allProducts);
-        if (status) status.innerText = `Connected to server · ${allProducts.length} products available`;
-      } catch (e) {
-        console.error('Marketplace fetch failed:', e);
-        if (status) status.innerText = 'Unable to connect to backend server';
-        if (grid) grid.innerHTML = `<div style="text-align:center; padding:24px; color:var(--text-muted);">Unable to load marketplace. Please start the backend server and refresh.</div>`;
-      }
+      } catch (e) { console.error(e); }
     }
 
     async function fetchMandiPrices() {
@@ -3476,74 +3670,308 @@
     }
 
     let allProducts = [];
+    let wishlist = JSON.parse(localStorage.getItem('farmify_wishlist')) || [];
 
     function renderMarketplace(products) {
       const grid = document.getElementById('marketGrid');
+      const emptyState = document.getElementById('emptyState');
+      const productCount = document.getElementById('productCount');
+      
       if (!grid) return;
-      if (!products.length) {
-        grid.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">No products found. Change filters or refresh to load more.</div>';
+      
+      productCount.textContent = `(${products.length} ${products.length === 1 ? 'product' : 'products'})`;
+      
+      if (products.length === 0) {
+        grid.innerHTML = '';
+        emptyState.style.display = 'block';
         return;
       }
+      
+      emptyState.style.display = 'none';
       grid.innerHTML = '';
+      
       products.forEach(p => {
+        const rating = p.rating || 4.5;
+        const reviews = p.reviews || Math.floor(Math.random() * 200);
+        const description = p.description || 'Fresh from farm. High quality produce.';
+        const location = p.location || 'Farm';
+        const isWishlisted = wishlist.some(w => w.id === p.id);
+        const stars = Array(5).fill('').map((_, i) => i < Math.floor(rating) ? '⭐' : '☆').join('');
+        const discount = p.discount || 0;
+        
         grid.innerHTML += `
-                <div class="card">
-                    <div style="height:170px; background:#f7f7f7; border-radius:14px; overflow:hidden; position:relative;">
-                        <img src="${getImgUrl(p.image)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=400&auto=format&fit=crop'">
-                        <div style="position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.65); color:white; padding:6px 10px; border-radius:999px; font-size:0.75rem; font-weight:700;">${p.category || 'General'}</div>
-                    </div>
-                    <div style="padding:16px 14px 14px;">
-                        <h3 style="font-size:1.05rem; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.name}</h3>
-                        <p style="margin:8px 0 0; color:var(--text-muted); font-size:0.9rem; line-height:1.4;">Sold by <strong>${p.farmer_name}</strong></p>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px;">
-                            <div>
-                              <div style="font-size:1.15rem; font-weight:800; color:var(--accent);">₹${Number(p.price).toLocaleString()}</div>
-                              <div style="font-size:0.78rem; color:var(--text-muted);">Stock: ${p.quantity}</div>
-                            </div>
-                            <button class="btn-scan" style="padding:10px 14px; background:var(--accent); color:white; border-radius:12px; min-width:110px;" onclick="addToCart('${p._id}', '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${(p.image || '').replace(/'/g, "\\'")}')">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
+          <div class="market-card" onclick="showProductDetails(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+            <div class="market-card-image">
+              <img src="/${p.image || 'uploads/default.jpg'}" onerror="this.src='https://images.unsplash.com/photo-1488459716781-6518f6c9d1c9?q=80&w=500&auto=format&fit=crop'" alt="${p.name}">
+              <div class="market-card-badge">${p.category}</div>
+              ${discount > 0 ? `<div class="market-card-discount">${discount}% OFF</div>` : ''}
+            </div>
+            
+            <div class="market-card-content">
+              <h3 class="market-card-title">${p.name}</h3>
+              
+              <div class="market-card-rating">
+                <div class="market-card-stars">${stars}</div>
+                <span style="font-weight: 700; color: var(--text-primary);">${rating}</span>
+                <span style="color: var(--text-muted);">(${reviews})</span>
+              </div>
+              
+              <p class="market-card-description">${description}</p>
+              
+              <div class="market-card-farmer">
+                <strong>👨‍🌾 ${p.farmer_name}</strong> • ${location}
+              </div>
+              
+              <div class="market-card-footer">
+                <div class="market-card-price">
+                  <span class="market-card-price-current">₹${p.price}</span>
+                  ${p.original_price ? `<span class="market-card-price-original">₹${p.original_price}</span>` : ''}
                 </div>
-            `;
+                <div style="flex: 1;">
+                  <div class="market-card-stock">Stock: <strong>${p.quantity}</strong></div>
+                </div>
+                <button class="market-card-wishlist" onclick="event.stopPropagation(); toggleWishlist(${p.id}, '${p.name}', ${p.price}, '${p.image || ''}')" title="Add to Wishlist">
+                  ${isWishlisted ? '❤️' : '🤍'}
+                </button>
+              </div>
+              
+              <button class="market-card-button" onclick="event.stopPropagation(); addToCartFromCard(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image || ''}')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        `;
       });
+      
+      updateWishlistBadge();
     }
 
     function filterMarketplace() {
-      const search = document.getElementById('marketSearch') ? document.getElementById('marketSearch').value.trim() : '';
-      const category = document.getElementById('marketCategory') ? document.getElementById('marketCategory').value : '';
-      if (!search && !category) {
-        renderMarketplace(allProducts);
+      const query = document.getElementById('marketSearch').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+      const sortBy = document.getElementById('sortBy').value;
+      
+      let filtered = allProducts.filter(p => {
+        const matchesSearch = !query || 
+          p.name.toLowerCase().includes(query) ||
+          (p.description || '').toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query) ||
+          p.farmer_name.toLowerCase().includes(query);
+        
+        const matchesCategory = !category || p.category === category;
+        
+        return matchesSearch && matchesCategory;
+      });
+      
+      // Apply sorting
+      if (sortBy === 'price-low') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'price-high') {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortBy === 'rating') {
+        filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      } else if (sortBy === 'popular') {
+        filtered.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+      } else if (sortBy === 'newest') {
+        filtered.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+      }
+      
+      renderMarketplace(filtered);
+      updateActiveFilters();
+    }
+
+    function updateActiveFilters() {
+      const query = document.getElementById('marketSearch').value;
+      const category = document.getElementById('categoryFilter').value;
+      const filterContainer = document.getElementById('activeFilters');
+      
+      filterContainer.innerHTML = '';
+      
+      if (query) {
+        filterContainer.innerHTML += `<div style="padding: 6px 12px; background: var(--accent-light); border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          🔍 "${query}"
+          <button onclick="document.getElementById('marketSearch').value = ''; filterMarketplace();" style="background: none; border: none; cursor: pointer; color: var(--accent);">✕</button>
+        </div>`;
+      }
+      
+      if (category) {
+        filterContainer.innerHTML += `<div style="padding: 6px 12px; background: var(--accent-light); border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          📦 ${category}
+          <button onclick="document.getElementById('categoryFilter').value = ''; filterMarketplace();" style="background: none; border: none; cursor: pointer; color: var(--accent);">✕</button>
+        </div>`;
+      }
+    }
+
+    function showProductDetails(product) {
+      const modal = document.getElementById('productDetailsModal');
+      const isWishlisted = wishlist.some(w => w.id === product.id);
+      
+      document.getElementById('detailImage').src = `/${product.image || 'uploads/default.jpg'}`;
+      document.getElementById('detailImage').onerror = function() {
+        this.src = 'https://images.unsplash.com/photo-1488459716781-6518f6c9d1c9?q=80&w=500&auto=format&fit=crop';
+      };
+      document.getElementById('detailName').textContent = product.name;
+      document.getElementById('detailCategory').textContent = product.category;
+      document.getElementById('detailPrice').textContent = `₹${product.price}`;
+      document.getElementById('detailStock').textContent = product.quantity > 0 ? `${product.quantity} Available` : 'Out of Stock';
+      document.getElementById('detailFarmer').textContent = product.farmer_name;
+      document.getElementById('detailLocation').textContent = `📍 ${product.location || 'Farm Location'}`;
+      document.getElementById('detailDescription').textContent = product.description || 'Fresh, high-quality produce directly from farms.';
+      
+      const rating = product.rating || 4.5;
+      const reviews = product.reviews || 0;
+      const stars = Array(5).fill('').map((_, i) => i < Math.floor(rating) ? '⭐' : '☆').join('');
+      document.getElementById('detailRating').innerHTML = stars.split('').map(s => `<span>${s}</span>`).join('');
+      document.getElementById('detailRatingCount').textContent = `${rating} (${reviews} reviews)`;
+      
+      const wishlistBtn = document.getElementById('wishlistBtn');
+      wishlistBtn.textContent = isWishlisted ? '❤️' : '🤍';
+      wishlistBtn.onclick = function() {
+        event.stopPropagation();
+        toggleWishlist(product.id, product.name, product.price, product.image);
+        showProductDetails(product);
+      };
+      
+      document.getElementById('detailAddToCartBtn').onclick = function() {
+        addToCartFromCard(product.id, product.name, product.price, product.image);
+        setTimeout(() => closeModal('productDetailsModal'), 1000);
+      };
+      
+      modal.style.display = 'flex';
+    }
+
+    function toggleWishlist(id, name, price, image) {
+      const existing = wishlist.findIndex(w => w.id === id);
+      if (existing >= 0) {
+        wishlist.splice(existing, 1);
+      } else {
+        wishlist.push({ id, name, price, image });
+      }
+      localStorage.setItem('farmify_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+      renderMarketplace(getCurrentFilteredProducts());
+    }
+
+    function getCurrentFilteredProducts() {
+      const query = document.getElementById('marketSearch').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+      
+      return allProducts.filter(p => {
+        const matchesSearch = !query || 
+          p.name.toLowerCase().includes(query) ||
+          (p.description || '').toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query) ||
+          p.farmer_name.toLowerCase().includes(query);
+        
+        const matchesCategory = !category || p.category === category;
+        
+        return matchesSearch && matchesCategory;
+      });
+    }
+
+    function updateWishlistBadge() {
+      const badge = document.getElementById('wishlistBadge');
+      if (wishlist.length > 0) {
+        badge.textContent = wishlist.length;
+        badge.style.display = 'inline-flex';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    function toggleWishlistView() {
+      if (wishlist.length === 0) {
+        alert('Your wishlist is empty. Add products to your wishlist first!');
         return;
       }
-      const filtered = allProducts.filter(p => {
-        const matchesQuery = !search || [p.name, p.category, p.farmer_name].some(value => String(value || '').toLowerCase().includes(search.toLowerCase()));
-        const matchesCategory = !category || String(p.category || '').toLowerCase() === category.toLowerCase();
-        return matchesQuery && matchesCategory;
-      });
-      renderMarketplace(filtered);
+      
+      const isShowingWishlist = document.getElementById('categoryFilter').value === 'wishlist';
+      
+      if (isShowingWishlist) {
+        document.getElementById('categoryFilter').value = '';
+        filterMarketplace();
+      } else {
+        const filteredProducts = allProducts.filter(p => wishlist.some(w => w.id === p.id));
+        renderMarketplace(filteredProducts);
+      }
+    }
+
+    function addToCartFromCard(id, name, price, image) {
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ id, name, price, image, quantity: 1 });
+      }
+      updateCartUI();
+      
+      // Show toast notification
+      showToastNotification(`✅ ${name} added to cart!`);
+    }
+
+    function addDetailToCart() {
+      const name = document.getElementById('detailName').textContent;
+      const priceText = document.getElementById('detailPrice').textContent;
+      const price = parseInt(priceText.replace('₹', ''));
+      const image = document.getElementById('detailImage').src;
+      
+      // Use the first product's ID that matches the name
+      const product = allProducts.find(p => p.name === name);
+      const id = product ? product.id : Date.now();
+      
+      addToCartFromCard(id, name, price, image);
+    }
+
+    function showToastNotification(message) {
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 80px;
+        left: 20px;
+        background: var(--accent);
+        color: white;
+        padding: 14px 20px;
+        border-radius: 10px;
+        font-weight: 700;
+        z-index: 9999;
+        animation: slideUp 0.3s ease;
+        box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+      `;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideDown 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
     }
 
     // ── CART LOGIC ──
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('farmify_cart')) || [];
 
-    async function fetchCart() {
-      if (!authToken) {
-        cart = JSON.parse(localStorage.getItem('farmify_cart')) || [];
-        updateCartUI();
-        return;
-      }
+    async function loadCartFromBackend() {
+      if (!authToken) return;
       try {
         const res = await fetch('/api/cart', {
           headers: { 'Authorization': authToken }
         });
         const data = await res.json();
-        if (data.success) {
-          cart = data.data.items;
+        if (data.success && data.data) {
+          // Merge backend cart with local cart
+          cart = data.data.map(item => ({
+            id: item.product_id,
+            name: item.product_name,
+            price: item.price,
+            image: item.image,
+            quantity: item.quantity
+          }));
+          localStorage.setItem('farmify_cart', JSON.stringify(cart));
           updateCartUI();
         }
-      } catch (e) { console.error('Error fetching cart:', e); }
+      } catch (err) {
+        console.error('Error loading cart from backend:', err);
+      }
     }
 
     function updateCartUI() {
@@ -3565,128 +3993,82 @@
         let total = 0;
         cart.forEach((item, index) => {
           total += item.price * item.quantity;
-          const productId = item.product || item.id;
           itemsList.innerHTML += `
-                    <div style="display: flex; gap: 12px; align-items: center; background: var(--bg-primary); padding: 10px; border-radius: 12px; border: 1px solid var(--border);">
-                        <div style="width: 55px; height: 55px; background: #eee; border-radius: 10px; overflow: hidden; flex-shrink: 0;">
-                            <img src="${getImgUrl(item.image)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/55?text=Agri'">
+                    <div style="display: flex; gap: 12px; align-items: center; background: var(--bg-primary); padding: 10px; border-radius: 12px;">
+                        <div style="width: 50px; height: 50px; background: #eee; border-radius: 8px; overflow: hidden;">
+                            <img src="/${item.image}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://via.placeholder.com/50?text=Agri'">
                         </div>
                         <div style="flex: 1;">
-                            <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-primary);">${item.name}</div>
-                            <div style="font-size: 0.85rem; color: var(--accent); font-weight: 700;">₹${item.price} x ${item.quantity}</div>
+                            <div style="font-weight: 800; font-size: 0.9rem;">${item.name}</div>
+                            <div style="font-size: 0.8rem; color: var(--accent); font-weight: 700;">₹${item.price} x ${item.quantity}</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="display: flex; align-items: center; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border); padding: 2px;">
-                              <button onclick="changeCartQty('${productId}', -1)" style="width:26px; height:26px; border-radius:6px; border:none; background:none; color:var(--text-primary); cursor:pointer;">-</button>
-                              <span style="font-weight: 800; font-size: 0.9rem; min-width: 24px; text-align: center;">${item.quantity}</span>
-                              <button onclick="changeCartQty('${productId}', 1)" style="width:26px; height:26px; border-radius:6px; border:none; background:none; color:var(--text-primary); cursor:pointer;">+</button>
-                            </div>
-                            <button onclick="removeFromCart('${productId}')" style="color:#e53935; border:none; background:none; cursor:pointer; padding:5px;">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                </svg>
-                            </button>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button onclick="changeCartQty(${index}, -1)" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--border); background:white;">-</button>
+                            <span style="font-weight: 800; font-size: 0.9rem;">${item.quantity}</span>
+                            <button onclick="changeCartQty(${index}, 1)" style="width:24px; height:24px; border-radius:50%; border:1px solid var(--border); background:white;">+</button>
+                            <button onclick="removeFromCart(${index})" style="margin-left:8px; color:#c62828; border:none; background:none; cursor:pointer; font-weight:900;">&times;</button>
                         </div>
                     </div>
                 `;
         });
         totalEl.innerText = '₹' + total;
       }
-      
-      // Also save to localStorage as backup for non-logged users
-      if (!authToken) {
-        localStorage.setItem('farmify_cart', JSON.stringify(cart));
-      }
+      localStorage.setItem('farmify_cart', JSON.stringify(cart));
     }
 
-    async function addToCart(id, name, price, image) {
+    function addToCart(id, name, price, image) {
       if (!authToken) {
-        const existing = cart.find(item => (item.id === id || item.product === id));
-        if (existing) {
-          existing.quantity += 1;
-        } else {
-          cart.push({ id, name, price, image, quantity: 1 });
+        showToast('Please login to add items to cart', 'error');
+        openModal('authModal');
+        return;
+      }
+
+      // Add to local cart for UI purposes
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ id, name, price, image, quantity: 1 });
+      }
+      updateCartUI();
+
+      // Also add to backend cart
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Authorization': authToken,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          product_id: id,
+          quantity: 1
+        })
+      }).then(res => res.json()).then(data => {
+        if (!data.success) {
+          showToast(data.error || 'Failed to add to cart', 'error');
         }
-        updateCartUI();
-        showToast('Added to local cart');
-      } else {
-        try {
-          const res = await fetch('/api/cart', {
-            method: 'POST',
-            headers: {
-              'Authorization': authToken,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ productId: id, name, price, image, quantity: 1 })
-          });
-          const data = await res.json();
-          if (data.success) {
-            cart = data.data.items;
-            updateCartUI();
-            showToast('Syncing with your account...');
-          }
-        } catch (e) { console.error('Add to cart failed:', e); }
-      }
-      
-      // Visual feedback on button
-      if (event && event.currentTarget) {
-        const btn = event.currentTarget;
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '✅ Added!';
-        setTimeout(() => btn.innerHTML = originalText, 1000);
-      }
+      }).catch(err => {
+        console.error('Cart API error:', err);
+      });
+
+      // Toast notification
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '✅ Added!';
+      setTimeout(() => btn.innerHTML = originalText, 1000);
     }
 
-    async function changeCartQty(productId, delta) {
-      const item = cart.find(i => (i.product === productId || i.id === productId));
-      if (!item) return;
-      
-      const newQty = item.quantity + delta;
-      
-      if (!authToken) {
-        if (newQty <= 0) {
-          cart = cart.filter(i => (i.product !== productId && i.id !== productId));
-        } else {
-          item.quantity = newQty;
-        }
-        updateCartUI();
-      } else {
-        try {
-          const res = await fetch(`/api/cart/${productId}`, {
-            method: 'PUT',
-            headers: {
-              'Authorization': authToken,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ quantity: newQty })
-          });
-          const data = await res.json();
-          if (data.success) {
-            cart = data.data.items;
-            updateCartUI();
-          }
-        } catch (e) { console.error('Update qty failed:', e); }
+    function changeCartQty(index, delta) {
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
       }
+      updateCartUI();
     }
 
-    async function removeFromCart(productId) {
-      if (!authToken) {
-        cart = cart.filter(i => (i.product !== productId && i.id !== productId));
-        updateCartUI();
-      } else {
-        try {
-          const res = await fetch(`/api/cart/${productId}`, {
-            method: 'DELETE',
-            headers: { 'Authorization': authToken }
-          });
-          const data = await res.json();
-          if (data.success) {
-            cart = data.data.items;
-            updateCartUI();
-          }
-        } catch (e) { console.error('Remove from cart failed:', e); }
-      }
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
     }
 
     function openPaymentModal(total) {
@@ -3697,7 +4079,7 @@
       // Add event listeners for payment method selection
       const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
       paymentMethods.forEach(method => {
-        method.addEventListener('change', function() {
+        method.addEventListener('change', function () {
           const cardDetails = document.getElementById('cardDetails');
           const upiDetails = document.getElementById('upiDetails');
 
@@ -3765,10 +4147,6 @@
 
         if (paymentData.success) {
           btn.innerText = 'Payment Successful!';
-          
-          // Clear backend cart after successful payment
-          await fetch('/api/cart', { method: 'DELETE', headers: { 'Authorization': authToken } });
-          
           setTimeout(async () => {
             showToast(`Payment successful! Transaction ID: ${paymentData.transaction_id}`);
             cart = [];
@@ -3795,7 +4173,7 @@
         return openModal('authModal');
       }
       if (currentUser.role !== 'buyer') {
-        return showToast('Only buyers can place orders.', 'warning');
+        return alert('Only buyers can place orders.');
       }
 
       const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -3889,34 +4267,64 @@
     }
 
     async function submitProduct() {
-      const name = document.getElementById('pName').value;
-      const cat = document.getElementById('pCat').value;
+      const name = document.getElementById('pName').value.trim();
+      const cat = document.getElementById('pCat').value.trim();
       const price = document.getElementById('pPrice').value;
       const qty = document.getElementById('pQty').value;
+      const desc = document.getElementById('pDesc').value.trim() || 'Fresh, high-quality produce directly from farms.';
+      const discount = document.getElementById('pDiscount').value || 0;
+      const originalPrice = document.getElementById('pOriginalPrice').value;
       const img = document.getElementById('pImage').files[0];
+
+      if (!name || !cat || !price || !qty) {
+        alert('Please fill in all required fields (Name, Category, Price, Quantity)');
+        return;
+      }
 
       const formData = new FormData();
       formData.append('name', name);
       formData.append('category', cat);
       formData.append('price', price);
       formData.append('quantity', qty);
+      formData.append('description', desc);
+      formData.append('discount', discount);
+      if (originalPrice) formData.append('original_price', originalPrice);
       if (img) formData.append('productImage', img);
 
-      const res = await fetch('/api/products', {
-        method: 'POST',
-        headers: { 'Authorization': authToken },
-        body: formData
-      });
-      if (res.ok) {
-        closeModal('addProductModal');
-        fetchFarmerDash();
-        fetchMarketplace();
-      } else { showToast('Error adding product', 'error'); }
+      try {
+        const res = await fetch('/api/products', {
+          method: 'POST',
+          headers: { 'Authorization': authToken },
+          body: formData
+        });
+        if (res.ok) {
+          // Clear form
+          document.getElementById('pName').value = '';
+          document.getElementById('pCat').value = '';
+          document.getElementById('pPrice').value = '';
+          document.getElementById('pQty').value = '';
+          document.getElementById('pDesc').value = 'Fresh, high-quality produce directly from farms.';
+          document.getElementById('pDiscount').value = '';
+          document.getElementById('pOriginalPrice').value = '';
+          document.getElementById('pImage').value = '';
+          
+          closeModal('addProductModal');
+          showToastNotification('✅ Product added successfully!');
+          fetchFarmerDash();
+          fetchMarketplace();
+        } else {
+          const error = await res.json();
+          alert('Error: ' + (error.error || 'Could not add product'));
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Error adding product: ' + e.message);
+      }
     }
 
     async function buyProduct(id) {
       if (!authToken) return openModal('authModal');
-      if (currentUser.role !== 'buyer') return showToast('Only buyers can purchase', 'warning');
+      if (currentUser.role !== 'buyer') return alert('Only buyers can purchase');
 
       const qty = prompt('Enter quantity:', '1');
       if (!qty) return;
@@ -3930,9 +4338,9 @@
         body: JSON.stringify({ product_id: id, quantity: parseInt(qty) })
       });
       if (res.ok) {
-        showToast('Order placed successfully!', 'success');
+        alert('Order placed successfully!');
         fetchBuyerDash();
-      } else { showToast('Error placing order', 'error'); }
+      } else { alert('Error placing order'); }
     }
 
     // Initial fetches
@@ -3942,7 +4350,6 @@
     renderStore();
     fetchAdvisories(true);
     fetchMandiPrices();
-    fetchCart(); // Load cart on initialization
 
     async function renderStore() {
       const grid = document.getElementById('storeGrid');
@@ -3957,7 +4364,7 @@
                     <div class="card-icon" style="font-size: 1.5rem;">${item.icon}</div>
                     <h3>${item.name}</h3>
                     <p style="color:var(--accent); font-weight:800;">₹${item.price} / ${item.unit}</p>
-                    <button class="btn-scan" style="width:100%; margin-top:10px; background:var(--accent); color:white;" onclick="addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', ${item.price}, '')">Add to Cart</button>
+                    <button class="btn-scan" style="width:100%; margin-top:10px; background:var(--accent); color:white;" onclick="addToCart(${item.id}, '${item.name}', ${item.price}, '')">Add to Cart</button>
                 </div>
             `;
         });
@@ -3966,7 +4373,7 @@
 
     async function buyStoreItem(name, price) {
       if (!authToken) return openModal('authModal');
-      showToast(`Request sent for ${name}. Our delivery partner will contact you soon for cash on delivery.`, 'success');
+      alert(`Request sent for ${name}. Our delivery partner will contact you soon for cash on delivery.`);
     }
 
     async function updateOrderStatus(orderId, newStatus) {
@@ -4000,7 +4407,7 @@
           fetchBuyerDash();
         } else {
           const data = await res.json();
-          showToast(data.error, 'error');
+          alert(data.error);
         }
       } catch (e) { console.error(e); }
     }
@@ -4078,7 +4485,7 @@
           body: JSON.stringify(data)
         });
         if (res.ok) {
-          showToast('Profile Updated Successfully!', 'success');
+          alert('Profile Updated Successfully!');
           currentUser.name = data.name;
           localStorage.setItem('farmify_user', JSON.stringify(currentUser));
           updateAuthUI();
@@ -4122,7 +4529,7 @@
     // ── SPEECH API (Audio AI) ──
     function startDictation(targetId) {
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-        showToast("Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari.", 'warning');
+        alert("Speech recognition is not supported in this browser. Please use Chrome, Edge, or Safari.");
         return;
       }
 
@@ -4135,12 +4542,12 @@
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
-      recognition.onstart = function() {
+      recognition.onstart = function () {
         console.log('Speech recognition started');
         showToast('Listening... Speak now', 'info');
       };
 
-      recognition.onresult = function(event) {
+      recognition.onresult = function (event) {
         console.log('Speech recognition result received');
         if (event.results.length > 0) {
           const transcript = event.results[0][0].transcript;
@@ -4150,10 +4557,10 @@
         }
       };
 
-      recognition.onerror = function(event) {
+      recognition.onerror = function (event) {
         console.error('Speech recognition error:', event.error);
         let errorMessage = 'Speech recognition failed. ';
-        switch(event.error) {
+        switch (event.error) {
           case 'no-speech':
             errorMessage += 'No speech was detected.';
             break;
@@ -4172,7 +4579,7 @@
         showToast(errorMessage, 'error');
       };
 
-      recognition.onend = function() {
+      recognition.onend = function () {
         console.log('Speech recognition ended');
       };
 
@@ -4200,15 +4607,15 @@
       utterance.pitch = 1;
       utterance.volume = 0.8;
 
-      utterance.onstart = function() {
+      utterance.onstart = function () {
         console.log('Speech synthesis started');
       };
 
-      utterance.onend = function() {
+      utterance.onend = function () {
         console.log('Speech synthesis ended');
       };
 
-      utterance.onerror = function(event) {
+      utterance.onerror = function (event) {
         console.error('Speech synthesis error:', event.error);
         showToast('Error with text-to-speech', 'error');
       };
@@ -4227,11 +4634,11 @@
       const res = await fetch('/api/soil-labs');
       const labs = await res.json();
       let html = '<div style="display:grid; gap:12px;">';
-      
+
       if (labs.length === 0) {
         html += '<p style="color:var(--text-muted); text-align:center;">No soil testing labs available</p>';
       }
-      
+
       labs.forEach(l => {
         html += `
                 <div class="card" style="border-left:5px solid var(--accent); cursor:pointer;" onclick="viewLabDetails(${l.id}, '${l.name.replace(/'/g, "\\'")}')">
@@ -4257,7 +4664,7 @@
 
     function viewLabDetails(labId, labName) {
       if (!authToken) return openModal('authModal');
-      
+
       fetch('/api/soil-labs').then(r => r.json()).then(labs => {
         const lab = labs.find(l => l.id === labId);
         if (!lab) return;
@@ -4417,7 +4824,7 @@
 
     function viewSubsidyDetails(subsidyId, subsidyName) {
       if (!authToken) return openModal('authModal');
-      
+
       fetch('/api/subsidies').then(r => r.json()).then(subs => {
         const subsidy = subs.find(s => s.id === subsidyId);
         if (!subsidy) return;
@@ -4611,6 +5018,24 @@
       });
       openLedger();
     }
+    let audioEnabled = false; // Default to false for optional audio
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById('audioToggle');
+      if (audioEnabled) {
+        btn.style.background = 'var(--accent)';
+        btn.style.borderColor = 'var(--accent)';
+        btn.querySelector('svg').style.stroke = '#fff';
+        showToast('Audio responses enabled', 'success');
+      } else {
+        btn.style.background = 'var(--accent-light)';
+        btn.style.borderColor = 'var(--accent)';
+        btn.querySelector('svg').style.stroke = 'currentColor';
+        showToast('Audio responses disabled', 'info');
+      }
+    }
+
     async function sendChat() {
       const input = document.getElementById('chatInput');
       const msg = input.value.trim();
@@ -4625,8 +5050,11 @@
           body: JSON.stringify({ message: msg })
         });
         const data = await response.json();
-        addChatMsg(data.reply, 'ai');
-        speakText(data.reply); // Audio AI responds back
+        const reply = data.reply || data.data?.reply || data.message || 'Sorry, I could not get a response from the AI.';
+        addChatMsg(reply, 'ai');
+        if (audioEnabled) {
+          speakText(reply); // Only speak if audio is enabled
+        }
       } catch (err) {
         console.error(err);
         addChatMsg("Sorry, I am offline or cannot connect to the server.", 'ai');
@@ -4676,18 +5104,25 @@
           btn.disabled = false;
 
           if (data.error) {
-            showToast('Error: ' + data.error, 'error');
+            alert('Error: ' + data.error);
           } else {
             document.getElementById('scanResult').style.display = 'block';
             document.getElementById('resDisease').innerText = data.disease;
             document.getElementById('resSolution').innerText = data.solution;
-            speakText(`Disease detected: ${data.disease}. ${data.solution}`);
+
+            // Only speak if it's a plant disease result and audio is enabled
+            if (data.disease !== 'Not a Plant' && audioEnabled) {
+              speakText(`Disease detected: ${data.disease}. ${data.solution}`);
+            } else if (data.disease === 'Not a Plant') {
+              // Show message for non-plant images
+              showToast('Please upload an image of a plant, crop, or leaf for disease analysis.', 'warning');
+            }
           }
         } catch (err) {
           console.error(err);
           btn.innerText = originalText;
           btn.disabled = false;
-          showToast('Failed to connect to server.', 'error');
+          alert('Failed to connect to server.');
         }
       }
     }
@@ -4707,9 +5142,9 @@
         const data = await res.json();
         document.getElementById('resCrop').innerText = data.recommendation;
         document.getElementById('cropResult').style.display = 'block';
-        speakText(data.recommendation);
+        if (audioEnabled) speakText(data.recommendation);
       } catch (e) {
-        showToast('Error connecting to server.', 'error');
+        alert('Error connecting to server.');
       }
     }
 
@@ -4722,9 +5157,9 @@
           const data = await res.json();
           document.getElementById('resCrop').innerText = `${data.detected}\n\n${data.recommendation}`;
           document.getElementById('cropResult').style.display = 'block';
-          speakText(data.recommendation);
+          if (audioEnabled) speakText(data.recommendation);
         } catch (e) {
-          showToast('Error connecting to server.', 'error');
+          alert('Error connecting to server.');
         }
       }
     }
@@ -4743,9 +5178,9 @@
         const data = await res.json();
         document.getElementById('resFert').innerText = data.guide;
         document.getElementById('fertResult').style.display = 'block';
-        speakText(data.guide);
+        if (audioEnabled) speakText(data.guide);
       } catch (e) {
-        showToast('Error connecting to server.', 'error');
+        alert('Error connecting to server.');
       }
     }
 
