@@ -1,13 +1,29 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-const dbPath = path.join(__dirname, '../../database.sqlite');
-const db = new sqlite3.Database(dbPath, (err) => {
+const fs = require('fs');
+
+const IS_VERCEL = process.env.VERCEL || process.env.NOW_REGION;
+const srcDbPath = path.join(__dirname, '../../database.sqlite');
+const destDbPath = IS_VERCEL ? path.join('/tmp', 'database.sqlite') : srcDbPath;
+
+// On Vercel, copy the bundled database to /tmp so it can be written to (even if ephemeral)
+if (IS_VERCEL && fs.existsSync(srcDbPath) && !fs.existsSync(destDbPath)) {
+  try {
+    fs.copyFileSync(srcDbPath, destDbPath);
+    console.log('✅ Database copied to /tmp');
+  } catch (err) {
+    console.error('❌ Failed to copy database to /tmp:', err.message);
+  }
+}
+
+const db = new sqlite3.Database(destDbPath, (err) => {
   if (err) {
     console.error('❌ DB connect error:', err.message);
-    process.exit(1);
+    // Don't exit on Vercel, let the app try to recover or show error
+    if (!IS_VERCEL) process.exit(1);
   }
-  console.log('✅ Connected to SQLite database');
+  console.log(`✅ Connected to SQLite database at ${destDbPath}`);
   db.serialize(() => {
     db.run("PRAGMA journal_mode = WAL;");
     db.run("PRAGMA foreign_keys = ON;");

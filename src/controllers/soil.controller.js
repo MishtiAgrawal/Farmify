@@ -43,9 +43,18 @@ exports.getBookings = async (req, res) => {
 
 exports.cropRecommend = async (req, res) => {
   try {
-    const { soilDetails } = req.body;
-    // Mimic legacy response
-    res.json({ recommendation: "Based on your description, we recommend growing Wheat or Maize for better yield." });
+    const { description } = req.body;
+    if (!description) return res.status(400).json({ error: "description is required" });
+
+    const prompt = `Based on this soil description: "${description}", recommend 2-3 best crops to grow for high yield. 
+    Explain why in 1-2 sentences. Keep it practical for Indian farmers.`;
+
+    let recommendation = await callGemini(prompt);
+    if (!recommendation) {
+      recommendation = "Based on your description, we recommend growing Wheat or Maize. These crops are resilient and suit most Indian soil types described.";
+    }
+
+    res.json({ recommendation });
   } catch (err) {
     res.status(500).json({ error: "Recommendation service failed" });
   }

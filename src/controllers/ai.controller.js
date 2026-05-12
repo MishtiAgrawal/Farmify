@@ -67,11 +67,17 @@ exports.getChatHistory = async (req, res) => {
 
 exports.scanPlant = async (req, res) => {
   try {
-    const { crop_type, description } = req.body;
+    const { crop_type, description, type } = req.body;
+    let prompt;
 
-    const prompt = `Based on ${description ? `these symptoms: ${description}` : "common plant disease patterns"} in ${crop_type || "a crop"}: 
-    Analyze the plant disease and provide a concise diagnosis and treatment.
-    Format as JSON: { "disease": "...", "solution": "..." }`;
+    if (type === 'weed') {
+      prompt = `Analyze this image for weeds. Identify the weed species and provide the best organic and chemical control methods. 
+      Format as JSON: { "disease": "Weed Name", "solution": "Control methods..." }`;
+    } else {
+      prompt = `Based on ${description ? `these symptoms: ${description}` : "common plant disease patterns"} in ${crop_type || "a crop"}: 
+      Analyze the plant disease and provide a concise diagnosis and treatment.
+      Format as JSON: { "disease": "Disease Name", "solution": "Treatment..." }`;
+    }
 
     let aiResponse = await callGemini(prompt);
     let result = { disease: 'Healthy', solution: 'No issues detected. Maintain regular care.' };
@@ -111,7 +117,7 @@ exports.help = async (req, res) => {
 exports.getCommunityPosts = async (req, res) => {
   try {
     const posts = await dbAll(
-      `SELECT p.id, u.name as user_name, p.content as message, p.created_at as timestamp 
+      `SELECT p.id, u.name as author, p.content as content, p.created_at as timestamp 
        FROM community_posts p JOIN users u ON p.author_id = u.id 
        ORDER BY p.created_at DESC LIMIT 30`,
       []

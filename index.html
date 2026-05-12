@@ -1536,6 +1536,7 @@
         transform: translateY(30px);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -1547,6 +1548,7 @@
         transform: translateY(0);
         opacity: 1;
       }
+
       to {
         transform: translateY(30px);
         opacity: 0;
@@ -1671,20 +1673,6 @@
             <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
           <span data-i18n="nav_home">Home</span>
-        </div>
-        <div class="nav-item" onclick="showPage('mandi',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-          </svg>
-          <span data-i18n="nav_mandi">Mandi</span>
-        </div>
-        <div class="nav-item" onclick="showPage('myfarm',this)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M17.5 19a3.5 3.5 0 1 1-5.83-2.67 3.5 3.5 0 1 1 5.83 2.67z"/><path d="M12 12V3"/><path d="M12 3L9 6"/><path d="M12 3l3 3"/>
-          </svg>
-          <span data-i18n="nav_myfarm">My Farm</span>
         </div>
         <div class="nav-item" onclick="showPage('marketplace',this)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -2083,132 +2071,7 @@
         </div>
       </div>
 
-      <!-- ══ DEMO PAGE (View All 13 Features) ══ -->
-      <div id="page-demo" class="page">
-        <div class="hero" style="min-height:140px; padding: 32px 48px; background: linear-gradient(135deg, var(--accent) 0%, #1b5e20 100%);">
-          <div class="hero-content">
-            <h1 style="font-size:2rem;" data-i18n="demo_title">All 13 Farmify Features</h1>
-            <p class="hero-sub" data-i18n="demo_desc">Explore the full power of AI-driven agriculture</p>
-          </div>
-        </div>
-
-        <div class="section" style="padding-bottom: 100px;">
-          <div class="action-grid" id="demoFeatureGrid">
-            <!-- 1. Disease Predictor -->
-            <div class="action-card" onclick="openModal('scanModal')">
-              <div class="action-icon" style="background:#e53935;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><circle cx="11" cy="11" r="3"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              </div>
-              <span data-i18n="f1">1. AI Disease Predictor</span>
-            </div>
-
-            <!-- 2. Krishi Chat AI -->
-            <div class="action-card" onclick="showPage('chat', null, 'chat')">
-              <div class="action-icon" style="background:var(--accent);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <span data-i18n="f2">2. Krishi Chat AI</span>
-            </div>
-
-            <!-- 3. Crop Recommendation -->
-            <div class="action-card" onclick="openModal('cropModal')">
-              <div class="action-icon" style="background:#fb8c00;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l3 3"/></svg>
-              </div>
-              <span data-i18n="f3">3. Crop Recommendation</span>
-            </div>
-
-            <!-- 4. Fertilizer Guide -->
-            <div class="action-card" onclick="openModal('fertModal')">
-              <div class="action-icon" style="background:#7b1fa2;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <span data-i18n="f4">4. Fertilizer Guide</span>
-            </div>
-
-            <!-- 5. Direct Mandi -->
-            <div class="action-card" onclick="showPage('home')">
-              <div class="action-icon" style="background:#fbc02d;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </div>
-              <span data-i18n="f5">5. Direct Mandi</span>
-            </div>
-
-            <!-- 6. My Farm Intelligence -->
-            <div class="action-card" onclick="showPage('myfarm', null, 'myfarm')">
-              <div class="action-icon" style="background:#0288d1;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19a3.5 3.5 0 1 1-5.83-2.67 3.5 3.5 0 1 1 5.83 2.67z"/><path d="M12 12V3"/><path d="M12 3L9 6"/><path d="M12 3l3 3"/></svg>
-              </div>
-              <span data-i18n="f6">6. My Farm Intelligence</span>
-            </div>
-
-            <!-- 7. Farm Store -->
-            <div class="action-card" onclick="showPage('store', null, 'store')">
-              <div class="action-icon" style="background:#d84315;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              </div>
-              <span data-i18n="f7">7. Farm Store</span>
-            </div>
-
-            <!-- 8. Support System -->
-            <div class="action-card" onclick="openModal('helpModal')">
-              <div class="action-icon" style="background:#546e7a;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"/></svg>
-              </div>
-              <span data-i18n="f8">8. Support System</span>
-            </div>
-
-            <!-- 9. Soil Testing Labs -->
-            <div class="action-card" onclick="openSoilLabs()">
-              <div class="action-icon" style="background:#43a047;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31"/><path d="M14 2v7.31"/><path d="M18 14V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v10a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4z"/><path d="M7 14h10"/></svg>
-              </div>
-              <span data-i18n="f9">9. Soil Testing Labs</span>
-            </div>
-
-            <!-- 10. Farm Community -->
-            <div class="action-card" onclick="showPage('community')">
-              <div class="action-icon" style="background:#1976d2;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <span data-i18n="f10">10. Farm Community</span>
-            </div>
-
-            <!-- 11. Govt. Subsidies -->
-            <div class="action-card" onclick="openSubsidies()">
-              <div class="action-icon" style="background:#ef6c00;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              </div>
-              <span data-i18n="f11">11. Govt. Subsidies</span>
-            </div>
-
-            <!-- 12. Machinery Rental -->
-            <div class="action-card" onclick="openMachinery()">
-              <div class="action-icon" style="background:#303f9f;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M12 10V5h5l3 5H12z"/><path d="M5 10l-3 5h3v2h14v-2h3l-3-5H5z"/></svg>
-              </div>
-              <span data-i18n="f12">12. Machinery Rental</span>
-            </div>
-
-            <!-- 13. Financial Ledger -->
-            <div class="action-card" onclick="openLedger()">
-              <div class="action-icon" style="background:#2e7d32;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2-2H12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              </div>
-              <span data-i18n="f13">13. Financial Ledger</span>
-            </div>
-
-            <!-- 14. Weed Control AI -->
-            <div class="action-card" onclick="openModal('weedModal')">
-              <div class="action-icon" style="background:#827717;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-              </div>
-              <span data-i18n="f14">14. Weed Control AI</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- ══ CHAT PAGE ══ -->
       <div id="page-chat" class="page">
         <div class="hero" style="min-height:140px; padding: 32px 48px;">
           <div class="hero-content">
@@ -2359,37 +2222,6 @@
         </div>
       </div>
 
-      <!-- ══ DIRECT MANDI PAGE ══ -->
-      <div id="page-mandi" class="page">
-        <div class="hero" style="min-height:140px; padding: 32px 48px; background: linear-gradient(135deg, #fbc02d 0%, #f9a825 100%);">
-          <div class="hero-content">
-            <h1 style="font-size:2rem;" data-i18n="mandi_title">Direct Mandi</h1>
-            <p class="hero-sub" data-i18n="mandi_sub">Live market rates · Updated daily</p>
-          </div>
-        </div>
-        <div class="section" style="padding-bottom: 100px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-            <div class="section-title" data-i18n="mandi_sec_title">Today's Rates</div>
-            <button class="btn-scan" style="background:var(--accent); color:white;" onclick="showPage('marketplace')">Sell Directly →</button>
-          </div>
-          <div style="background:var(--bg-card); border-radius:15px; border:1px solid var(--border); overflow:hidden; box-shadow:var(--shadow);">
-            <table style="width:100%; border-collapse:collapse; text-align:left;">
-              <thead style="background:var(--bg-primary);">
-                <tr>
-                  <th style="padding:15px;" data-i18n="mandi_h1">Crop</th>
-                  <th style="padding:15px;" data-i18n="mandi_h2">Price (₹/Quintal)</th>
-                  <th style="padding:15px;" data-i18n="mandi_h3">Change</th>
-                  <th style="padding:15px;" data-i18n="mandi_h4">Market</th>
-                </tr>
-              </thead>
-              <tbody id="mandiTableBody">
-                <tr><td colspan="4" style="padding:20px; text-align:center; color:var(--text-muted);">Loading Mandi prices...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
       <!-- ══ COMMUNITY PAGE ══ -->
       <div id="page-community" class="page">
         <div class="hero" style="min-height:140px; padding: 32px 48px;">
@@ -2437,16 +2269,24 @@
         <!-- Marketplace Filters & Search -->
         <div class="section" style="padding-bottom: 100px;">
           <!-- Search Bar -->
-          <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; margin-bottom: 24px; align-items: end;">
+          <div
+            style="display: grid; grid-template-columns: 1fr auto auto; gap: 12px; margin-bottom: 24px; align-items: end;">
             <div style="position: relative;">
-              <input type="text" id="marketSearch" placeholder="Search products, farmers, categories..." 
-                style="width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-size:0.95rem; transition:all 0.3s;" 
+              <input type="text" id="marketSearch" placeholder="Search products, farmers, categories..."
+                style="width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-size:0.95rem; transition:all 0.3s;"
                 oninput="filterMarketplace()"
                 onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 0 3px var(--accent-light)';"
                 onblur="this.style.borderColor='var(--border)'; this.style.boxShadow='none';">
-              <svg style="position:absolute; right:12px; top:50%; transform:translateY(-50%); width:20px; height:20px; color:var(--text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <svg
+                style="position:absolute; right:12px; top:50%; transform:translateY(-50%); width:20px; height:20px; color:var(--text-muted);"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
             </div>
-            <select id="categoryFilter" style="padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-family:inherit; cursor:pointer; min-width:150px;" onchange="filterMarketplace()">
+            <select id="categoryFilter"
+              style="padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-family:inherit; cursor:pointer; min-width:150px;"
+              onchange="filterMarketplace()">
               <option value="">All Categories</option>
               <option value="Vegetables">🥬 Vegetables</option>
               <option value="Fruits">🍎 Fruits</option>
@@ -2454,7 +2294,9 @@
               <option value="Dairy">🥛 Dairy</option>
               <option value="Organic">🌿 Organic</option>
             </select>
-            <select id="sortBy" style="padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-family:inherit; cursor:pointer; min-width:150px;" onchange="filterMarketplace()">
+            <select id="sortBy"
+              style="padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg-secondary); color:var(--text-primary); font-family:inherit; cursor:pointer; min-width:150px;"
+              onchange="filterMarketplace()">
               <option value="newest">Newest</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
@@ -2469,15 +2311,20 @@
 
           <!-- Section Title with Stats -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <div class="section-title">Fresh Products <span id="productCount" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-left: 12px;">(Loading...)</span></div>
-            <button onclick="toggleWishlistView()" style="padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 600; transition: all 0.3s;">
-              ❤️ Wishlist <span id="wishlistBadge" style="display: none; background: var(--accent); color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; margin-left: 4px;"></span>
+            <div class="section-title">Fresh Products <span id="productCount"
+                style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-left: 12px;">(Loading...)</span>
+            </div>
+            <button onclick="toggleWishlistView()"
+              style="padding: 8px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 600; transition: all 0.3s;">
+              ❤️ Wishlist <span id="wishlistBadge"
+                style="display: none; background: var(--accent); color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; margin-left: 4px;"></span>
             </button>
           </div>
 
           <!-- Product Grid -->
           <div id="marketGrid" class="market-grid">
-            <div style="text-align:center; padding:40px 20px; color:var(--text-muted); grid-column: 1/-1;">Loading fresh products...</div>
+            <div style="text-align:center; padding:40px 20px; color:var(--text-muted); grid-column: 1/-1;">Loading fresh
+              products...</div>
           </div>
 
           <!-- Empty State -->
@@ -2494,11 +2341,13 @@
         <div class="modal-content" style="width: 90%; max-width: 600px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2 style="font-size: 1.5rem; font-weight: 800;">Product Details</h2>
-            <button onclick="closeModal('productDetailsModal')" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+            <button onclick="closeModal('productDetailsModal')"
+              style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
           </div>
           <div id="productDetailsContent" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
             <!-- Image -->
-            <div style="background: var(--bg-primary); border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 300px;">
+            <div
+              style="background: var(--bg-primary); border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 300px;">
               <img id="detailImage" src="" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <!-- Details -->
@@ -2508,9 +2357,10 @@
                   <h3 id="detailName" style="font-size: 1.3rem; font-weight: 800; margin-bottom: 4px;"></h3>
                   <p id="detailCategory" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"></p>
                 </div>
-                <button id="wishlistBtn" onclick="toggleWishlistItem()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">🤍</button>
+                <button id="wishlistBtn" onclick="toggleWishlistItem()"
+                  style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">🤍</button>
               </div>
-              
+
               <!-- Rating -->
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
                 <div id="detailRating" style="display: flex; gap: 2px;"></div>
@@ -2518,13 +2368,16 @@
               </div>
 
               <!-- Price & Stock -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; padding: 12px; background: var(--bg-primary); border-radius: 12px;">
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; padding: 12px; background: var(--bg-primary); border-radius: 12px;">
                 <div>
-                  <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">PRICE</p>
+                  <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">PRICE
+                  </p>
                   <p id="detailPrice" style="font-size: 1.3rem; font-weight: 800; color: var(--accent);"></p>
                 </div>
                 <div>
-                  <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">STOCK AVAILABLE</p>
+                  <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px;">STOCK
+                    AVAILABLE</p>
                   <p id="detailStock" style="font-size: 1.1rem; font-weight: 800;"></p>
                 </div>
               </div>
@@ -2538,13 +2391,18 @@
 
               <!-- Description -->
               <div style="margin-bottom: 16px;">
-                <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;">DESCRIPTION</p>
+                <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;">
+                  DESCRIPTION</p>
                 <p id="detailDescription" style="color: var(--text-secondary); line-height: 1.5;"></p>
               </div>
 
               <!-- Delivery Info -->
-              <div style="padding: 12px; background: var(--bg-primary); border-radius: 12px; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div
+                style="padding: 12px; background: var(--bg-primary); border-radius: 12px; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
                 <div>
                   <p style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">FREE DELIVERY</p>
                   <p style="font-size: 0.85rem; color: var(--text-secondary);">Delivered within 24-48 hours</p>
@@ -2553,11 +2411,17 @@
 
               <!-- Action Buttons -->
               <div style="display: flex; gap: 12px;">
-                <button id="detailAddToCartBtn" onclick="addDetailToCart()" style="flex: 1; padding: 12px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <button id="detailAddToCartBtn" onclick="addDetailToCart()"
+                  style="flex: 1; padding: 12px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                  </svg>
                   Add to Cart
                 </button>
-                <button onclick="closeModal('productDetailsModal')" style="flex: 1; padding: 12px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border); border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s;">
+                <button onclick="closeModal('productDetailsModal')"
+                  style="flex: 1; padding: 12px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border); border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s;">
                   Close
                 </button>
               </div>
@@ -2892,27 +2756,6 @@
     </div>
   </div>
 
-  <!-- 14. Weed Control Modal -->
-  <div id="weedModal" class="modal">
-    <div class="modal-content glass">
-      <span class="close-btn" onclick="closeModal('weedModal')">&times;</span>
-      <h2 data-i18n="f14">14. Weed Control AI</h2>
-      <p style="margin: 10px 0; color: var(--text-muted);" data-i18n="f14_d">Identify and manage weeds in your farm.</p>
-      
-      <div style="margin-top: 20px;">
-        <input type="file" id="weedInput" accept="image/*" style="display:none;" onchange="handleWeedScan(this)">
-        <button class="btn-scan" style="width:100%; background: #827717; color: white;" 
-                onclick="document.getElementById('weedInput').click()">Upload Weed Image</button>
-      </div>
-
-      <div id="weedResult" class="result-box" style="display:none;">
-        <h3 style="color: #827717; margin-bottom: 5px;">Analysis Result</h3>
-        <p><strong>Weed/Plant:</strong> <span id="resWeedName"></span></p>
-        <p><strong>Management:</strong> <span id="resWeedSolution"></span></p>
-      </div>
-    </div>
-  </div>
-
   <!-- 5. Farm Overview Modal -->
   <div id="farmOverviewModal" class="modal">
     <div class="modal-content">
@@ -2935,17 +2778,6 @@
           <h4 data-i18n="farm_c4_t">Yield Est.</h4>
           <p id="farmYield" style="color:var(--accent); font-size:1.1rem; font-weight:bold; margin-top:5px;"></p>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Generic Data Modal -->
-  <div id="dataModal" class="modal">
-    <div class="modal-content glass" style="max-width: 500px;">
-      <span class="close-btn" onclick="closeModal('dataModal')">&times;</span>
-      <h2 id="dataModalTitle" style="color:var(--accent);">Data</h2>
-      <div id="dataModalContent" style="margin-top:20px; max-height:400px; overflow-y:auto; display: flex; flex-direction: column; gap: 12px;">
-        <!-- Data items go here -->
       </div>
     </div>
   </div>
@@ -3184,12 +3016,13 @@
     <div class="modal-content" style="max-width: 600px;">
       <span class="close-btn" onclick="closeModal('addProductModal')">&times;</span>
       <h2 style="font-size: 1.3rem; margin-bottom: 20px;">📦 Add Product to Marketplace</h2>
-      
+
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
         <input type="text" id="pName" placeholder="Product Name (e.g. Fresh Wheat)"
           style="grid-column: 1/-1; padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
-        
-        <select id="pCat" style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
+
+        <select id="pCat"
+          style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
           <option value="">Select Category</option>
           <option value="Vegetables">🥬 Vegetables</option>
           <option value="Fruits">🍎 Fruits</option>
@@ -3197,30 +3030,35 @@
           <option value="Dairy">🥛 Dairy</option>
           <option value="Organic">🌿 Organic</option>
         </select>
-        
+
         <input type="number" id="pPrice" placeholder="Price (per kg/unit)" min="0" step="0.01"
           style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
-        
+
         <input type="number" id="pQty" placeholder="Quantity Available" min="0"
           style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
-        
+
         <input type="number" id="pDiscount" placeholder="Discount %" min="0" max="100"
           style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
-        
+
         <input type="number" id="pOriginalPrice" placeholder="Original Price (optional)" min="0" step="0.01"
           style="padding:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary);">
       </div>
-      
+
       <textarea id="pDesc" placeholder="Product Description (e.g. Fresh from farm, rich in nutrients)"
         style="width:100%; padding:12px; margin-top:12px; border-radius:10px; border:1px solid var(--border); font-family:inherit; background: var(--bg-primary); height: 80px; resize: vertical;">Fresh, high-quality produce directly from farms.</textarea>
-      
+
       <div style="margin-top: 12px;">
-        <label style="display: block; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px;">Product Image</label>
-        <input type="file" id="pImage" accept="image/*" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: var(--bg-primary);">
+        <label
+          style="display: block; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px;">Product
+          Image</label>
+        <input type="file" id="pImage" accept="image/*"
+          style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: var(--bg-primary);">
       </div>
-      
-      <button class="btn-scan" style="width:100%; margin-top:20px; padding:14px; background:var(--accent); color:white; border:none; border-radius:10px; font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.3s;"
-        onclick="submitProduct()" onmouseover="this.style.background='var(--accent-hover)'" onmouseout="this.style.background='var(--accent)'">
+
+      <button class="btn-scan"
+        style="width:100%; margin-top:20px; padding:14px; background:var(--accent); color:white; border:none; border-radius:10px; font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.3s;"
+        onclick="submitProduct()" onmouseover="this.style.background='var(--accent-hover)'"
+        onmouseout="this.style.background='var(--accent)'">
         ✅ List Product
       </button>
     </div>
@@ -3280,8 +3118,10 @@
     </div>
   </div>
 
+  <!-- ─── SCRIPTS ─── -->
+  <script src="lang.js"></script>
   <script>
-    const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3005' : '';
+    const API_BASE = (window.location.protocol === 'file:' || window.location.port !== '3000') ? 'http://localhost:3000' : '';
     const originalFetch = window.fetch.bind(window);
     window.fetch = (resource, init) => {
       if (typeof resource === 'string' && resource.startsWith('/api')) {
@@ -3290,17 +3130,9 @@
       return originalFetch(resource, init);
     };
 
+    // ── AUTH ──
     let currentUser = JSON.parse(localStorage.getItem('farmify_user')) || null;
     let authToken = localStorage.getItem('farmify_token') || null;
-    let currentLang = localStorage.getItem('farmify_lang') || 'English';
-    let audioEnabled = true;
-    let weatherCache = null;
-    let allProducts = [];
-    let wishlist = JSON.parse(localStorage.getItem('farmify_wishlist')) || [];
-    let pageStack = [];
-    let forwardStack = [];
-    let isNavigating = false;
-    let cart = JSON.parse(localStorage.getItem('farmify_cart')) || [];
 
     function updateAuthUI() {
       const loginBtn = document.getElementById('loginBtn');
@@ -3311,9 +3143,10 @@
       const postAdvBtn = document.getElementById('postAdvBtn');
 
       if (authToken && currentUser) {
-        if(loginBtn) loginBtn.style.display = 'none';
-        if(logoutBtn) logoutBtn.style.display = 'block';
-        if(authStatus) authStatus.innerText = `Hi, ${currentUser.name} (${currentUser.role})`;
+        loginBtn.style.display = 'none';
+        logoutBtn.style.display = 'block';
+        authStatus.innerText = `Hi, ${currentUser.name} (${currentUser.role})`;
+
         if (currentUser.role === 'farmer') {
           if (farmerNav) farmerNav.style.display = 'flex';
           if (buyerNav) buyerNav.style.display = 'none';
@@ -3324,81 +3157,91 @@
           if (postAdvBtn) postAdvBtn.style.display = 'none';
         }
       } else {
-        if(loginBtn) loginBtn.style.display = 'block';
-        if(logoutBtn) logoutBtn.style.display = 'none';
-        if(authStatus) authStatus.innerText = '';
+        loginBtn.style.display = 'block';
+        logoutBtn.style.display = 'none';
+        authStatus.innerText = '';
+        if (farmerNav) farmerNav.style.display = 'none';
+        if (buyerNav) buyerNav.style.display = 'none';
+        if (postAdvBtn) postAdvBtn.style.display = 'none';
       }
     }
 
-    function showToast(msg, type = 'success') {
-      const toast = document.createElement('div');
-      toast.className = 'glass';
-      toast.style.cssText = `position: fixed; top: 80px; right: 20px; z-index: 9999; padding: 16px 24px; border-radius: 12px; border-left: 5px solid ${type === 'success' ? '#2e7d32' : '#e53935'}; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: slideInRight 0.5s ease; font-weight: 800; font-size: 0.9rem; color: var(--text-primary);`;
-      toast.innerHTML = (type === 'success' ? '✅ ' : '❌ ') + msg;
-      document.body.appendChild(toast);
-      setTimeout(() => { toast.style.animation = 'slideOutRight 0.5s ease forwards'; setTimeout(() => toast.remove(), 500); }, 4000);
+    function toggleAuth(isLogin) {
+      document.getElementById('loginForm').style.display = isLogin ? 'block' : 'none';
+      document.getElementById('signupForm').style.display = isLogin ? 'none' : 'block';
     }
 
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    async function handleSignup() {
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPass').value;
+      const role = document.getElementById('signupRole').value;
+
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role })
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert('Account created! Please login.');
+        toggleAuth(true);
+      } else {
+        alert(data.error);
+      }
+    }
 
     async function handleLogin() {
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPass').value;
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        if (data.token) {
-          localStorage.setItem('farmify_token', data.token);
-          localStorage.setItem('farmify_user', JSON.stringify(data.user));
-          authToken = data.token; currentUser = data.user;
-          location.reload();
-        } else showToast(data.error, 'error');
-      } catch (e) { showToast('Login error', 'error'); }
+
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem('farmify_token', data.token);
+        localStorage.setItem('farmify_user', JSON.stringify(data.user));
+        authToken = data.token;
+        currentUser = data.user;
+        closeModal('authModal');
+        updateAuthUI();
+        await loadCartFromBackend(); // Load cart after login
+        location.reload();
+      } else {
+        alert(data.error);
+      }
     }
 
-    async function submitAdvisory(e) {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const data = Object.fromEntries(fd.entries());
-      try {
-        await fetch('/api/advisories', {
-          method: 'POST',
-          headers: { 'Authorization': authToken, 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        showToast('Advisory Posted', 'success');
-        closeModal('expertModal');
-      } catch (e) { showToast('Failed to post', 'error'); }
+    function logout() {
+      localStorage.removeItem('farmify_token');
+      localStorage.removeItem('farmify_user');
+      location.reload();
     }
 
-    async function fetchMarketplace() {
-      try {
-        const res = await fetch('/api/marketplace');
-        allProducts = await res.json();
-        renderMarketplace(allProducts);
-      } catch (e) { console.error(e); }
-    }
+    updateAuthUI();
+    loadCartFromBackend(); // Load cart on page load if user is logged in
 
-    function renderMarketplace(products) {
-      const grid = document.getElementById('marketGrid');
-      if (!grid) return;
-      grid.innerHTML = products.map(p => `
-        <div class="market-card" onclick="showProductDetails(${JSON.stringify(p).replace(/"/g, '&quot;')})">
-          <div class="market-card-image"><img src="/${p.image || 'uploads/default.jpg'}" alt="${p.name}"></div>
-          <div class="market-card-content">
-            <h3 class="market-card-title">${p.name}</h3>
-            <div class="market-card-price">₹${p.price}</div>
-            <div class="market-card-farmer">👨‍🌾 ${p.farmer_name}</div>
-            <button class="market-card-button" onclick="event.stopPropagation(); addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image || ''}')">Add to Cart</button>
-          </div>
-        </div>
-      `).join('');
-    }
+    // ── THEME TOGGLE ──
+    const html = document.documentElement;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    const saved = localStorage.getItem('farmify-theme') || 'light';
+    html.setAttribute('data-theme', saved);
+
+    toggleBtn.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('farmify-theme', next);
+    });
+
+    // ── PAGE NAVIGATION & STACK ──
+    let pageStack = [];
+    let forwardStack = [];
+    let isNavigating = false;
 
     function showPage(pageId, sidebarEl, bnavId, pushToStack = true) {
       const pageElement = document.getElementById('page-' + pageId);
@@ -3408,72 +3251,690 @@
         const currentPage = getCurrentPage();
         if (currentPage && currentPage !== pageId) {
           pageStack.push(currentPage);
-          forwardStack = [];
+          forwardStack = []; // Clear forward stack on new navigation
         }
       }
 
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       pageElement.classList.add('active');
 
+      // Update Sidebar
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      if (sidebarEl) {
+        sidebarEl.classList.add('active');
+      } else {
+        // Try to find matching sidebar item
+        const sidebarItems = document.querySelectorAll('.nav-item');
+        sidebarItems.forEach(item => {
+          if (item.getAttribute('onclick')?.includes(`'${pageId}'`)) {
+            item.classList.add('active');
+          }
+        });
+      }
+
+      // Update Bottom Nav
       document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
       if (bnavId) {
         const bn = document.getElementById('bnav-' + bnavId);
         if (bn) bn.classList.add('active');
+      } else {
+        // Try to find matching bottom nav item
+        const bnavItems = document.querySelectorAll('.bnav-item');
+        bnavItems.forEach(item => {
+          if (item.getAttribute('onclick')?.includes(`'${pageId}'`)) {
+            item.classList.add('active');
+          }
+        });
       }
 
-      // Feature Initializers
+      updateNavButtons();
+
+      // Page specific logic
+      if (pageId === 'profile') fetchProfile();
       if (pageId === 'marketplace') fetchMarketplace();
-      if (pageId === 'mandi') fetchMandi();
-      if (pageId === 'myfarm') fetchMyFarmData();
       if (pageId === 'farmer-dashboard') fetchFarmerDash();
       if (pageId === 'buyer-dashboard') fetchBuyerDash();
       if (pageId === 'community') fetchCommunityData();
-      if (pageId === 'chat') fetchChatHistory();
-      if (pageId === 'store') renderStore();
+      if (pageId === 'myfarm') fetchMyFarmData();
 
       window.scrollTo(0, 0);
     }
 
-    function speakText(text) {
-      if (!window.speechSynthesis || !audioEnabled) return;
-      window.speechSynthesis.cancel();
-      const ut = new SpeechSynthesisUtterance(text);
-      ut.lang = currentLang === 'Hindi' ? 'hi-IN' : 'en-IN';
-      window.speechSynthesis.speak(ut);
+    function getCurrentPage() {
+      const activePage = document.querySelector('.page.active');
+      return activePage ? activePage.id.replace('page-', '') : null;
     }
 
+    function navBack() {
+      if (pageStack.length === 0) return;
+      const currentPage = getCurrentPage();
+      const prevPage = pageStack.pop();
+      forwardStack.push(currentPage);
 
-    async function fetchMandi() {
-      const tbody = document.getElementById('mandiTableBody');
+      isNavigating = true;
+      showPage(prevPage, null, null, false);
+      isNavigating = false;
+    }
+
+    function navForward() {
+      if (forwardStack.length === 0) return;
+      const currentPage = getCurrentPage();
+      const nextPage = forwardStack.pop();
+      pageStack.push(currentPage);
+
+      isNavigating = true;
+      showPage(nextPage, null, null, false);
+      isNavigating = false;
+    }
+
+    function updateNavButtons() {
+      document.getElementById('btnBack').disabled = pageStack.length === 0;
+      document.getElementById('btnForward').disabled = forwardStack.length === 0;
+    }
+
+    // Session Check
+    function checkSessionAndLogin() {
+      if (authToken && currentUser) {
+        document.getElementById('sessionConfirm').style.display = 'block';
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('signupForm').style.display = 'none';
+        document.getElementById('existingUserName').innerText = currentUser.name;
+        document.getElementById('authModalTitle').innerText = 'Account Active';
+      } else {
+        document.getElementById('sessionConfirm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('signupForm').style.display = 'none';
+        document.getElementById('authModalTitle').innerText = 'Welcome Back';
+      }
+      openModal('authModal');
+    }
+
+    function logoutAndShowLogin() {
+      localStorage.removeItem('farmify_token');
+      localStorage.removeItem('farmify_user');
+      authToken = null;
+      currentUser = null;
+      updateAuthUI();
+      document.getElementById('sessionConfirm').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('authModalTitle').innerText = 'Welcome Back';
+    }
+
+    // ── FORECAST TABS ──
+    document.querySelectorAll('.ftab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    let weatherCache = null;
+
+    let currentAdvCategory = 'All';
+    function setAdvisoryCategory(cat) {
+      currentAdvCategory = cat;
+      document.querySelectorAll('.adv-tab').forEach(t => {
+        t.classList.toggle('active', t.innerText === cat);
+      });
+      fetchAdvisories();
+    }
+
+    let lastAdvisoryId = 0;
+
+    async function fetchAdvisories(isInitial = false) {
+      console.log(currentLang);
       try {
-        const res = await fetch('/api/mandi');
-        const rows = await res.json();
-        tbody.innerHTML = rows.map(r => `
-          <tr style="border-top: 1px solid var(--border);">
-            <td style="padding:15px; font-weight:700; color:var(--text-primary);">${r.crop}</td>
-            <td style="padding:15px; font-weight:800; color:var(--accent);">₹${r.price}</td>
-            <td style="padding:15px; font-weight:700; color:${r.change.includes('↑') ? '#2e7d32' : '#d32f2f'};">${r.change}</td>
-            <td style="padding:15px; color:var(--text-muted);">${r.market}</td>
-          </tr>
-        `).join('');
+        const res = await fetch(`/api/advisories?lang=${currentLang}&category=${currentAdvCategory}`);
+        const data = await res.json();
+
+        // Check for new advisory (Live notification)
+        if (!isInitial && data.length > 0 && data[0].id > lastAdvisoryId) {
+          showLiveNotification(data[0]);
+        }
+        if (data.length > 0) lastAdvisoryId = data[0].id;
+
+        const list = document.getElementById('advisoryList');
+        if (!list) return;
+        list.innerHTML = '';
+        data.forEach(adv => {
+          const badgeClass = `badge-${adv.category.toLowerCase()}`;
+          const timeStr = new Date(adv.timestamp).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+          list.innerHTML += `
+                    <div class="advisory-card" onclick="showAdvisoryDetail(${JSON.stringify(adv).replace(/"/g, '&quot;')})">
+                        <div class="advisory-icon">${adv.icon}</div>
+                        <div class="advisory-content">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span class="advisory-badge ${badgeClass}">${adv.category}</span>
+                                <span style="font-size:0.65rem; color:var(--text-muted); font-weight:700;">${timeStr}</span>
+                            </div>
+                            <div class="advisory-card-title">${adv.title}</div>
+                            <div class="advisory-card-desc">${adv.description}</div>
+                            <div style="margin-top:10px; color:var(--accent); font-size:0.75rem; font-weight:800; display:flex; align-items:center; gap:4px;">
+                                Read Full Advisory <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                `;
+        });
+      } catch (e) { console.error(e); }
+    }
+
+    function showLiveNotification(adv) {
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+            position:fixed; top:80px; right:20px; z-index:9999;
+            background:var(--bg-card); border-left:5px solid #e53935;
+            padding:16px 20px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            max-width:300px; animation: slideInRight 0.5s ease; cursor:pointer;
+        `;
+      toast.innerHTML = `
+            <div style="font-size:0.7rem; font-weight:900; color:#e53935; margin-bottom:4px;">🚨 NEW LIVE ALERT</div>
+            <div style="font-weight:800; font-size:0.9rem;">${adv.title}</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">${adv.description}</div>
+        `;
+      toast.onclick = () => { showAdvisoryDetail(adv); toast.remove(); };
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 8000);
+    }
+
+    // Start live polling every 30 seconds
+    setInterval(() => fetchAdvisories(), 30000);
+
+    async function submitAdvisory(e) {
+      e.preventDefault();
+      if (!authToken) return openModal('authModal');
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+      // Simple mock translations for demo
+      data.title_hi = data.title_en + " (Hindi)";
+      data.title_hinglish = data.title_en + " (Hinglish)";
+      data.desc_hi = data.desc_en + " (Hindi)";
+      data.desc_hinglish = data.desc_en + " (Hinglish)";
+      data.detail_hi = data.detail_en + " (Hindi)";
+      data.detail_hinglish = data.detail_en + " (Hinglish)";
+
+      try {
+        const res = await fetch('/api/advisories', {
+          method: 'POST',
+          headers: {
+            'Authorization': authToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          alert('Advisory Published Live!');
+          closeModal('expertModal');
+          fetchAdvisories(true);
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    function showAdvisoryDetail(adv) {
+      const modal = document.getElementById('advisoryDetailModal');
+      document.getElementById('advDetailTitle').innerText = adv.title;
+      document.getElementById('advDetailContent').innerText = adv.detail;
+      document.getElementById('advDetailCategory').innerText = adv.category;
+      document.getElementById('advDetailCategory').className = `advisory-badge badge-${adv.category.toLowerCase()}`;
+
+      const linkBox = document.getElementById('advExternalLink');
+      if (adv.category === 'Crop') {
+        linkBox.innerHTML = `<a href="https://www.agrifarming.in/" target="_blank" style="color:var(--accent); font-weight:800; font-size:0.8rem;">Read more detailed info on AgriFarming.in →</a>`;
+        linkBox.style.display = 'block';
+      } else if (adv.category === 'Market') {
+        linkBox.innerHTML = `<a href="https://agmarknet.gov.in/" target="_blank" style="color:var(--accent); font-weight:800; font-size:0.8rem;">Check latest Mandi Bhav on Agmarknet →</a>`;
+        linkBox.style.display = 'block';
+      } else {
+        linkBox.style.display = 'none';
+      }
+
+      openModal('advisoryDetailModal');
+    }
+
+    function showToast(msg, type = 'success') {
+      const toast = document.createElement('div');
+      toast.className = 'glass';
+      toast.style.cssText = `
+        position: fixed; top: 80px; right: 20px; z-index: 9999;
+        padding: 16px 24px; border-radius: 12px; border-left: 5px solid ${type === 'success' ? '#2e7d32' : '#e53935'};
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: slideInRight 0.5s ease;
+        font-weight: 800; font-size: 0.9rem; color: var(--text-primary);
+      `;
+      toast.innerHTML = (type === 'success' ? '✅ ' : '❌ ') + msg;
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.animation = 'slideOutRight 0.5s ease forwards';
+        setTimeout(() => toast.remove(), 500);
+      }, 4000);
+    }
+
+    async function fetchMyFarmData() {
+      try {
+        // Fetch Farm Overview (Only if logged in)
+        if (authToken) {
+          const farmRes = await fetch('/api/farm-overview', { headers: { 'Authorization': authToken } });
+          const farmData = await farmRes.json();
+          if (!farmData.error) {
+            document.getElementById('farmArea').innerText = farmData.total_area;
+            document.getElementById('farmCrops').innerText = farmData.active_crops;
+            document.getElementById('farmSoil').innerText = farmData.soil_health;
+            document.getElementById('farmYield').innerText = farmData.yield_est;
+          }
+        } else {
+          // Demo data for non-logged users
+          document.getElementById('farmArea').innerText = '4.5 Acres (Demo)';
+          document.getElementById('farmCrops').innerText = 'Wheat, Soybean';
+          document.getElementById('farmSoil').innerText = 'pH 6.8 (Healthy)';
+          document.getElementById('farmYield').innerText = '38 Quintal/Acre';
+        }
+
+        // Fetch Weather
+        const weatherRes = await fetch('/api/weather');
+        weatherCache = await weatherRes.json();
+
+        document.getElementById('weatherCond').innerText = weatherCache.condition;
+        document.getElementById('weatherTemp').innerText = weatherCache.temp + '°C';
+        document.getElementById('weatherFeels').innerText = 'Feels Like ' + weatherCache.feels_like + '°C';
+        document.getElementById('weatherLoc').innerText = weatherCache.location;
+        document.getElementById('weatherPres').innerText = weatherCache.pressure;
+        document.getElementById('weatherHum').innerText = weatherCache.humidity + ' %';
+        document.getElementById('weatherWind').innerText = (weatherCache.wind_speed || weatherCache.wind) + ' m/s';
+
+        updateWeatherUI('overview');
       } catch (e) {
-        tbody.innerHTML = '<tr><td colspan="4" style="padding:20px; text-align:center;">Failed to load Mandi rates.</td></tr>';
+        console.error('Error fetching farm data:', e);
       }
     }
 
-    async function fetchFarmOverview() {
-      if (!authToken) return;
-      try {
-        const res = await fetch('/api/farm-overview', {
-          headers: { 'Authorization': authToken }
+    function updateWeatherUI(type) {
+      if (!weatherCache) return;
+      const row = document.getElementById('forecastRow');
+      row.innerHTML = '';
+
+      if (type === 'overview') {
+        const f = weatherCache.forecast || [];
+        f.forEach(day => {
+          const rainIcon = day.rain_chance > 50 ? '🌧️' : day.rain_chance > 20 ? '⛅' : '☀️';
+          row.innerHTML += `
+            <div class="forecast-card">
+              <div class="forecast-day">${rainIcon} ${day.day}</div>
+              <div class="forecast-desc">${day.cond}</div>
+              <div class="forecast-temps">${day.temp_high || day.temp}°C / ${day.temp_low || ''}°C</div>
+              <div style="font-size:0.65rem; color:var(--text-muted); margin-top:4px;">Rain: ${day.rain_chance || 0}%</div>
+            </div>`;
         });
-        const data = await res.json();
-        document.getElementById('farmArea').innerText = data.total_area || '4.5 Acres';
-        document.getElementById('farmCrops').innerText = data.active_crops || 'Wheat, Soybean';
-        document.getElementById('farmSoil').innerText = data.soil_health || 'pH 6.8 - Good';
-        document.getElementById('farmYield').innerText = data.yield_est || '38 Qtl/Acre';
+        if (weatherCache.crop_advisory) {
+          row.innerHTML += `<div style="width:100%;padding:12px;margin-top:8px;background:var(--accent-light);border-radius:10px;font-size:0.8rem;color:var(--text-primary);border:1px solid var(--border);"><strong style="color:var(--accent);">🌾 Crop Advisory:</strong> ${weatherCache.crop_advisory}</div>`;
+        }
+      } else if (type === 'wind') {
+        row.innerHTML = `
+          <div style="padding:20px; width:100%;">
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; text-align:center;">
+              <div style="background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:800;">SPEED</div>
+                <div style="font-size:1.3rem;font-weight:900;color:var(--accent);">${weatherCache.wind_speed || weatherCache.wind} m/s</div>
+              </div>
+              <div style="background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:800;">DIRECTION</div>
+                <div style="font-size:1.3rem;font-weight:900;color:var(--accent);">🧭 ${weatherCache.wind_direction || 'NE'}</div>
+              </div>
+              <div style="background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:800;">GUST</div>
+                <div style="font-size:1.3rem;font-weight:900;color:var(--accent);">${weatherCache.wind_gust || 'N/A'} m/s</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;padding:10px;background:var(--accent-light);border-radius:8px;font-size:0.8rem;color:var(--text-primary);">💡 <strong>Tip:</strong> Wind speed below 15 m/s is safe for spraying. Current conditions are ${(weatherCache.wind_speed || 0) < 15 ? 'suitable ✅' : 'not suitable ❌'} for pesticide spraying.</div>
+          </div>`;
+      } else if (type === 'humidity') {
+        row.innerHTML = `
+          <div style="padding:20px; width:100%;">
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; text-align:center;">
+              <div style="background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:800;">HUMIDITY</div>
+                <div style="font-size:1.3rem;font-weight:900;color:var(--accent);">${weatherCache.humidity}%</div>
+              </div>
+              <div style="background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:800;">DEW POINT</div>
+                <div style="font-size:1.3rem;font-weight:900;color:var(--accent);">${weatherCache.dew_point || 'N/A'}°C</div>
+              </div>
+              <div style="background:var(--bg-card);padding:15px;border-radius:12px;border:1px solid var(--border);">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:800;">UV INDEX</div>
+                <div style="font-size:1.3rem;font-weight:900;color:var(--accent);">${weatherCache.uv_index || 0}</div>
+              </div>
+            </div>
+            <div style="margin-top:12px;padding:10px;background:var(--accent-light);border-radius:8px;font-size:0.8rem;color:var(--text-primary);">💧 <strong>Overview:</strong> ${weatherCache.overview || 'Normal conditions'}</div>
+          </div>`;
+      }
+    }
+
+    // Call on load
+    fetchMyFarmData();
+
+    // ── COMMUNITY ──
+    async function fetchCommunityData() {
+      try {
+        // Fetch Posts
+        const postsRes = await fetch('/api/community/posts');
+        const posts = await postsRes.json();
+        const feed = document.getElementById('communityFeed');
+        feed.innerHTML = '';
+        posts.forEach(post => {
+          const date = new Date(post.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          feed.innerHTML += `
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div>
+                                <span class="post-user">${post.user_name}</span>
+                                <span style="font-size:0.7rem; color:var(--accent); font-weight:700; margin-left:8px;">📍 ${post.location}</span>
+                            </div>
+                            <span class="post-time">${date}</span>
+                        </div>
+                        <div class="post-message">${post.message}</div>
+                    </div>
+                `;
+        });
+
+        // Fetch Orgs
+        const orgsRes = await fetch('/api/community/orgs');
+        const orgs = await orgsRes.json();
+        const list = document.getElementById('orgList');
+        list.innerHTML = '';
+        orgs.forEach(org => {
+          list.innerHTML += `
+                    <div class="org-card">
+                        <div class="org-type">${org.type}</div>
+                        <div class="org-name">${org.name}</div>
+                        <div class="org-contact">📞 ${org.contact}</div>
+                        ${org.description ? `<div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px;">${org.description}</div>` : ''}
+                        ${org.website ? `<a href="${org.website}" target="_blank" style="display:inline-block;margin-top:8px;color:var(--accent);font-size:0.75rem;font-weight:800;">Visit Official Site →</a>` : ''}
+                    </div>
+                `;
+        });
+      } catch (e) {
+        console.error('Error fetching community data:', e);
+      }
+    }
+
+    async function postToCommunity() {
+      if (!authToken) return openModal('authModal');
+      const msg = document.getElementById('communityMsg').value.trim();
+      if (!msg) return;
+
+      try {
+        await fetch('/api/community/posts', {
+          method: 'POST',
+          headers: {
+            'Authorization': authToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: msg, location: currentUser.location || 'Local Area' })
+        });
+        document.getElementById('communityMsg').value = '';
+        fetchCommunityData();
+      } catch (e) {
+        alert('Error posting to community.');
+      }
+    }
+
+    // Call on load
+    fetchCommunityData();
+
+    // ── MARKETPLACE & DASHBOARD LOGIC ──
+    async function fetchMarketplace() {
+      try {
+        const res = await fetch('/api/marketplace');
+        allProducts = await res.json();
+        renderMarketplace(allProducts);
       } catch (e) { console.error(e); }
+    }
+
+    async function fetchMandiPrices() {
+      try {
+        const res = await fetch('/api/mandi');
+        const data = await res.json();
+        const body = document.getElementById('mandiBody');
+        if (!body) return;
+        body.innerHTML = '';
+        data.forEach(p => {
+          const changeClass = p.change.includes('↑') ? 'price-up' : 'price-down';
+          body.innerHTML += `
+            <tr>
+              <td>${p.crop}</td>
+              <td>${p.price.toLocaleString()}</td>
+              <td class="${changeClass}">${p.change}</td>
+              <td>${p.market}</td>
+            </tr>
+          `;
+        });
+      } catch (e) { console.error('Error fetching Mandi prices:', e); }
+    }
+
+    let allProducts = [];
+    let wishlist = JSON.parse(localStorage.getItem('farmify_wishlist')) || [];
+
+    function renderMarketplace(products) {
+      const grid = document.getElementById('marketGrid');
+      const emptyState = document.getElementById('emptyState');
+      const productCount = document.getElementById('productCount');
+
+      if (!grid) return;
+
+      productCount.textContent = `(${products.length} ${products.length === 1 ? 'product' : 'products'})`;
+
+      if (products.length === 0) {
+        grid.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      grid.innerHTML = '';
+
+      products.forEach(p => {
+        const rating = p.rating || 4.5;
+        const reviews = p.reviews || Math.floor(Math.random() * 200);
+        const description = p.description || 'Fresh from farm. High quality produce.';
+        const location = p.location || 'Farm';
+        const isWishlisted = wishlist.some(w => w.id === p.id);
+        const stars = Array(5).fill('').map((_, i) => i < Math.floor(rating) ? '⭐' : '☆').join('');
+        const discount = p.discount || 0;
+
+        grid.innerHTML += `
+          <div class="market-card" onclick="showProductDetails(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+            <div class="market-card-image">
+              <img src="/${p.image || 'uploads/default.jpg'}" onerror="this.src='https://images.unsplash.com/photo-1488459716781-6518f6c9d1c9?q=80&w=500&auto=format&fit=crop'" alt="${p.name}">
+              <div class="market-card-badge">${p.category}</div>
+              ${discount > 0 ? `<div class="market-card-discount">${discount}% OFF</div>` : ''}
+            </div>
+            
+            <div class="market-card-content">
+              <h3 class="market-card-title">${p.name}</h3>
+              
+              <div class="market-card-rating">
+                <div class="market-card-stars">${stars}</div>
+                <span style="font-weight: 700; color: var(--text-primary);">${rating}</span>
+                <span style="color: var(--text-muted);">(${reviews})</span>
+              </div>
+              
+              <p class="market-card-description">${description}</p>
+              
+              <div class="market-card-farmer">
+                <strong>👨‍🌾 ${p.farmer_name}</strong> • ${location}
+              </div>
+              
+              <div class="market-card-footer">
+                <div class="market-card-price">
+                  <span class="market-card-price-current">₹${p.price}</span>
+                  ${p.original_price ? `<span class="market-card-price-original">₹${p.original_price}</span>` : ''}
+                </div>
+                <div style="flex: 1;">
+                  <div class="market-card-stock">Stock: <strong>${p.quantity}</strong></div>
+                </div>
+                <button class="market-card-wishlist" onclick="event.stopPropagation(); toggleWishlist(${p.id}, '${p.name}', ${p.price}, '${p.image || ''}')" title="Add to Wishlist">
+                  ${isWishlisted ? '❤️' : '🤍'}
+                </button>
+              </div>
+              
+              <button class="market-card-button" onclick="event.stopPropagation(); addToCartFromCard(${p.id}, '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image || ''}')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      updateWishlistBadge();
+    }
+
+    function filterMarketplace() {
+      const query = document.getElementById('marketSearch').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+      const sortBy = document.getElementById('sortBy').value;
+
+      let filtered = allProducts.filter(p => {
+        const matchesSearch = !query ||
+          p.name.toLowerCase().includes(query) ||
+          (p.description || '').toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query) ||
+          p.farmer_name.toLowerCase().includes(query);
+
+        const matchesCategory = !category || p.category === category;
+
+        return matchesSearch && matchesCategory;
+      });
+
+      // Apply sorting
+      if (sortBy === 'price-low') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortBy === 'price-high') {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortBy === 'rating') {
+        filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      } else if (sortBy === 'popular') {
+        filtered.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+      } else if (sortBy === 'newest') {
+        filtered.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+      }
+
+      renderMarketplace(filtered);
+      updateActiveFilters();
+    }
+
+    function updateActiveFilters() {
+      const query = document.getElementById('marketSearch').value;
+      const category = document.getElementById('categoryFilter').value;
+      const filterContainer = document.getElementById('activeFilters');
+
+      filterContainer.innerHTML = '';
+
+      if (query) {
+        filterContainer.innerHTML += `<div style="padding: 6px 12px; background: var(--accent-light); border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          🔍 "${query}"
+          <button onclick="document.getElementById('marketSearch').value = ''; filterMarketplace();" style="background: none; border: none; cursor: pointer; color: var(--accent);">✕</button>
+        </div>`;
+      }
+
+      if (category) {
+        filterContainer.innerHTML += `<div style="padding: 6px 12px; background: var(--accent-light); border-radius: 8px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+          📦 ${category}
+          <button onclick="document.getElementById('categoryFilter').value = ''; filterMarketplace();" style="background: none; border: none; cursor: pointer; color: var(--accent);">✕</button>
+        </div>`;
+      }
+    }
+
+    function showProductDetails(product) {
+      const modal = document.getElementById('productDetailsModal');
+      const isWishlisted = wishlist.some(w => w.id === product.id);
+
+      document.getElementById('detailImage').src = `/${product.image || 'uploads/default.jpg'}`;
+      document.getElementById('detailImage').onerror = function () {
+        this.src = 'https://images.unsplash.com/photo-1488459716781-6518f6c9d1c9?q=80&w=500&auto=format&fit=crop';
+      };
+      document.getElementById('detailName').textContent = product.name;
+      document.getElementById('detailCategory').textContent = product.category;
+      document.getElementById('detailPrice').textContent = `₹${product.price}`;
+      document.getElementById('detailStock').textContent = product.quantity > 0 ? `${product.quantity} Available` : 'Out of Stock';
+      document.getElementById('detailFarmer').textContent = product.farmer_name;
+      document.getElementById('detailLocation').textContent = `📍 ${product.location || 'Farm Location'}`;
+      document.getElementById('detailDescription').textContent = product.description || 'Fresh, high-quality produce directly from farms.';
+
+      const rating = product.rating || 4.5;
+      const reviews = product.reviews || 0;
+      const stars = Array(5).fill('').map((_, i) => i < Math.floor(rating) ? '⭐' : '☆').join('');
+      document.getElementById('detailRating').innerHTML = stars.split('').map(s => `<span>${s}</span>`).join('');
+      document.getElementById('detailRatingCount').textContent = `${rating} (${reviews} reviews)`;
+
+      const wishlistBtn = document.getElementById('wishlistBtn');
+      wishlistBtn.textContent = isWishlisted ? '❤️' : '🤍';
+      wishlistBtn.onclick = function () {
+        event.stopPropagation();
+        toggleWishlist(product.id, product.name, product.price, product.image);
+        showProductDetails(product);
+      };
+
+      document.getElementById('detailAddToCartBtn').onclick = function () {
+        addToCartFromCard(product.id, product.name, product.price, product.image);
+        setTimeout(() => closeModal('productDetailsModal'), 1000);
+      };
+
+      modal.style.display = 'flex';
+    }
+
+    function toggleWishlist(id, name, price, image) {
+      const existing = wishlist.findIndex(w => w.id === id);
+      if (existing >= 0) {
+        wishlist.splice(existing, 1);
+      } else {
+        wishlist.push({ id, name, price, image });
+      }
+      localStorage.setItem('farmify_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+      renderMarketplace(getCurrentFilteredProducts());
+    }
+
+    function getCurrentFilteredProducts() {
+      const query = document.getElementById('marketSearch').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+
+      return allProducts.filter(p => {
+        const matchesSearch = !query ||
+          p.name.toLowerCase().includes(query) ||
+          (p.description || '').toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query) ||
+          p.farmer_name.toLowerCase().includes(query);
+
+        const matchesCategory = !category || p.category === category;
+
+        return matchesSearch && matchesCategory;
+      });
+    }
+
+    function updateWishlistBadge() {
+      const badge = document.getElementById('wishlistBadge');
+      if (wishlist.length > 0) {
+        badge.textContent = wishlist.length;
+        badge.style.display = 'inline-flex';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    function toggleWishlistView() {
+      if (wishlist.length === 0) {
+        alert('Your wishlist is empty. Add products to your wishlist first!');
+        return;
+      }
+
+      const isShowingWishlist = document.getElementById('categoryFilter').value === 'wishlist';
+
+      if (isShowingWishlist) {
+        document.getElementById('categoryFilter').value = '';
+        filterMarketplace();
+      } else {
+        const filteredProducts = allProducts.filter(p => wishlist.some(w => w.id === p.id));
+        renderMarketplace(filteredProducts);
+      }
     }
 
     function addToCartFromCard(id, name, price, image) {
@@ -3484,7 +3945,7 @@
         cart.push({ id, name, price, image, quantity: 1 });
       }
       updateCartUI();
-      
+
       // Show toast notification
       showToastNotification(`✅ ${name} added to cart!`);
     }
@@ -3494,11 +3955,11 @@
       const priceText = document.getElementById('detailPrice').textContent;
       const price = parseInt(priceText.replace('₹', ''));
       const image = document.getElementById('detailImage').src;
-      
+
       // Use the first product's ID that matches the name
       const product = allProducts.find(p => p.name === name);
       const id = product ? product.id : Date.now();
-      
+
       addToCartFromCard(id, name, price, image);
     }
 
@@ -3519,7 +3980,7 @@
       `;
       toast.textContent = message;
       document.body.appendChild(toast);
-      
+
       setTimeout(() => {
         toast.style.animation = 'slideDown 0.3s ease';
         setTimeout(() => toast.remove(), 300);
@@ -3886,7 +4347,7 @@
           document.getElementById('pDiscount').value = '';
           document.getElementById('pOriginalPrice').value = '';
           document.getElementById('pImage').value = '';
-          
+
           closeModal('addProductModal');
           showToastNotification('✅ Product added successfully!');
           fetchFarmerDash();
@@ -4072,57 +4533,6 @@
       } catch (e) { console.error(e); }
     }
 
-    async function fetchCommunityData() {
-      const feed = document.getElementById('communityFeed');
-      const orgs = document.getElementById('orgList');
-      if (!feed || !orgs) return;
-      try {
-        const res1 = await fetch('/api/community/posts');
-        const posts = await res1.json();
-        feed.innerHTML = posts.map(p => `
-          <div style="border-bottom:1px solid var(--border); padding:10px 0;">
-            <strong style="color:var(--accent);">${p.author}</strong>: ${p.content}
-          </div>
-        `).join('') || '<p>No community posts yet.</p>';
-
-        const res2 = await fetch('/api/community/orgs');
-        const orgData = await res2.json();
-        orgs.innerHTML = orgData.map(o => `
-          <div style="padding:10px; border:1px solid var(--border); border-radius:10px; margin-bottom:10px;">
-            <strong>${o.name}</strong><br><small>${o.description || o.desc}</small>
-          </div>
-        `).join('') || '<p>No organizations listed.</p>';
-      } catch (e) { console.error(e); }
-    }
-
-    async function handleWeedScan(input) {
-      if (!input.files[0]) return;
-      const resBox = document.getElementById('weedResult');
-      const name = document.getElementById('resWeedName');
-      const sol = document.getElementById('resWeedSolution');
-      
-      resBox.style.display = 'block';
-      name.innerText = 'Analyzing...';
-      sol.innerText = 'Scanning image for weeds...';
-
-      try {
-        const formData = new FormData();
-        formData.append('image', input.files[0]);
-        formData.append('type', 'weed');
-
-        const res = await fetch('/api/scan', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        name.innerText = data.disease || 'Unknown Weed';
-        sol.innerText = data.solution || 'No control method found.';
-      } catch (e) {
-        name.innerText = 'Offline Mode';
-        sol.innerText = 'Could not reach AI server. Try hand-pulling or mulching.';
-      }
-    }
-
     async function submitHelp() {
       const email = document.getElementById('helpEmail').value;
       const issue = document.getElementById('helpInput').value;
@@ -4134,10 +4544,7 @@
       try {
         const res = await fetch('/api/help', {
           method: 'POST',
-          headers: { 
-            'Authorization': authToken,
-            'Content-Type': 'application/json' 
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, issue })
         });
         const data = await res.json();
@@ -4770,7 +5177,7 @@
         const res = await fetch('/api/crop-recommend', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ description: soilDetails })
+          body: JSON.stringify({ soilDetails })
         });
         const data = await res.json();
         document.getElementById('resCrop').innerText = data.recommendation;
@@ -4817,241 +5224,7 @@
       }
     }
 
-    async function fetchChatHistory() {
-      if (!authToken) return;
-      try {
-        const res = await fetch('/api/ai/chat/history', { headers: { 'Authorization': authToken } });
-        const history = await res.json();
-        const container = document.getElementById('chatMessages');
-        container.innerHTML = '<div style="background:var(--accent-light);border-radius:12px;padding:12px 16px;max-width:80%;align-self:flex-start;color:var(--text-primary);font-weight:600;font-size:0.88rem;border:1px solid var(--border);" data-i18n="chat_welcome">🌿 Namaste Kisan bhai! Main aapka Krishi AI assistant hoon. Koi bhi kheti se judi baat puchh sakte ho!</div>';
-        history.forEach(h => addChatMsg(h.message, h.role === 'user' ? 'user' : 'ai'));
-      } catch (e) { console.error(e); }
-    }
-
-    async function fetchMyFarmData() {
-      fetchFarmOverview();
-      fetchWeather();
-    }
-
-    async function fetchWeather() {
-      try {
-        const res = await fetch('/api/weather');
-        const data = await res.json();
-        if (data.main) {
-          document.getElementById('weatherTemp').innerText = `${data.main.temp}°C`;
-          document.getElementById('weatherCond').innerText = data.weather[0].main;
-          document.getElementById('weatherLoc').innerText = `${data.name}, ${data.sys.country}`;
-        }
-      } catch (e) { console.error(e); }
-    }
-
-    // ── CORE FEATURE HANDLERS ──
-
-    // 1. AI Disease Predictor
-    async function handleScan(input) {
-      if (!input.files || !input.files[0]) return;
-      const formData = new FormData();
-      formData.append('image', input.files[0]);
-      showToast('Analyzing plant image...', 'success');
-      try {
-        const res = await fetch('/api/scan', {
-          method: 'POST',
-          headers: { 'Authorization': authToken },
-          body: formData
-        });
-        const data = await res.json();
-        document.getElementById('resDisease').innerText = data.disease;
-        document.getElementById('resSolution').innerText = data.solution;
-        document.getElementById('scanResult').style.display = 'block';
-        if (audioEnabled) speakText(`Result: ${data.disease}. Solution: ${data.solution}`);
-      } catch (e) { showToast('Scan failed', 'error'); }
-    }
-
-    // 2. Krishi Chat AI
-    async function sendChat() {
-      const input = document.getElementById('chatInput');
-      const msg = input.value.trim();
-      if (!msg) return;
-      input.value = '';
-      addChatMsg(msg, 'user');
-      try {
-        const res = await fetch('/api/ai/chat', {
-          method: 'POST',
-          headers: { 'Authorization': authToken, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg, lang: currentLang })
-        });
-        const data = await res.json();
-        addChatMsg(data.response, 'ai');
-        if (audioEnabled) speakText(data.response);
-      } catch (e) { showToast('Chat failed', 'error'); }
-    }
-
-    function addChatMsg(text, role) {
-      const container = document.getElementById('chatMessages');
-      if (!container) return;
-      const div = document.createElement('div');
-      div.style.cssText = `
-        background: ${role === 'user' ? 'var(--accent)' : 'var(--bg-card)'};
-        color: ${role === 'user' ? 'white' : 'var(--text-primary)'};
-        align-self: ${role === 'user' ? 'flex-end' : 'flex-start'};
-        padding: 12px 16px; border-radius: 18px; max-width: 80%;
-        margin-bottom: 10px; font-size: 0.9rem; font-weight: 600;
-        box-shadow: var(--shadow); border: 1px solid var(--border);
-      `;
-      div.innerText = text;
-      container.appendChild(div);
-      container.scrollTop = container.scrollHeight;
-    }
-
-    // 3. Crop Recommendation
-    async function handleSoilScan(input) {
-      if (!input.files[0]) return;
-      const formData = new FormData();
-      formData.append('image', input.files[0]);
-      try {
-        const res = await fetch('/api/scan-soil', { method: 'POST', body: formData });
-        const data = await res.json();
-        document.getElementById('soilDesc').value = data.description;
-      } catch (e) { showToast('Soil scan failed', 'error'); }
-    }
-
-    async function getRecommendationText() {
-      const desc = document.getElementById('soilDesc').value;
-      if (!desc) return showToast('Please describe your soil', 'error');
-      try {
-        const res = await fetch('/api/ai/recommend-crop', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ soilDescription: desc, lang: currentLang })
-        });
-        const data = await res.json();
-        document.getElementById('cropResultText').innerText = data.recommendation;
-        document.getElementById('cropResult').style.display = 'block';
-        if (audioEnabled) speakText(data.recommendation);
-      } catch (e) { showToast('Failed to get recommendation', 'error'); }
-    }
-
-    // 9. Soil Testing Labs
-    async function openSoilLabs() {
-      try {
-        const res = await fetch('/api/soil-labs');
-        const labs = await res.json();
-        let html = labs.map(l => `
-          <div class="card" style="border-left:5px solid var(--accent); margin-bottom:10px;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <h3 style="font-size:1rem;">🔬 ${l.name}</h3>
-                <p style="font-size:0.8rem; color:var(--text-muted);">📍 ${l.location}</p>
-                <p style="font-size:0.75rem;">Price: ₹${l.testing_price || 'Free'}</p>
-              </div>
-              <button class="btn-scan" style="background:var(--accent); color:white; font-size:0.75rem;" onclick="showToast('Lab details opening...')">Details</button>
-            </div>
-          </div>
-        `).join('');
-        document.getElementById('genericModalTitle').innerText = 'Soil Testing Labs';
-        document.getElementById('genericModalContent').innerHTML = html || 'No labs found';
-        openModal('genericModal');
-      } catch (e) { showToast('Failed to load labs', 'error'); }
-    }
-
-    // 11. Govt. Subsidies
-    async function openSubsidies() {
-      try {
-        const res = await fetch('/api/subsidies');
-        const data = await res.json();
-        const subs = Array.isArray(data) ? data : (data.subsidies || []);
-        let html = subs.map(s => `
-          <div class="card" style="border-left:5px solid #ef6c00; margin-bottom:10px;">
-            <h4>💰 ${s.name}</h4>
-            <p style="font-size:0.8rem; color:var(--text-muted);">${s.department || s.benefit}</p>
-            <div style="font-weight:800; color:#ef6c00; margin:5px 0;">Benefit: ${s.subsidy_amount || 'Varies'}</div>
-            <button class="btn-scan" style="background:#ef6c00; color:white; width:100%;" onclick="showToast('Application sent for review', 'success')">Apply Now</button>
-          </div>
-        `).join('');
-        document.getElementById('genericModalTitle').innerText = 'Govt. Subsidies';
-        document.getElementById('genericModalContent').innerHTML = html || 'No schemes found';
-        openModal('genericModal');
-      } catch (e) { showToast('Error loading subsidies', 'error'); }
-    }
-
-    // 12. Machinery Rental
-    async function openMachinery() {
-      try {
-        const res = await fetch('/api/machinery');
-        const items = await res.json();
-        let html = items.map(m => `
-          <div class="card" style="border-left:5px solid #303f9f; margin-bottom:10px;">
-            <h4>🚜 ${m.name}</h4>
-            <p style="font-size:0.8rem; color:var(--text-muted);">Type: ${m.type}</p>
-            <div style="font-weight:900; color:#303f9f; margin:5px 0;">₹${m.price_per_hour}/hr</div>
-            <button class="btn-scan" style="background:#303f9f; color:white; width:100%;" onclick="showToast('Booking request sent!', 'success')">Rent Now</button>
-          </div>
-        `).join('');
-        document.getElementById('genericModalTitle').innerText = 'Machinery Rental';
-        document.getElementById('genericModalContent').innerHTML = html || 'No machinery available';
-        openModal('genericModal');
-      } catch (e) { showToast('Error loading machinery', 'error'); }
-    }
-
-    // 13. Financial Ledger
-    async function openLedger() {
-      if (!authToken) return openModal('authModal');
-      try {
-        const res = await fetch('/api/ledger', { headers: { 'Authorization': authToken } });
-        const entries = await res.json();
-        let html = `
-          <div style="margin-bottom:20px; display:grid; gap:8px;">
-            <input id="ledAmount" type="number" placeholder="Amount (₹)" style="padding:10px; border-radius:8px; border:1px solid var(--border);">
-            <input id="ledCat" type="text" placeholder="Category (e.g. Seeds)" style="padding:10px; border-radius:8px; border:1px solid var(--border);">
-            <button onclick="addLedgerEntry()" class="btn-scan" style="background:var(--accent); color:white; width:100%;">Add Entry</button>
-          </div>
-          <div id="ledgerList">
-        `;
-        html += entries.map(e => `
-          <div style="display:flex; justify-content:space-between; padding:10px; background:var(--bg-card); border-radius:10px; margin-bottom:5px; border:1px solid var(--border);">
-            <div>
-              <div style="font-weight:800;">${e.category}</div>
-              <div style="font-size:0.7rem; color:var(--text-muted);">${new Date(e.timestamp).toLocaleDateString()}</div>
-            </div>
-            <div style="font-weight:900; color:${e.type==='Income'?'#2e7d32':'#e53935'}">${e.type==='Income'?'+':'-'} ₹${e.amount}</div>
-          </div>
-        `).join('');
-        html += '</div>';
-        document.getElementById('genericModalTitle').innerText = 'Financial Ledger';
-        document.getElementById('genericModalContent').innerHTML = html;
-        openModal('genericModal');
-      } catch (e) { showToast('Error loading ledger', 'error'); }
-    }
-
-    async function addLedgerEntry() {
-      const amount = document.getElementById('ledAmount').value;
-      const category = document.getElementById('ledCat').value;
-      if (!amount || !category) return showToast('Fill all fields', 'error');
-      try {
-        const res = await fetch('/api/ledger', {
-          method: 'POST',
-          headers: { 'Authorization': authToken, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount, category, type: 'Expense' })
-        });
-        if (res.ok) {
-          showToast('Entry added');
-          openLedger();
-        }
-      } catch (e) { showToast('Error adding entry', 'error'); }
-    }
-
-    // 14. Weed Control AI
-    async function handleWeedScan(input) {
-      if (!input.files || !input.files[0]) return;
-      showToast('Analyzing weed image...', 'success');
-      setTimeout(() => {
-        const res = "Identified: Parthenium (Gajar Ghas). This is a highly invasive weed. Solution: Spray Glyphosate 41% SL or manual uprooting before flowering stage.";
-        document.getElementById('weedResultText').innerText = res;
-        document.getElementById('weedResult').style.display = 'block';
-        if (audioEnabled) speakText(res);
-      }, 2000);
-    }
-
+    // Profile, saveProfile, and fetchAdvisories are defined above (non-duplicate versions)
   </script>
 </body>
 

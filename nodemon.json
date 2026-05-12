@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    "database.sqlite",
+    "database.sqlite-journal",
+    "database.sqlite-wal",
+    "src/uploads/*",
+    "node_modules"
+  ],
+  "ext": "js,json"
+}

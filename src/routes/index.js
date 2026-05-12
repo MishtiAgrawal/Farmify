@@ -14,6 +14,18 @@ const payment = require('../controllers/payment.controller');
 
 const { authenticateToken, requireRole } = require('../middleware/auth.middleware');
 const { authLimiter } = require('../middleware/rateLimit.middleware');
+const multer = require('multer');
+const path = require('path');
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'uploads/'),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ 
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+});
 
 /**
  * ROUTES MAPPED TO MATCH FRONTEND FETCH CALLS EXACTLY
@@ -40,7 +52,7 @@ router.get('/store', dashboard.getStore);
 
 // --- MARKETPLACE & PRODUCTS ---
 router.get('/marketplace', marketplace.getMarketplace);
-router.post('/products', authenticateToken, requireRole('farmer', 'expert'), marketplace.createProduct);
+router.post('/products', authenticateToken, requireRole('farmer', 'expert'), upload.single('productImage'), marketplace.createProduct);
 router.get('/farmer/products', authenticateToken, requireRole('farmer', 'expert'), marketplace.getFarmerProducts);
 router.put('/products/:id', authenticateToken, requireRole('farmer', 'expert'), marketplace.updateProduct);
 router.delete('/products/:id', authenticateToken, requireRole('farmer', 'expert'), marketplace.deleteProduct);
@@ -76,7 +88,7 @@ router.post('/community/posts/:id/like', authenticateToken, ai.likeCommunityPost
 router.get('/community/orgs', ai.getCommunityOrgs);
 router.post('/chat', ai.chat); // Note: frontend doesn't use auth for chat yet
 router.get('/ai/chat/history', authenticateToken, ai.getChatHistory);
-router.post('/scan', ai.scanPlant);
+router.post('/scan', upload.single('plantImage'), ai.scanPlant);
 router.post('/help', authenticateToken, ai.help);
 
 // --- SOIL ---

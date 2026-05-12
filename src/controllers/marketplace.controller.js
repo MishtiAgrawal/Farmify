@@ -74,7 +74,7 @@ exports.getCart = async (req, res) => {
        FROM cart c JOIN products p ON c.product_id = p.id WHERE c.buyer_id = ?`,
       [req.user.id]
     );
-    res.json({ success: true, data: { items: rows || [] } });
+    res.json({ success: true, data: rows || [] });
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch cart" });
   }
